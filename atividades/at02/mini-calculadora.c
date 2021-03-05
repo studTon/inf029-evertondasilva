@@ -26,11 +26,16 @@ float dividir(float numA, float numB)
 
 int main()
 {
-    int escolha;
+    int escolha = 1;
     float numeroA, numeroB, resultado;
 
-    while(escolha >= 0 && escolha <= 4)
-    {
+    while(escolha >= 1 && escolha <= 4)
+    {    
+        printf("Digite o primeiro numero: ");
+        scanf("%f", &numeroA);
+        printf("Digite o segundo numero: ");
+        scanf("%f", &numeroB);
+
         printf("\nEscolha uma das operacoes:");
         printf("\n0 - Sair\n1 - Somar\n2 - Subtrair\n3 - Multiplicar\n4 - Dividir\n");
         printf("Sua escolha: ");
@@ -39,12 +44,7 @@ int main()
         {
             printf("\nSair\n");
             break;
-        }    
-
-        printf("Digite o primeiro numero: ");
-        scanf("%f", &numeroA);
-        printf("Digite o segundo numero: ");
-        scanf("%f", &numeroB);
+        }
 
         switch(escolha)
         {
@@ -74,8 +74,8 @@ int main()
             }break;
             default: {
                 printf("Digite uma das 5 alternativas");
-                break;
-            }
+                
+            }break;
 
         }
         printf("\n\n");
