@@ -29,7 +29,7 @@ int main()
     int escolha;
     float numeroA, numeroB, resultado;
 
-    while(escolha != 0)
+    while(escolha >= 0 && escolha <= 4)
     {
         printf("\nEscolha uma das operacoes:");
         printf("\n0 - Sair\n1 - Somar\n2 - Subtrair\n3 - Multiplicar\n4 - Dividir\n");
@@ -74,6 +74,7 @@ int main()
             }break;
             default: {
                 printf("Digite uma das 5 alternativas");
+                break;
             }
 
         }
