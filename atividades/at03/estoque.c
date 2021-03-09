@@ -1,10 +1,35 @@
-struct produto
-{
-    int codigo;
-    char nomeProduto[128];
-    int qtde;//Quantidade de produtos
-};
+#include <stdio.h>
 
-struct produto ProdutoEstoque;
+void estocagem(void)
+{   
+    printf("==================================\n\tEstoque\n==================================\n\n");
 
-produto Estoque(int codigo)
+    int quantidadeProduto;
+    typedef struct
+    {
+        int codigo;
+        int qtde;//Quantidade do produto
+    } Produto;
+
+    Produto estoqueproduto[10];
+
+    /*Lista de produtos em estoque*/
+    estoqueproduto[0].codigo = 1010;
+    estoqueproduto[0].qtde = 95;
+    /*Fim da lista*/
+
+    int codigoProduto;
+    printf("Digite o codigo do produto que deseja saber a quantidade: ");
+    scanf("%d", &codigoProduto);
+
+    switch(codigoProduto)
+    {
+        case 1010:{
+            quantidadeProduto = estoqueproduto[0].qtde;
+        }break;
+        default:{
+            quantidadeProduto = 0;
+        }
+    }
+    printf("O produto %d tem %d unidades em estoque.\n", codigoProduto, quantidadeProduto);
+}
