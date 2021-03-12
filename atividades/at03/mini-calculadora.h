@@ -1,0 +1,1 @@
+void calcular(void);

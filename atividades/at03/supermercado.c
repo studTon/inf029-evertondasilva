@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "estoque.h"
+#include "venda.h"
 /*Fim das bibliotecas*/
 
 int main()
@@ -16,7 +17,9 @@ int main()
     int input;
     while(escolha != 0)
     {
-        printf("Digite a operacao que deseja realizar: ");
+        printf("==========================\n\tSupermercado\n==========================\n");
+        printf("Digite a operacao que deseja realizar:\n");
+        printf("0 - Sair\n1 - Estoque\n2 - Venda\n3 - Calculadora\n");
         scanf("%d", &escolha);
         switch(escolha)
         {
@@ -27,6 +30,12 @@ int main()
             case 1:{
                 estocagem();
             }break;
+            case 2:{
+                adicionar_produto();
+            }
+            case 3:{
+                
+            }
         }
         
     }
