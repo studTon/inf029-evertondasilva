@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/*Registro do struct*/
+/*Struct dos produtos*/
 typedef struct
 {
     int codigo;

@@ -1,6 +1,6 @@
-/*Protótipo da função para verificar estoque*/
 void estocagem(void);
-/*Registro do struct*/
+
+/*Struct dos produtos*/
 typedef struct
 {
     int codigo;

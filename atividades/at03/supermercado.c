@@ -9,6 +9,7 @@
 #include <time.h>
 #include "estoque.h"
 #include "venda.h"
+#include "mini-calculadora.h"
 /*Fim das bibliotecas*/
 
 int main()
@@ -19,7 +20,7 @@ int main()
     {
         printf("==========================\n\tSupermercado\n==========================\n");
         printf("Digite a operacao que deseja realizar:\n");
-        printf("0 - Sair\n1 - Estoque\n2 - Venda\n3 - Calculadora\n");
+        printf("0 - Sair\n1 - Estoque\n2 - Venda\n3 - Calculadora\n::");
         scanf("%d", &escolha);
         switch(escolha)
         {
@@ -32,9 +33,9 @@ int main()
             }break;
             case 2:{
                 adicionar_produto();
-            }
+            }break;
             case 3:{
-                
+                calcular();
             }
         }
         

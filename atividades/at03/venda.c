@@ -105,15 +105,15 @@ void adicionar_produto(void)
                 valor = 0;
             }break;
         }
-        printf("Quantidade de itens?\n");
+        printf("Quantidade de itens?\n::");
         scanf("%d", &qtdeItens);
         valor *= qtdeItens;
         printf("%s X %d == %.2f\n", nomeProduto, qtdeItens, valor);
         totalCompra += valor;
-        printf("Adicionar outro produto?\n0 - NAO\n1 - SIM\n");
+        printf("Adicionar outro produto?\n0 - NAO\n1 - SIM\n::");
         scanf("%d", &op);
     }
     
-    printf("\nTOTAL A PAGAR: %.2f\n", totalCompra);
+    printf("\nTOTAL A PAGAR: R$ %.2f\n", totalCompra);
       
 }
