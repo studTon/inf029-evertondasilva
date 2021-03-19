@@ -1,20 +1,36 @@
 #include <stdio.h>
+#define MAXIMO 4
+void Ler4numeros();
+/*Definição da struct*/
 typedef struct
 {
-    int valor[4];
+    int valor[MAXIMO];
 }registro;
-void Ler4numeros();
+registro Estrutura;
+/********************/
 
 int main(void)
 {
-    registro Estrutura;
+    
     Ler4numeros();
-    printf("Valores:\n%d | %d | %d | %d\n",);
+
+    for (int jContador = 0; jContador < MAXIMO; jContador++)
+    {
+        printf("%d", Estrutura.valor[jContador]);
+        if(jContador < MAXIMO - 1)
+            printf(" | ");
+    }
+    
     return 0;
 }
 
 void Ler4numeros()
-{
-    printf("Digite 4 valores:\n");
-    scanf("%d %d %d %d",);
+{   
+    int iContador = 0;
+    while (iContador < MAXIMO)
+    {
+        printf("Digite o valor(indice %d): ", iContador);
+        scanf("%d", &Estrutura.valor[iContador]);
+        iContador++;
+    }
 }
