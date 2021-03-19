@@ -1,16 +1,36 @@
 #include <stdio.h>
+#define MAXIMO 3
 void ler3letras();
+/*Definição de uma struct*/
+typedef struct
+{
+    char Letra[MAXIMO];
+}registro;
+registro Estrutura;
+/************************/
+
 int main(void)
 {
-    char input[3];
     ler3letras();
-    printf("Letras:\n%c | %c | %c\n",);
+    for (int jContador = 0; jContador < MAXIMO; jContador++)
+    {
+        printf("%c", Estrutura.Letra[jContador]);
+        if(jContador < MAXIMO - 1)
+            printf(" | ");
+    }
 
     return 0;
 }
 
 void ler3letras()
 {
-    printf("Digite 3 letras:\n");
-    scanf("%c %c %c",);
+    int iContador = 0;
+    while(iContador < MAXIMO)
+    {
+        printf("Digite uma letra: ");
+        Estrutura.Letra[iContador] = getchar();
+        /*Pular uma linha*/
+        while(getchar() != '\n' );
+        iContador++;
+    }
 }
