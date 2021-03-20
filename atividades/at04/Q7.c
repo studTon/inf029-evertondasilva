@@ -15,7 +15,7 @@ int main(void)
     int iContador = 0;
     while (iContador < NUM_STRINGS)
     {
-        puts(*Estrutura.palavra[iContador]);
+        printf("%s\n", Estrutura.palavra[iContador]);
         iContador++;
     }
     
@@ -28,8 +28,7 @@ void ler3palavras()
     while (jContador < NUM_STRINGS)
     {
         printf("Digite a palavra(indice %d): ", jContador);
-        while(getchar() != '\n' );
-        gets(Estrutura.palavra[jContador][0]);
+        gets(Estrutura.palavra[jContador]);
         jContador++;
     }
     
