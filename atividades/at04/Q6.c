@@ -1,10 +1,10 @@
 #include <stdio.h>
-#define MAXIMO 3
+#define NUM_LETRAS 3
 void ler3letras();
 /*Definição de uma struct*/
 typedef struct
 {
-    char Letra[MAXIMO];
+    char Letra[NUM_LETRAS];
 }registro;
 registro Estrutura;
 /************************/
@@ -12,10 +12,10 @@ registro Estrutura;
 int main(void)
 {
     ler3letras();
-    for (int jContador = 0; jContador < MAXIMO; jContador++)
+    for (int jContador = 0; jContador < NUM_LETRAS; jContador++)
     {
         printf("%c", Estrutura.Letra[jContador]);
-        if(jContador < MAXIMO - 1)
+        if(jContador < NUM_LETRAS - 1)
             printf(" | ");
     }
 
@@ -25,7 +25,7 @@ int main(void)
 void ler3letras()
 {
     int iContador = 0;
-    while(iContador < MAXIMO)
+    while(iContador < NUM_LETRAS)
     {
         printf("Digite uma letra: ");
         Estrutura.Letra[iContador] = getchar();
