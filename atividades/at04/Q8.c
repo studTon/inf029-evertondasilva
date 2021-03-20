@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM_STRING 64
+#include <string.h>
+#define TAM_NOME 20
 #define TAM_DATA 11 //Corresponde a : "01/01/0001\0"
 #define TAM_CPF 15 //Corresponde a : "123.456.789-00\0"
 void cadastrarCliente(void);
 /*Struct dos dados do cliente*/
 typedef struct
 {
-    char nome[TAM_STRING];
+    char nome[TAM_NOME];
     char cpf[TAM_CPF];
     char sexo;
     char dataNasc[TAM_DATA];
@@ -28,7 +29,7 @@ int main(void)
 
     return 0;
 }
-
+/*Cadastro do cliente*/
 void cadastrarCliente(void)
 {
     printf("Cadastro de cliente\n");
