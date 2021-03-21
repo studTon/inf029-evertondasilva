@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#define TAM_NOME 20
+#define TAM_NOME 21
 #define TAM_DATA 11 //Corresponde a : "01/01/0001\0"
 #define TAM_CPF 15 //Corresponde a : "123.456.789-00\0"
 void cadastrarCliente(void);
