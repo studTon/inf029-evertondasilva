@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define NUM_STRINGS 3
-#define TAM_STRING 16
+#define TAM_STRING 17
 void ler3palavras();
 typedef struct
 {
