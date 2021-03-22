@@ -20,7 +20,6 @@ int main(void)
     /*Retorno dos dados cadastrados*/
     printf("\n===Dados cadastrados===\n\n");
     printf("Nome: %s\n", perfilCliente.nome);
-    fflush(stdout);
     printf("CPF: %s\n", perfilCliente.cpf);
     printf("Sexo: %c\n", perfilCliente.sexo);
     printf("Data de nasc.: %s\n", perfilCliente.dataNasc);
@@ -44,5 +43,4 @@ void cadastrarCliente(void)
     while(getchar() != '\n' );/*Pular uma linha*/
     printf("Data de nascimento(dia/mes/ano): ");
     gets(perfilCliente.dataNasc);
-    fflush(stdout);
 }
