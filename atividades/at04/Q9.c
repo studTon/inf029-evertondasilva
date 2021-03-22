@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
     {
         printf("\n\n===Dados cadastrados===\n\n");
         printf("Nome: %s\n", perfilCliente.nome);
-        fflush(stdout);
         printf("CPF: %s\n", perfilCliente.cpf);
         printf("Sexo: %c\n", perfilCliente.sexo);
         printf("Data de nasc.: %s\n", perfilCliente.dataNasc);    
