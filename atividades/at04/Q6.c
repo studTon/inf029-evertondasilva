@@ -12,6 +12,7 @@ registro Estrutura;
 int main(void)
 {
     ler3letras();
+    printf("\n======Letras======\n");
     for (int jContador = 0; jContador < NUM_LETRAS; jContador++)
     {
         printf("%c", Estrutura.Letra[jContador]);
@@ -29,7 +30,7 @@ void ler3letras()
     {
         printf("Digite uma letra: ");
         Estrutura.Letra[iContador] = getchar();
-        /*Pular uma linha*/
+        /*Pular uma linha do input para evitar leitura do char '\n'*/
         while(getchar() != '\n' );
         iContador++;
     }

@@ -1,20 +1,33 @@
 #include <stdio.h>
+#define QTD_NUM 2
+float soma(float valores[]);
 
-float soma(float numA, float numB);
-
-int main()
+int main(int argc, char *argv[])
 {
-    float a, b;
-    printf("Digite o primeiro valor: ");
-    scanf("%f", &a);
-    printf("Digite o segundo valor: ");
-    scanf("%f", &b);
-    printf("Soma = %.2f\n", soma(a, b));
+    float numeros[QTD_NUM];
+    int iContador = 0;
+    while(iContador < QTD_NUM)
+    {
+        printf("Digite o numero(indice %d): ", iContador);
+        scanf("%f", &numeros[iContador]);
+        iContador++;
+    }
+    
+    float resultadoProcessado = soma(numeros);
+    printf("Soma = %.2f\n", resultadoProcessado);
 
     return 0;
 }
 
-float soma(float numA, float numB)
+float soma(float valores[])
 {
-    return numA + numB;
+    float resultado = 0;
+    int jContador = 0;
+    while(jContador < QTD_NUM)
+    {
+        resultado += valores[jContador];
+        jContador++;
+    }
+        
+    return resultado;
 }

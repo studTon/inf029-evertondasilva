@@ -8,10 +8,12 @@ typedef struct
 }registro;
 registro Estrutura;
 
+/*Principal*/
 int main(void)
 {
     ler3palavras();
     int iContador = 0;
+    printf("\n======3 Palavras======\n");//Linha para separar input do output
     while (iContador < NUM_STRINGS)
     {
         printf("%s\n", Estrutura.palavra[iContador]);

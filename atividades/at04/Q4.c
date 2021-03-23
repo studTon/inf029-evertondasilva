@@ -1,16 +1,29 @@
 #include <stdio.h>
-void Ler3numeros(int *num);
+#define QTD_NUM 3
+void Ler3numeros(int num[]);
 
 int main(void)
 {
-    int valores[3];
-    Ler3numeros(valores);
-    printf("Valores: %d | %d | %d\n", valores[0], valores[1], valores[2]);
+    int numeros[QTD_NUM];
+    Ler3numeros(numeros);
+    printf("\n*Numeros:");
+    for(int iContador = 0; iContador < QTD_NUM; iContador++)
+    {
+        printf("%d", numeros[iContador]);
+        if(iContador < QTD_NUM - 1)
+            printf(" | ");
+    }
+        
     return 0;
 }
 
-void Ler3numeros(int *num)
+void Ler3numeros(int num[])
 {
-    printf("Digite 3 valores:\n");
-    scanf("%d %d %d", &*(num), &*(num + 1), &*(num + 2));
+    printf("===Ler 3 numeros===\n");
+    for(int jContador = 0; jContador < QTD_NUM; jContador++)
+    {
+        printf("Digite o numero(indice %d): ", jContador);
+        scanf("%d", &num[jContador]);
+    }
+        
 }

@@ -2,6 +2,7 @@
 #define TAM_NOME 21
 #define TAM_DATA 11 //Corresponde a : "01/01/0001\0"
 #define TAM_CPF 15 //Corresponde a : "123.456.789-00\0"
+#define NUM_BARRAS 30
 void cadastrarCliente(void);
 /*Struct dos dados do cliente*/
 typedef struct
@@ -24,7 +25,9 @@ int main(void)
     printf("CPF: %s\n", perfilCliente.cpf);
     printf("Sexo: %c\n", perfilCliente.sexo);
     printf("Data de nasc.: %s\n", perfilCliente.dataNasc);
-
+    //Linha que determina fim do programa
+    for (int contador = 0; contador < NUM_BARRAS; contador++)
+        printf("=");
     return 0;
 }
 /*Cadastro do cliente*/

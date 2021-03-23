@@ -4,7 +4,7 @@ void Ler4numeros();
 /*Definição da struct*/
 typedef struct
 {
-    int valor[MAXIMO];
+    int numero[MAXIMO];
 }registro;
 registro Estrutura;
 /********************/
@@ -16,7 +16,7 @@ int main(void)
 
     for (int jContador = 0; jContador < MAXIMO; jContador++)
     {
-        printf("%d", Estrutura.valor[jContador]);
+        printf("%d", Estrutura.numero[jContador]);
         if(jContador < MAXIMO - 1)
             printf(" | ");
     }
@@ -29,8 +29,8 @@ void Ler4numeros()
     int iContador = 0;
     while (iContador < MAXIMO)
     {
-        printf("Digite o valor(indice %d): ", iContador);
-        scanf("%d", &Estrutura.valor[iContador]);
+        printf("Digite o numero(indice %d): ", iContador);
+        scanf("%d", &Estrutura.numero[iContador]);
         iContador++;
     }
 }

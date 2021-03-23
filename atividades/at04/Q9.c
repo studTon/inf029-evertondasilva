@@ -6,6 +6,7 @@
 #define CARACTER_DIA 3
 #define CARACTER_MES 3
 #define CARACTER_ANO 5
+#define NUM_BARRAS 30
 /*Protótipo das funções utilizadas*/
 void cadastrarCliente(void);
 void validarNome(char inputNome[]);
@@ -46,6 +47,10 @@ int main(int argc, char *argv[])
         printf("Sexo: %c\n", perfilCliente.sexo);
         printf("Data de nasc.: %s\n", perfilCliente.dataNasc);    
     }
+    //Linha que determina fim do programa
+    for (int contador = 0; contador < NUM_BARRAS; contador++)
+        printf("=");
+    
 
     return 0;
 }
