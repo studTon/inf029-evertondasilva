@@ -70,10 +70,9 @@ void cadastrarCliente(void)
     if(perfilCliente.sexo >= 'a' && perfilCliente.sexo <= 'z')
         perfilCliente.sexo -= 32; 
     //Data de nascimento
-    while(getchar() != '\n' );/*Pular uma linha*/
+    while(getchar() != '\n' );/*Pular uma linha para não considerar '\n' no input*/
     printf("Data de nascimento(Formato: dia/mes/ano): ");
     gets(perfilCliente.dataNasc);
-    fflush(stdout);
 }
 
 /*Validar nome*/
