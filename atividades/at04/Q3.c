@@ -7,7 +7,8 @@ int main(void)
     printf("===Fatorial===\n\nDigite um valor: ");
     scanf("%d", &numero);
     numero = fatorial(numero);
-    if(validaInput == 1){
+    if(validaInput == 1)
+    {
         printf("Fatorial = %d\n", numero);
     }
     return 0;
@@ -16,7 +17,7 @@ int main(void)
 int fatorial(int valor)
 {
     if(valor < 0 || valor > 12){
-        printf("Valor invalido(muito acima ou muito abaixo do esperado!)");
+        printf("Valor invalido(muito acima ou muito abaixo do esperado!)\n");
     }
     else{
         validaInput++;//Validação

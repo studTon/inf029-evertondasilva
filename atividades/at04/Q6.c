@@ -19,7 +19,7 @@ int main(void)
         if(jContador < NUM_LETRAS - 1)
             printf(" | ");
     }
-
+    printf("\n");
     return 0;
 }
 

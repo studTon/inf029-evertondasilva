@@ -59,10 +59,10 @@ void cadastrarCliente(void)
     printf("===Cadastro de cliente===\n\n");
     //Nome
     printf("Primeiro nome: ");
-    gets(perfilCliente.nome);
+    scanf("%[^\n]%*c", perfilCliente.nome);
     //CPF
     printf("CPF(Formato: XXX.XXX.XXX-XX): ");
-    gets(perfilCliente.cpf);
+    scanf("%[^\n]%*c", perfilCliente.cpf);
     //Sexo
     printf("Sexo(M - Masculino|F - Feminino|O - Outro): ");
     scanf("%c", &perfilCliente.sexo);
@@ -72,7 +72,7 @@ void cadastrarCliente(void)
     //Data de nascimento
     while(getchar() != '\n' );/*Pular uma linha para não considerar '\n' no input*/
     printf("Data de nascimento(Formato: dia/mes/ano): ");
-    gets(perfilCliente.dataNasc);
+    scanf("%[^\n]%*c", perfilCliente.dataNasc);
 }
 
 /*Validar nome*/
@@ -235,9 +235,62 @@ void validarNasc(char data[])
             anoChar[jContador] = '\0';
 
         /*Conversão para inteiros*/
-        int diaData = atoi(diaChar);
-        int mesData = atoi(mesChar);
-        int anoData = atoi(anoChar);
+        //Conversão da string dia
+        int indiceDoAlgarismo = 0;
+        int diaData = 0;
+        while (indiceDoAlgarismo < CARACTER_DIA - 1)
+        {   
+            switch(indiceDoAlgarismo)
+            {
+                case 0:{
+                    diaData += (diaChar[indiceDoAlgarismo] - '0') * 10;
+                }break;
+                case 1:{
+                    diaData += (diaChar[indiceDoAlgarismo] - '0') * 1;
+                }break;
+            }
+            indiceDoAlgarismo++;
+        }
+        
+        //Conversão da string mês
+        int mesData = 0;
+        indiceDoAlgarismo = 0;
+        while(indiceDoAlgarismo < CARACTER_MES - 1)
+        {
+            switch(indiceDoAlgarismo)
+            {
+                case 0:{
+                    mesData += (mesChar[indiceDoAlgarismo] - '0') * 10;
+                }break;
+                case 1:{
+                    mesData += (mesChar[indiceDoAlgarismo] - '0') * 1;
+                }break;
+            }
+            indiceDoAlgarismo++;
+        }
+        
+        //Conversão da string ano
+        int anoData = 0;
+        indiceDoAlgarismo = 0;
+        while(indiceDoAlgarismo < CARACTER_ANO - 1)
+        {
+            switch(indiceDoAlgarismo)
+            {
+                case 0:{
+                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1000;
+                }break;
+                case 1:{
+                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 100;
+                }break;
+                case 2:{
+                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 10;
+                }break;
+                case 3:{
+                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1;
+                }break;
+            }
+            indiceDoAlgarismo++;
+        }
 
         /*Verificação de ano bissexto*/
         int bissexto = 0; //0 - Comum | 1 - Bissexto
