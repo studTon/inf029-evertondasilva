@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+/*Bibliotecas dos módulos*/
+#include "aluno.h"
+/*************************/
+
 int main(int argc, char *argv[])
 {
     /*Detecção de SO*/
-    #ifdef WIN32
+    #if defined(WIN32)
         system("cls");//Windows
     #endif
-    #ifdef _linux_
+    #if defined(_linux_)
         system("clear");//Linux
     #endif
     /**********************/
@@ -20,7 +24,7 @@ int main(int argc, char *argv[])
         printf("******************************\n");
         printf("*            ESCOLA          *\n");
         printf("******************************\n");
-        printf("\nDigite uma das seguintes opções:\n0 - Sair\n1 - Cadastrar aluno\n2 - Listar alunos\n::");
+        printf("\nEscolha uma opção a seguir:\n0 - Sair\n1 - Info. aluno\n::");
         scanf("%c", &escolhaMenu);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolhaMenu)
@@ -31,11 +35,8 @@ int main(int argc, char *argv[])
             }break;
             case '1':
             {
-                //Cadastrar aluno
-            }break;
-            case '2':
-            {
-                //Listar alunos
+                //Informações sobre aluno
+                menuAluno();
             }break;
             default:
             {
