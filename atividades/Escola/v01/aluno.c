@@ -46,43 +46,38 @@ void menuAluno()
     
 }
 
-//Verificações da entrada de dados do cadastro
-void validarMatricula(char inputMatricula[])
+int turma = 1;//De 1 a 9
+void gerarMatricula(int inputIndiceAluno)
 {
-    /*Análise dos campos da matrícula*/
-    int tamDoInput = 0;
-    int contadorCaracterPonto = 0;
-    int contadorNumeros = 0;
-    while(inputMatricula[tamDoInput] != '\0')
-    {
-        if(inputMatricula[tamDoInput] >= '0' && inputMatricula[tamDoInput] <= '9' &&
-        (tamDoInput != 4 && tamDoInput != 8))
-        {
-            contadorNumeros++;
-        }
-        else
-        if(inputMatricula[tamDoInput] == '.' && (tamDoInput == 4 || tamDoInput == 8))
-        {
-            contadorCaracterPonto++;
-        }
-        tamDoInput++;
-    }
-    int somaContadores = contadorCaracterPonto + contadorNumeros;
-    /*Conclusão*/
-    if(somaContadores == 12)
-    {
-        printf("MATRÍCULA VALIDA\n");
-    }
-    else
-    {
-        printf("ERRO: Matrícula invalida\n");
-        //contaErros++;
-    }
+    /*Geração da matrícula*/
+    int ano = 2021;
+    inputIndiceAluno++;
+    if(inputIndiceAluno > 50) turma++;
+    int numeroDoEstudante = inputIndiceAluno++;
+    aluno[numeroDoEstudante].matricula = 2021 * 1000000 + turma * 1000 + numeroDoEstudante;    
     
+    /*Conclusão*/
+    printf("MATRÍCULA GERADA\n::%d\n", aluno[numeroDoEstudante].matricula);
+
 }
+//Verificações da entrada de dados do cadastro
 void validarNome(char inputNome[])
 {
-
+    int tamanhoInputNome = 0;
+    while(inputNome[tamanhoInputNome] != '\0') tamanhoInputNome++;
+    int tamanhoNomeReal = 0;
+    while(inputNome[tamanhoNomeReal] != '\0')
+    {
+        if(
+        (inputNome[tamanhoNomeReal] >= 'a' && inputNome[tamanhoNomeReal] <= 'z')||
+        (inputNome[tamanhoNomeReal] >= 'A' && inputNome[tamanhoNomeReal] <= 'Z')||
+        (inputNome[tamanhoNomeReal] == ' '))
+            tamanhoNomeReal++;
+    } 
+    if(tamanhoInputNome == tamanhoNomeReal)
+        printf("NOME VÁLIDO\n");
+    else
+        printf("ERRO: Nome inválido\n");
 }
 void validarCPF(char cpf[])
 {
@@ -97,46 +92,46 @@ void validarNasc(char data[])
 
 }
 //Cadastrar aluno
+int iContador = 0;
 void cadastrarAluno()
 {
     setlocale(LC_ALL, "Portuguese");
     printf("***Cadastrar aluno***\n");
-    int iContador = 0;
-    /*while(aluno[iContador].sexo != '\0')
-    {
-        iContador++;
-    }*/
-    //Matrícula        
-    printf("Digite a matrícula do(a) estudante(XXXX.XXX.XXX): ");//Ano.Turma.NúmeroDoEstudante
-    fgets(aluno[iContador].matricula, 13, stdin);
-    int tamanhoDoInput = 0;
-    while(aluno[iContador].matricula[tamanhoDoInput] != '\0') tamanhoDoInput++;
-    size_t novaLinha = tamanhoDoInput - 1;
-    if (aluno[iContador].matricula[novaLinha] == '\n')
-	    aluno[iContador].matricula[novaLinha] = '\0';
+    if(iContador > 50)
+        iContador = 0;
+    //Matrícula
+    /*Gerar matrícula*/        
+    gerarMatricula(iContador);
     //Nome
     printf("Digite o nome do(a) estudante: ");
-    fgets(aluno[iContador].nome, 51, stdin);
-    tamanhoDoInput = 0;
+    fgets(aluno[iContador].nome, sizeof(aluno[iContador].nome), stdin);
+    /****Remover o new line*/
+    int tamanhoDoInput = 0;
     while(aluno[iContador].nome[tamanhoDoInput] != '\0') tamanhoDoInput++;
-    novaLinha = tamanhoDoInput - 1;
-    if(aluno[iContador].matricula[novaLinha] == '\n')
-        aluno[iContador].matricula[novaLinha] = '\0';
+    if(aluno[iContador].nome[tamanhoDoInput] == '\n')
+        aluno[iContador].nome[tamanhoDoInput] = '\0';
     //Sexo
     printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
-    scanf("%1c", &aluno[iContador].sexo);
-    while(getchar() != '\n');/*Pular o char new line no input*/
+    scanf("%c%*c", &aluno[iContador].sexo);
+    
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", aluno[iContador].dataNasc);
-    while(getchar() != '\n');/*Pular o char new line no input*/
+    fgets(aluno[iContador].dataNasc, 11, stdin);
+    /****Remover o new line*/
+    tamanhoDoInput = 0;
+    while(aluno[iContador].nome[tamanhoDoInput] != '\0') tamanhoDoInput++;
+    if(aluno[iContador].nome[tamanhoDoInput] == '\n')
+        aluno[iContador].nome[tamanhoDoInput] = '\0';
     //CPF
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", aluno[iContador].cpf);
-    while(getchar() != '\n');/*Pular o char new line no input*/
+    fgets(aluno[iContador].cpf, 15, stdin);
+    /****Remover o new line*/
+    tamanhoDoInput = 0;
+    while(aluno[iContador].nome[tamanhoDoInput] != '\0') tamanhoDoInput++;
+    if(aluno[iContador].nome[tamanhoDoInput] == '\n')
+        aluno[iContador].nome[tamanhoDoInput] = '\0';
     /*Validações*/
-    validarMatricula(aluno[iContador].matricula);
-
+    validarNome(aluno[iContador].nome);
     /*Detecção de SO para pausar*/
     if(SO == 1)
         system("pause");//Windows

@@ -1,7 +1,7 @@
 /*Registro*/
 typedef struct
 {
-    char matricula[13];
+    int matricula;
     char nome[51];
     char sexo;
     char dataNasc[11];
@@ -10,7 +10,7 @@ typedef struct
 /*Funções*/
 void menuAluno();
 /*Validações*/
-void validarMatricula(char inputMatricula[]);
+void gerarMatricula(int inputIndiceAluno);
 void validarNome(char inputNome[]);
 void validarCPF(char cpf[]);
 void validarSexo(char sexo);
