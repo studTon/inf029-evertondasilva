@@ -7,13 +7,12 @@
 
 int main(int argc, char *argv[])
 {
-    /*Detecção de SO*/
+    /*Detecção de SO para SO a tela*/
     #if defined(WIN32)
+        #define SO 1
+    #endif
+    if(SO == 1)
         system("cls");//Windows
-    #endif
-    #if defined(_linux_)
-        system("clear");//Linux
-    #endif
     /**********************/
     setlocale(LC_ALL, "Portuguese"); //Idioma para exibição
     
@@ -43,13 +42,18 @@ int main(int argc, char *argv[])
                 printf("INPUT INVÁLIDO\n");
             }break;
         }
-        /*Detecção de SO*/
-        #ifdef WIN32
+        /*Detecção de SO para pausar*/
+        if(SO == 1)
+            system("pause");//Windows
+        else
+            system("read -p \"Pause\"");//Linux
+        /**********************/
+        /*Detecção de SO para SO a tela*/
+        #if defined(WIN32)
+            #define SO 1
+        #endif
+        if(SO == 1)
             system("cls");//Windows
-        #endif
-        #ifdef _linux_
-            system("clear");//Linux
-        #endif
         /**********************/
     }
     
