@@ -4,26 +4,21 @@
 #define CARACTER_DIA 3
 #define CARACTER_MES 3
 #define CARACTER_ANO 5
-cadastroAluno aluno[100];
-//menu Aluno
+#define QTD_DE_ALUNOS 100
+cadastroAluno aluno[QTD_DE_ALUNOS];
+int chaveDeValidar = 0;
+int cadastrosComSucesso = 0;
+/*menu Aluno*/
 void menuAluno()
 {
-    /*Detecção de SO para SO a tela*/
-    #if defined(WIN32)
-        #define SO 1
-    #endif
-    if(SO == 1)
-        system("cls");//Windows
-    /**********************/
-
     char escolha = '1';
     while(escolha != '0')
     {
         printf("******************************\n");
         printf("*         INFO ALUNO         *\n");
         printf("******************************\n");
-        printf("\nEscolha uma opção a seguir:\n0 - Voltar\n1 - Cadastrar\n2 - Listar\n::");
-        scanf("%c", &escolha);
+        printf("\nEscolha uma opcao a seguir:\n0 - Voltar\n1 - Cadastrar\n2 - Listar\n::");
+        scanf("%1c%*c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
@@ -37,18 +32,18 @@ void menuAluno()
             }break;
             case '2':
             {
-                //Listar alunos cadastrados
+                listarAlunos();
+            }break;
+            default:
+            {
+                printf("INPUT INVALIDO\n");
             }break;
         }
-        /*Detecção de SO para SO limpar a tela*/
-        if(SO == 1)
-            system("cls");//Windows
-        /**********************/
+    
     }
     
 }
-//Geração de matrícula
-
+/*Geração de matrícula*/
 int turma = 1;
 void gerarMatricula(int inputIndiceAluno)
 {
@@ -65,9 +60,8 @@ void gerarMatricula(int inputIndiceAluno)
     char centenaAluno = (inputIndiceAluno / 100) + '0';
     char dezenaAluno = ((inputIndiceAluno % 100) / 10) + '0';
     char unidadeAluno = (inputIndiceAluno % 10) + '0';
-    printf("centena: %c\ndezena: %c\nunidade: %c\n", centenaAluno, dezenaAluno, unidadeAluno);
     //Ano e semestre
-    char ano[5] = "2021\0";
+    char ano[CARACTER_ANO] = "2021\0";
     char semestre = '1';
     //Decomposição da turma
     char dezenaTurma = (turma / 10) + '0';
@@ -125,12 +119,12 @@ void gerarMatricula(int inputIndiceAluno)
     printf("MATRICULA GERADA: %s\n", aluno[iContador].matricula);
 
 }
-//Verificações da entrada de dados do cadastro
+/*Verificações da entrada de dados do cadastro*/
 void validarNome(char inputNome[])
 {   
     
     int tamanhoInputNome = 0;
-    while(inputNome[tamanhoInputNome + 1] != '\0') tamanhoInputNome++;
+    while(inputNome[tamanhoInputNome] != '\0') tamanhoInputNome++;
     int tamanhoNomeReal = 0;
     int contador = 0;
     while(inputNome[contador] != '\0')
@@ -143,7 +137,10 @@ void validarNome(char inputNome[])
         contador++;
     }
     if(tamanhoInputNome == tamanhoNomeReal)
+    {
         printf("NOME VALIDO\n");
+        chaveDeValidar++;
+    }
     else
         printf("ERRO: Nome invalido\n");
 }
@@ -176,6 +173,7 @@ void validarCPF(char cpf[])
     if(somaContadores == 14)
     {
         printf("CPF VALIDO\n");
+        chaveDeValidar++;
     }
     else
     {
@@ -186,9 +184,10 @@ void validarCPF(char cpf[])
 }
 void validarSexo(char sexo)
 {
-    if(sexo == 'm'||sexo == 'M'||sexo == 'f'||sexo == 'F'||sexo == 'o'||sexo == 'o')
+    if(sexo == 'M'||sexo == 'F'||sexo == 'O')
     {
         printf("SEXO VALIDO\n");
+        chaveDeValidar++;
     }
     else
     {
@@ -379,12 +378,14 @@ void validarNasc(char data[])
     if (errosData == 0)
     {
         printf("DATA VALIDA\n");
+        chaveDeValidar++;
     }
     else
     {
         printf("ERRO: Data invalida\n");
     }
 }
+/*********************************************************/
 //Cadastrar aluno
 void cadastrarAluno()
 {
@@ -397,29 +398,38 @@ void cadastrarAluno()
     gerarMatricula(iContador);
     //Nome
     printf("Digite o nome do(a) estudante: ");
-    fgets(aluno[iContador].nome, sizeof(aluno[iContador].nome), stdin);
-    /****Remover o new line*/
-    int tamanhoDoInput = 0;
-    while(aluno[iContador].nome[tamanhoDoInput] != '\0') tamanhoDoInput++;
-    if(aluno[iContador].nome[tamanhoDoInput] == '\n')
-        aluno[iContador].nome[tamanhoDoInput] = '\0';
+    scanf("%51[^\n]%*c", aluno[iContador].nome);
     //Sexo
     printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
-    scanf("%c%*c", &aluno[iContador].sexo);
-    
+    scanf("%1c%*c", &aluno[iContador].sexo);
+    if(aluno[iContador].sexo >= 'a' && aluno[iContador].sexo <= 'z')
+        aluno[iContador].sexo -= 32; //Tornar o input com letras maiúsculas
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
     scanf("%11[^\n]%*c", &aluno[iContador].dataNasc);
     //CPF
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &aluno[iContador].cpf);
+    scanf("%15[^\n]%*c", &aluno[iContador].cpf);
     /*Validações*/
     validarNome(aluno[iContador].nome);
     validarSexo(aluno[iContador].sexo);
     validarNasc(aluno[iContador].dataNasc);
     validarCPF(aluno[iContador].cpf);
-    /*Detecção de SO para pausar*/
-    if(SO == 1)
-        system("pause");//Windows
-    /**********************/
+    if(chaveDeValidar == 4)
+        cadastrosComSucesso++;
+}
+
+//Listar aluno
+void listarAlunos()
+{
+    printf("\nLista de alunos cadastrados\n*******************************\n\n");
+    int iContador = 0;
+    while(iContador < cadastrosComSucesso)
+    {
+        printf("MATRICULA: %s\nNOME: %s\nSEXO: %c\n", aluno[iContador].matricula, aluno[iContador].nome, aluno[iContador].sexo);
+        printf("DATA DE NASC.: %s\nCPF: %s\n", aluno[iContador].dataNasc, aluno[iContador].cpf);
+        printf("*******************************\n");
+        iContador++;
+    }
+    printf("\n\nListagem completa...\n");
 }
