@@ -1,7 +1,7 @@
 /*Registro*/
 typedef struct
 {
-    int matricula;
+    char matricula[13];
     char nome[51];
     char sexo;
     char dataNasc[11];

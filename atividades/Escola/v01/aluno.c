@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "aluno.h"
-cadastroAluno aluno[200];
+cadastroAluno aluno[100];
 //menu Aluno
 void menuAluno()
 {
@@ -45,34 +45,93 @@ void menuAluno()
     }
     
 }
+//Geração de matrícula
 
-int turma = 1;//De 1 a 9
+int turma = 1;
 void gerarMatricula(int inputIndiceAluno)
 {
-    /*Geração da matrícula*/
-    int ano = 2021;
+    int iContador = inputIndiceAluno;
     inputIndiceAluno++;
-    if(inputIndiceAluno > 50) turma++;
-    int numeroDoEstudante = inputIndiceAluno++;
-    aluno[numeroDoEstudante].matricula = 2021 * 1000000 + turma * 1000 + numeroDoEstudante;    
+    if(inputIndiceAluno > 50)
+    {
+        turma++;
+        inputIndiceAluno - 50;
+    }
+    //Decomposição do índice do aluno
+    char centenaAluno = inputIndiceAluno / 100;
+    char dezenaAluno = (inputIndiceAluno % 100) / 10;
+    char unidadeAluno = inputIndiceAluno % 10;
+    //Ano e semestre
+    char ano[5] = "2021\0";
+    char semestre = '1';
+    //Decomposição da turma
+    char dezenaTurma = turma / 10;
+    char unidadeTurma = turma % 10;
+    //Criação da string que representa a matrícula
+    int contador = 0;
+    while(aluno[iContador].matricula[contador] != '\0')
+    {
+        if(contador >= 0 && contador <= 3)
+        {
+            aluno[iContador].matricula[contador] = ano[contador];
+        }
+        if(contador == 4 || contador == 6 ||contador == 9)
+        {
+            aluno[iContador].matricula[contador] = '.';
+        }
+        if(contador == 5)
+        {
+            aluno[iContador].matricula[contador] = semestre;
+        }
+        if(contador == 7)
+        {
+            aluno[iContador].matricula[contador] = dezenaTurma;
+        }
+        else
+            if(contador == 8)
+            {
+                aluno[iContador].matricula[contador] = unidadeTurma;
+            }
+        if(contador == 10)
+        {
+            aluno[iContador].matricula[contador] = centenaAluno;
+        }
+        else
+            if(contador == 11)
+            {
+                aluno[iContador].matricula[contador] = dezenaAluno;
+            }
+            else
+                if(contador == 12)
+                {
+                    aluno[iContador].matricula[contador] = unidadeAluno;
+                }
     
-    /*Conclusão*/
-    printf("MATRÍCULA GERADA\n::%d\n", aluno[numeroDoEstudante].matricula);
+    contador++;
+    }
+    printf("\n**CONTADOR**::%d\n", contador);
+    if(contador == 13)
+        aluno[iContador].matricula[contador] = '\0';
+
+    printf("MATRÍCULA GERADA: %s", aluno[iContador].matricula);
 
 }
 //Verificações da entrada de dados do cadastro
 void validarNome(char inputNome[])
-{
+{   
+    
     int tamanhoInputNome = 0;
     while(inputNome[tamanhoInputNome] != '\0') tamanhoInputNome++;
     int tamanhoNomeReal = 0;
-    while(inputNome[tamanhoNomeReal] != '\0')
+    int contador = 0;
+    while(inputNome[contador] != '\0')
     {
         if(
-        (inputNome[tamanhoNomeReal] >= 'a' && inputNome[tamanhoNomeReal] <= 'z')||
-        (inputNome[tamanhoNomeReal] >= 'A' && inputNome[tamanhoNomeReal] <= 'Z')||
-        (inputNome[tamanhoNomeReal] == ' '))
+        (inputNome[contador] >= 'a' && inputNome[contador] <= 'z')||
+        (inputNome[contador] >= 'A' && inputNome[contador] <= 'Z')||
+        (inputNome[contador] == ' '))
             tamanhoNomeReal++;
+        contador++;
     } 
     if(tamanhoInputNome == tamanhoNomeReal)
         printf("NOME VÁLIDO\n");
@@ -92,10 +151,9 @@ void validarNasc(char data[])
 
 }
 //Cadastrar aluno
-int iContador = 0;
 void cadastrarAluno()
 {
-    setlocale(LC_ALL, "Portuguese");
+    int iContador = 0;
     printf("***Cadastrar aluno***\n");
     if(iContador > 50)
         iContador = 0;
@@ -116,20 +174,10 @@ void cadastrarAluno()
     
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    fgets(aluno[iContador].dataNasc, 11, stdin);
-    /****Remover o new line*/
-    tamanhoDoInput = 0;
-    while(aluno[iContador].nome[tamanhoDoInput] != '\0') tamanhoDoInput++;
-    if(aluno[iContador].nome[tamanhoDoInput] == '\n')
-        aluno[iContador].nome[tamanhoDoInput] = '\0';
+    scanf("%11[^\n]%*c", &aluno[iContador].dataNasc);
     //CPF
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    fgets(aluno[iContador].cpf, 15, stdin);
-    /****Remover o new line*/
-    tamanhoDoInput = 0;
-    while(aluno[iContador].nome[tamanhoDoInput] != '\0') tamanhoDoInput++;
-    if(aluno[iContador].nome[tamanhoDoInput] == '\n')
-        aluno[iContador].nome[tamanhoDoInput] = '\0';
+    scanf("%15[^\n]%*c", &aluno[iContador].cpf);
     /*Validações*/
     validarNome(aluno[iContador].nome);
     /*Detecção de SO para pausar*/
