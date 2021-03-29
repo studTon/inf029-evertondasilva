@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
         printf("******************************\n");
         printf("*            ESCOLA          *\n");
         printf("******************************\n");
-        printf("\nEscolha uma opcao a seguir:\n0 - Sair\n1 - Info. aluno\n::");
+        printf("\nEscolha uma opcao a seguir:\n0 - Sair\n1 - Gerenciar alunos\n::");
         scanf("%1c%*c", &escolhaMenu);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolhaMenu)

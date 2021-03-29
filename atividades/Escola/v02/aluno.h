@@ -10,6 +10,8 @@ typedef struct
 /*Funções*/
 void menuAluno();
 void inserirAluno();
+void excluirAluno();
+void excluirAlunoNaLista(int indiceAluno);
 void listarAlunos();
 /*Funções de Validação*/
 void gerarMatricula(int inputIndiceAluno);

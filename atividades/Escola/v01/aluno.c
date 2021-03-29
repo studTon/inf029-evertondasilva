@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "aluno.h"
 #define CARACTER_DIA 3
 #define CARACTER_MES 3
@@ -17,7 +16,7 @@ void menuAluno()
         printf("******************************\n");
         printf("*         INFO ALUNO         *\n");
         printf("******************************\n");
-        printf("\nEscolha uma opcao a seguir:\n0 - Voltar\n1 - Cadastrar\n2 - Listar\n::");
+        printf("\nEscolha uma opcao a seguir:\n0 - Voltar\n1 - Inserir aluno\n2 - Listar alunos\n::");
         scanf("%1c%*c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
@@ -28,7 +27,7 @@ void menuAluno()
             }break;
             case '1':
             {
-                cadastrarAluno();
+                inserirAluno();
             }break;
             case '2':
             {
@@ -387,7 +386,7 @@ void validarNasc(char data[])
 }
 /*********************************************************/
 //Cadastrar aluno
-void cadastrarAluno()
+void inserirAluno()
 {
     int iContador = 0;
     printf("***Cadastrar aluno***\n");
