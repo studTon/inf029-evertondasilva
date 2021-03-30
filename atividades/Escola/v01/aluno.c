@@ -48,7 +48,7 @@ void gerarMatricula(int inputIndiceAluno)
 {
     int iContador = inputIndiceAluno;
     inputIndiceAluno++;
-    if(inputIndiceAluno > 50)
+    if(inputIndiceAluno >= 50)
     {
         turma++;
         inputIndiceAluno - 50;
