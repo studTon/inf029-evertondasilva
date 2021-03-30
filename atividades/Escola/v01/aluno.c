@@ -388,6 +388,9 @@ void validarNasc(char data[])
 //Cadastrar aluno
 void inserirAluno()
 {
+    /*
+     *CORRIGIR!: Estou gerando somente uma matrícula 
+    */
     int iContador = 0;
     printf("***Cadastrar aluno***\n");
     if(iContador > 50)

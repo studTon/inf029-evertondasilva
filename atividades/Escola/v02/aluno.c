@@ -402,6 +402,9 @@ void validarNasc(char data[])
 //Cadastrar aluno
 void inserirAluno()
 {
+    /*
+     *CORRIGIR!: Estou gerando somente uma matrícula 
+    */
     int iContador = 0;
     printf("***Cadastrar aluno***\n");
     if(iContador > 50)
@@ -435,6 +438,7 @@ void inserirAluno()
 //Excluir aluno
 void excluirAluno()
 {
+    printf("****************************\n");
     char matriculaExcluir[13];
     printf("Digite a matricula do aluno: ");
     scanf("%13[^\n]%*c", matriculaExcluir);
@@ -454,7 +458,9 @@ void excluirAluno()
         if(caracteresIguais == iContador)
         {
             achou = 1;
+            printf("ALUNO ENCONTRADO\n");
             excluirAlunoNaLista(numeroDoAlunoEmLista);
+            cadastrosComSucesso -= achou;
             break;
         }
         numeroDoAlunoEmLista++;
@@ -466,12 +472,25 @@ void excluirAluno()
 }
 
 //Excluir os dados do aluno na lista
-void excluirAlunoNaLista(int indiceAluno)
+int excluirAlunoNaLista(int indiceAluno)
 {
-    for(int iContador; aluno[indiceAluno].matricula[iContador] != '\0'; iContador++)
+    for(int iContador = 0; aluno[indiceAluno].matricula[iContador] != '\0'; iContador++)
     {
-        aluno[indiceAluno].matricula[iContador] = NULL;
+        //Apagar a matrícula cadastrada
+        aluno[indiceAluno].matricula[iContador] = 0;
     }
+    for(int iContador = 0; aluno[indiceAluno].nome[iContador] != '\0'; iContador++)
+    {
+        //Apagar o nome cadastrado
+        aluno[indiceAluno].nome[iContador] = 0;
+    }
+    aluno[indiceAluno].sexo = 0; //Apagar o sexo cadastrado
+    for(int iContador = 0; aluno[indiceAluno].cpf[iContador] != '\0'; iContador++)
+    {
+        //Apagar o CPF cadastrado
+        aluno[indiceAluno].cpf[iContador] = 0;
+    }
+    printf("**OS DADOS DO ALUNO FORAM EXCLUIDOS**\n\n");
 }
 
 //Listar alunos
