@@ -388,13 +388,8 @@ void validarNasc(char data[])
 //Cadastrar aluno
 void inserirAluno()
 {
-    /*
-     *CORRIGIR!: Estou gerando somente uma matrícula 
-    */
-    int iContador = 0;
+    int iContador = cadastrosComSucesso;
     printf("***Cadastrar aluno***\n");
-    if(iContador > 50)
-        iContador = 0;
     //Matrícula
     /*Gerar matrícula*/        
     gerarMatricula(iContador);
@@ -426,10 +421,13 @@ void listarAlunos()
 {
     printf("\nLista de alunos cadastrados\n*******************************\n\n");
     int iContador = 0;
-    while(iContador < cadastrosComSucesso)
+    while(iContador <= cadastrosComSucesso)
     {
-        printf("MATRICULA: %s\nNOME: %s\nSEXO: %c\n", aluno[iContador].matricula, aluno[iContador].nome, aluno[iContador].sexo);
-        printf("DATA DE NASC.: %s\nCPF: %s\n", aluno[iContador].dataNasc, aluno[iContador].cpf);
+        printf("MATRICULA: %s\n", aluno[iContador].matricula);
+        printf("NOME: %s\n", aluno[iContador].nome);
+        printf("SEXO: %c\n", aluno[iContador].sexo);
+        printf("DATA DE NASC.: %s\n", aluno[iContador].dataNasc);
+        printf("CPF: %s\n", aluno[iContador].cpf);
         printf("*******************************\n");
         iContador++;
     }
