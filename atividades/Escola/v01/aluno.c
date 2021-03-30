@@ -431,5 +431,5 @@ void listarAlunos()
         printf("*******************************\n");
         iContador++;
     }
-    printf("\n\nListagem completa...\n");
+    printf("Listagem completa...\n\n");
 }
