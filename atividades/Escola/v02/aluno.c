@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "aluno.h"
 /*Variáveis para auxiliar a contagem dos alunos*/
-int chaveDeValidar;
-int cadastrosComSucesso = 0;
+int chaveDeValidarAluno;
+int cadastrosComSucessoAluno = 0;
 /*Registro*/
 cadastroAluno aluno[QTD_DE_ALUNOS];
 
@@ -51,7 +51,7 @@ void menuAluno()
     
 }
 /*Geração de matrícula*/
-void gerarMatricula(int inputIndiceAluno)
+void gerarMatriculaAluno(int inputIndiceAluno)
 {    
     if(inputIndiceAluno < QTD_DE_ALUNOS)
     {
@@ -110,7 +110,7 @@ void gerarMatricula(int inputIndiceAluno)
 
 }
 /*Verificações da entrada de dados do cadastro*/
-void validarNome(char inputNome[])
+void validarNomeAluno(char inputNome[])
 {   
     
     int tamanhoInputNome = 0;
@@ -129,12 +129,12 @@ void validarNome(char inputNome[])
     if(tamanhoInputNome == tamanhoNomeReal)
     {
         printf("NOME VALIDO\n");
-        chaveDeValidar++;
+        chaveDeValidarAluno++;
     }
     else
         printf("ERRO: Nome invalido\n");
 }
-void validarCPF(char cpf[])
+void validarCPFAluno(char cpf[])
 {
     /*Análise dos campo CPF*/
     int tamDoInput = 0;
@@ -163,7 +163,7 @@ void validarCPF(char cpf[])
     if(somaContadores == CPF - 1)
     {
         printf("CPF VALIDO\n");
-        chaveDeValidar++;
+        chaveDeValidarAluno++;
     }
     else
     {
@@ -172,19 +172,19 @@ void validarCPF(char cpf[])
     }
     
 }
-void validarSexo(char sexo)
+void validarSexoAluno(char sexo)
 {
     if(sexo == 'M'||sexo == 'F'||sexo == 'O')
     {
         printf("SEXO VALIDO\n");
-        chaveDeValidar++;
+        chaveDeValidarAluno++;
     }
     else
     {
         printf("ERRO: Sexo invalido\n");
     }
 }
-void validarNasc(char data[])
+void validarNascAluno(char data[])
 {
     int errosData = 0;
     /*Decomposição da data*/
@@ -368,7 +368,7 @@ void validarNasc(char data[])
     if (errosData == 0)
     {
         printf("DATA VALIDA\n");
-        chaveDeValidar++;
+        chaveDeValidarAluno++;
     }
     else
     {
@@ -379,32 +379,32 @@ void validarNasc(char data[])
 //Inserir aluno
 void inserirAluno()
 {
-    chaveDeValidar = 0;
+    chaveDeValidarAluno = 0;
     printf("***Cadastrar aluno***\n");
     //Matrícula
     /*Gerar matrícula*/        
-    gerarMatricula(cadastrosComSucesso + 1);
+    gerarMatriculaAluno(cadastrosComSucessoAluno + 1);
     //Nome
     printf("Digite o nome do(a) estudante: ");
-    scanf("%51[^\n]%*c", aluno[cadastrosComSucesso + 1].nome);
+    scanf("%51[^\n]%*c", aluno[cadastrosComSucessoAluno + 1].nome);
     //Sexo
     printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
-    scanf("%1c%*c", &aluno[cadastrosComSucesso + 1].sexo);
-    if(aluno[cadastrosComSucesso + 1].sexo >= 'a' && aluno[cadastrosComSucesso + 1].sexo <= 'z')
-        aluno[cadastrosComSucesso + 1].sexo -= 32; //Tornar o input com letras maiúsculas
+    scanf("%1c%*c", &aluno[cadastrosComSucessoAluno + 1].sexo);
+    if(aluno[cadastrosComSucessoAluno + 1].sexo >= 'a' && aluno[cadastrosComSucessoAluno + 1].sexo <= 'z')
+        aluno[cadastrosComSucessoAluno + 1].sexo -= 32; //Tornar o input com letras maiúsculas
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucesso + 1].dataNasc);
+    scanf("%[^\n]%*c", &aluno[cadastrosComSucessoAluno + 1].dataNasc);
     //CPF
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucesso + 1].cpf);
+    scanf("%[^\n]%*c", &aluno[cadastrosComSucessoAluno + 1].cpf);
     /*Validações*/
-    validarNome(aluno[cadastrosComSucesso + 1].nome);
-    validarSexo(aluno[cadastrosComSucesso + 1].sexo);
-    validarNasc(aluno[cadastrosComSucesso + 1].dataNasc);
-    validarCPF(aluno[cadastrosComSucesso + 1].cpf);
-    if(chaveDeValidar == 4)
-        cadastrosComSucesso++;
+    validarNomeAluno(aluno[cadastrosComSucessoAluno + 1].nome);
+    validarSexoAluno(aluno[cadastrosComSucessoAluno + 1].sexo);
+    validarNascAluno(aluno[cadastrosComSucessoAluno + 1].dataNasc);
+    validarCPFAluno(aluno[cadastrosComSucessoAluno + 1].cpf);
+    if(chaveDeValidarAluno == 4)
+        cadastrosComSucessoAluno++;
 }
 
 //Excluir aluno
@@ -418,7 +418,7 @@ void excluirAluno()
     int numeroDoAlunoEmLista = 0;
     int caracteresIguais;
     int achou = 0;//0 - Não achou|1 - Achou
-    while(numeroDoAlunoEmLista < cadastrosComSucesso)
+    while(numeroDoAlunoEmLista < cadastrosComSucessoAluno)
     {
         caracteresIguais = 0;
         jContador = 0;
@@ -432,7 +432,7 @@ void excluirAluno()
             achou = 1;
             printf("ALUNO ENCONTRADO\n");
             excluirAlunoNaLista(numeroDoAlunoEmLista);
-            cadastrosComSucesso -= achou;
+            cadastrosComSucessoAluno -= achou;
             break;
         }
         numeroDoAlunoEmLista++;
@@ -476,7 +476,7 @@ void listarAlunos()
     */
     printf("\nLista de alunos cadastrados\n*******************************\n\n");
     int iContador = 0;
-    while(iContador <= cadastrosComSucesso)
+    while(iContador <= cadastrosComSucessoAluno)
     {
         printf("MATRICULA: %s\n", aluno[iContador].matricula);
         printf("NOME: %s\n", aluno[iContador].nome);

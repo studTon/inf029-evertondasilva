@@ -18,10 +18,10 @@ void excluirProf();
 int excluirProfNaLista(int indiceProf);
 void listarProf();
 /*Funções de Validação*/
-void gerarMatricula(int inputIndiceProf);
-void validarNome(char inputNome[]);
-void validarCPF(char cpf[]);
-void validarSexo(char sexo);
-void validarNasc(char data[]);
+void gerarMatriculaProf(int inputIndiceProf);
+void validarNomeProf(char inputNome[]);
+void validarCPFProf(char cpf[]);
+void validarSexoProf(char sexo);
+void validarNascProf(char data[]);
 /**********************/
 #endif
