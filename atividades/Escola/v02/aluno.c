@@ -69,7 +69,7 @@ void gerarMatricula(int inputIndiceAluno)
         char semestre = '1';
         //Criação da string que representa a matrícula
         int contador = 0;
-        while(contador < 11)
+        while(contador < TAM_MATRICULA_ALUNO - 1)
         {
             if(contador >= 0 && contador <= 3)
             {
@@ -98,7 +98,7 @@ void gerarMatricula(int inputIndiceAluno)
             
         	contador++;
         }
-        if(contador == 10)
+        if(contador == TAM_MATRICULA_ALUNO - 1)
             aluno[inputIndiceAluno].matricula[contador] = '\0';
 
         printf("MATRICULA GERADA: %s\n", aluno[inputIndiceAluno].matricula);
@@ -160,7 +160,7 @@ void validarCPF(char cpf[])
     }
     int somaContadores = contadorCaracterHifen + contadorCaracterPonto + contadorNumeros;
     /*Conclusão*/
-    if(somaContadores == 14)
+    if(somaContadores == CPF - 1)
     {
         printf("CPF VALIDO\n");
         chaveDeValidar++;
@@ -411,7 +411,7 @@ void inserirAluno()
 void excluirAluno()
 {
     printf("****************************\n");
-    char matriculaExcluir[13];
+    char matriculaExcluir[TAM_MATRICULA_ALUNO];
     printf("Digite a matricula do aluno: ");
     scanf("%13[^\n]%*c", matriculaExcluir);
     int jContador;
@@ -472,7 +472,7 @@ int excluirAlunoNaLista(int indiceAluno)
 void listarAlunos()
 {   
     /*BUG: Quando lista alunos, com pelo menos um excluído*
-    * o programa exibe um cadastro com dados vazios.      *
+    *, o programa exibe um cadastro com dados vazios.     *
     */
     printf("\nLista de alunos cadastrados\n*******************************\n\n");
     int iContador = 0;

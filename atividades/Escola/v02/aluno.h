@@ -1,19 +1,14 @@
 #ifndef ALUNO_H
 #define ALUNO_H
-/*Macros de tamanho de arranjos*/
-#define QTD_DE_ALUNOS 100
-#define TAM_CARACTER_DIA 3
-#define TAM_CARACTER_MES 3
-#define TAM_CARACTER_ANO 5
-
+#include "utilitarios.h"
 /*Registro*/
 typedef struct
 {
-    char matricula[11];
-    char nome[51];
+    char matricula[TAM_MATRICULA_ALUNO];
+    char nome[TAM_NOME];
     char sexo;
-    char dataNasc[11];
-    char cpf[15];
+    char dataNasc[DATA_NASC];
+    char cpf[CPF];
 }cadastroAluno;
 
 /*Funções principais*/

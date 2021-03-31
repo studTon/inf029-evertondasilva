@@ -2,6 +2,7 @@
 #include <stdlib.h>
 /*Bibliotecas dos módulos*/
 #include "aluno.h"
+#include "professor.h"
 /*************************/
 
 int main(int argc, char *argv[])
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
             case '2':
             {
                 //Informações sobre professor
+                menuProf();
                 
             }break;
             case '3':
