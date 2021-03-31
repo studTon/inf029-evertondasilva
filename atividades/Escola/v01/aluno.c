@@ -4,7 +4,7 @@
 int chaveDeValidar;
 int cadastrosComSucesso = 0;
 /*Registro*/
-
+cadastroAluno aluno[QTD_DE_ALUNOS];
 
 /*menu Aluno*/
 void menuAluno()
@@ -367,7 +367,6 @@ void validarNasc(char data[])
     }
 }
 /*********************************************************/
-
 //Inserir aluno
 void inserirAluno()
 {

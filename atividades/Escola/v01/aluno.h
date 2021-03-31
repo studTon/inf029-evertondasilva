@@ -16,9 +16,7 @@ typedef struct
     char cpf[15];
 }cadastroAluno;
 
-cadastroAluno aluno[QTD_DE_ALUNOS];
-
-/*Funções*/
+/*Funções principais*/
 void menuAluno();
 void inserirAluno();
 void listarAlunos();

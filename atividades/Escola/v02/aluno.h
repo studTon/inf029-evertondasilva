@@ -1,13 +1,22 @@
+#ifndef ALUNO_H
+#define ALUNO_H
+/*Macros de tamanho de arranjos*/
+#define QTD_DE_ALUNOS 100
+#define TAM_CARACTER_DIA 3
+#define TAM_CARACTER_MES 3
+#define TAM_CARACTER_ANO 5
+
 /*Registro*/
 typedef struct
 {
-    char matricula[14];
+    char matricula[11];
     char nome[51];
     char sexo;
     char dataNasc[11];
     char cpf[15];
 }cadastroAluno;
-/*Funções*/
+
+/*Funções principais*/
 void menuAluno();
 void inserirAluno();
 void excluirAluno();
@@ -20,3 +29,4 @@ void validarCPF(char cpf[]);
 void validarSexo(char sexo);
 void validarNasc(char data[]);
 /**********************/
+#endif

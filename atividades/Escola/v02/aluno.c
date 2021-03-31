@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include "aluno.h"
-#define TAM_CARACTER_DIA 3
-#define TAM_CARACTER_MES 3
-#define TAM_CARACTER_ANO 5
-#define TAM_MATRICULA 13
-#define QTD_DE_ALUNOS 100
-cadastroAluno aluno[QTD_DE_ALUNOS];
-int chaveDeValidar = 0;
+/*Variáveis para auxiliar a contagem dos alunos*/
+int chaveDeValidar;
 int cadastrosComSucesso = 0;
+/*Registro*/
+cadastroAluno aluno[QTD_DE_ALUNOS];
 
 void menuAluno()
 {
@@ -54,81 +51,62 @@ void menuAluno()
     
 }
 /*Geração de matrícula*/
-int turma = 1;
 void gerarMatricula(int inputIndiceAluno)
 {    
     if(inputIndiceAluno < QTD_DE_ALUNOS)
-        if(inputIndiceAluno >= 50)
-        {
-            turma++;
-            inputIndiceAluno -= 50;
-        }
-    //Decomposição do índice do aluno
-    /*É necessário somar o char '0' a todos os valores inteiros na 
-     *conversão de inteiro para char, pois o valor inteiro do char
-     *'0' somado ao número inteiro equivale ao seu char correspon-
-     *dente.
-     */
-    char centenaAluno = (inputIndiceAluno / 100) + '0';
-    char dezenaAluno = ((inputIndiceAluno % 100) / 10) + '0';
-    char unidadeAluno = (inputIndiceAluno % 10) + '0';
-    //Ano e semestre
-    char ano[TAM_CARACTER_ANO] = "2021\0";
-    char semestre = '1';
-    //Decomposição da turma
-    char dezenaTurma = (turma / 10) + '0';
-    char unidadeTurma = (turma % 10) + '0';
-    //Criação da string que representa a matrícula
-    int contador = 0;
-    while(contador < 13)
     {
-        if(contador >= 0 && contador <= 3)
+        /*É necessário somar o char '0' a todos os valores inteiros na 
+         *conversão de inteiro para char, pois o valor inteiro do char
+         *'0' somado ao número inteiro equivale ao seu char correspon-
+         *dente.
+         */
+        //Decomposição do índice do aluno
+        char centenaAluno = (inputIndiceAluno / 100) + '0';
+        char dezenaAluno = ((inputIndiceAluno % 100) / 10) + '0';
+        char unidadeAluno = (inputIndiceAluno % 10) + '0';
+        //Ano e semestre
+        char ano[TAM_CARACTER_ANO] = "2021\0";
+        char semestre = '1';
+        //Criação da string que representa a matrícula
+        int contador = 0;
+        while(contador < 11)
         {
-            aluno[inputIndiceAluno].matricula[contador] = ano[contador];
-        }
-        if(contador == 4 || contador == 6 ||contador == 9)
-        {
-            aluno[inputIndiceAluno].matricula[contador] = '.';
-        }
-        if(contador == 5)
-        {
-            aluno[inputIndiceAluno].matricula[contador] = semestre;
-        }
-        if(contador == 7)
-        {
-            aluno[inputIndiceAluno].matricula[contador] = dezenaTurma;
-        }
-        else
-	    {
+            if(contador >= 0 && contador <= 3)
+            {
+                aluno[inputIndiceAluno].matricula[contador] = ano[contador];
+            }
+            if(contador == 4||contador == 6)
+            {
+                aluno[inputIndiceAluno].matricula[contador] = '.';
+            }
+            if(contador == 5)
+            {
+                aluno[inputIndiceAluno].matricula[contador] = semestre;
+            }
+            if(contador == 7)
+            {
+                aluno[inputIndiceAluno].matricula[contador] = centenaAluno;
+            }
             if(contador == 8)
-                {
-                    aluno[inputIndiceAluno].matricula[contador] = unidadeTurma;
-                }
-	    }    
-        if(contador == 10)
-        {
-            aluno[inputIndiceAluno].matricula[contador] = centenaAluno;
-        }
-        else
-        {
-            if(contador == 11)
             {
                 aluno[inputIndiceAluno].matricula[contador] = dezenaAluno;
             }
-            else
+            if(contador == 9)
             {
-                if(contador == 12)
-                {
-                    aluno[inputIndiceAluno].matricula[contador] = unidadeAluno;
-                }
+                aluno[inputIndiceAluno].matricula[contador] = unidadeAluno;
             }
+            
+        	contador++;
         }
-    	contador++;
-    }
-    if(contador == 13)
-        aluno[inputIndiceAluno].matricula[contador] = '\0';
+        if(contador == 10)
+            aluno[inputIndiceAluno].matricula[contador] = '\0';
 
-    printf("MATRICULA GERADA: %s\n", aluno[inputIndiceAluno].matricula);
+        printf("MATRICULA GERADA: %s\n", aluno[inputIndiceAluno].matricula);
+    }
+    else
+    {
+        printf("SEM VAGAS PARA CADASTRO DE MAIS ALUNOS\n");
+    }
 
 }
 /*Verificações da entrada de dados do cadastro*/
@@ -401,6 +379,7 @@ void validarNasc(char data[])
 //Inserir aluno
 void inserirAluno()
 {
+    chaveDeValidar = 0;
     printf("***Cadastrar aluno***\n");
     //Matrícula
     /*Gerar matrícula*/        
@@ -472,12 +451,15 @@ int excluirAlunoNaLista(int indiceAluno)
         //Apagar a matrícula cadastrada
         aluno[indiceAluno].matricula[iContador] = 0;
     }
+    
     for(int iContador = 0; aluno[indiceAluno].nome[iContador] != '\0'; iContador++)
     {
         //Apagar o nome cadastrado
         aluno[indiceAluno].nome[iContador] = 0;
     }
+    
     aluno[indiceAluno].sexo = 0; //Apagar o sexo cadastrado
+    
     for(int iContador = 0; aluno[indiceAluno].cpf[iContador] != '\0'; iContador++)
     {
         //Apagar o CPF cadastrado
@@ -488,10 +470,13 @@ int excluirAlunoNaLista(int indiceAluno)
 
 //Listar alunos
 void listarAlunos()
-{
+{   
+    /*BUG: Quando lista alunos, com pelo menos um excluído*
+    * o programa exibe um cadastro com dados vazios.      *
+    */
     printf("\nLista de alunos cadastrados\n*******************************\n\n");
     int iContador = 0;
-    while(iContador < cadastrosComSucesso)
+    while(iContador <= cadastrosComSucesso)
     {
         printf("MATRICULA: %s\n", aluno[iContador].matricula);
         printf("NOME: %s\n", aluno[iContador].nome);
