@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include "disciplina.h"
+/*Variáveis para auxiliar a contagem de disciplinas*/
+int chaveValidarDisciplina;
+int DisciplinasCadastradas = 0;
+/*Registro das disciplinas*/
+cadastroDisc disciplina[QTD_DE_DISC];
 
 void menuDisc()
 {
@@ -43,4 +48,56 @@ void menuDisc()
         }
     
     }
+}
+
+void inserirDisc()
+{
+    chaveValidarDisciplina = 0;
+    printf("***Inserir disciplina***\n");
+    //Gerar código
+    gerarCodigoDaDisc(DisciplinasCadastradas + 1);
+    //Nome da disciplina
+    printf("Digite o nome da disciplina: ");
+    scanf("%33[^\n]%*c", disciplina[DisciplinasCadastradas + 1].nomeDisciplina);
+    //Semestre da disciplina
+    printf("Digite o semestre da disciplina: ");
+    scanf("%1%*c", &disciplina[DisciplinasCadastradas + 1].semestre);
+    //Nome do professor na disciplinar
+    printf("Digite o nome do professor que ensina a disciplina: ");
+    scanf("%51%[^\n]%*c", &disciplina[DisciplinasCadastradas + 1].professorDisciplina);
+    /*Validações dos campos inseridos*/
+    validarNomeDisc(disciplina[DisciplinasCadastradas + 1].nomeDisciplina);
+    validarSemestre(disciplina[DisciplinasCadastradas + 1].semestre);
+    validarProfNaDisc(disciplina[DisciplinasCadastradas + 1].professorDisciplina);
+    if(chaveValidarDisciplina == 4)
+        DisciplinasCadastradas++;
+}
+
+void gerarCodigoDaDisc(int inputIndiceDisc)
+{
+    
+}
+void validarNomeDisc(char inputDisciplina[])
+{
+    
+}
+void validarSemestre(char inputSemestre)
+{
+    
+}
+void validarProfNaDisc(char nomeProfessor[])
+{
+    
+}
+void excluirDisc()
+{
+    
+}
+int excluirDiscNaLista(int indiceDisc)
+{
+    
+}
+void listarDisciplinas()
+{
+    
 }

@@ -3,11 +3,11 @@
 #include "utilitarios.h"
 /*Registro*/
 typedef struct{
-    char NomeDisciplina[TAM_NOME_DISC];
+    char nomeDisciplina[TAM_NOME_DISC];
     char Codigo[TAM_CODIGO_DISC];
     char semestre;
     char professorDisciplina[TAM_NOME_PROF_DISC];
-}cadastroDisc
+}cadastroDisc;
 
 /*Funções principais*/
 void menuDisc();
