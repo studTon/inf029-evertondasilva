@@ -3,6 +3,7 @@
 /*Bibliotecas dos módulos*/
 #include "aluno.h"
 #include "professor.h"
+#include "disciplina.h"
 /*************************/
 
 int main(int argc, char *argv[])
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
             case '3':
             {
                 //Informações sobre disciplina
+                menuDisc();
                 
             }break;
             default:
