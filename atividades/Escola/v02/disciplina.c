@@ -75,7 +75,31 @@ void inserirDisc()
 
 void gerarCodigoDaDisc(int inputIndiceDisc)
 {
+    //Decomposição do inteiro para char
+    char caracterCentena = (inputIndiceDisc / 100) + '0';
+    char caracterDezena = ((inputIndiceDisc % 100) / 10) + '0';
+    char caracterUnidade = (inputIndiceDisc % 10) + '0';
     
+    //Formar a string do código
+    int iContador = 0;
+    while(iContador < TAM_CODIGO_DISC)
+    {
+        if(iContador == 0)
+        {
+            cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = caracterCentena;
+        }
+        if(iContador == 1)
+        {
+            cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = caracterDezena;
+        }
+        if(iContador == 2)
+        {
+            cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = caracterUnidade;
+        }
+        iContador++;
+    }
+    if(iContador == 3)
+        cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = '\0';
 }
 void validarNomeDisc(char inputDisciplina[])
 {
