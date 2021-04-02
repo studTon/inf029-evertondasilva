@@ -12,11 +12,11 @@ typedef struct
 }cadastroProfessor;
 
 /*Funções principais*/
-void menuProf();
-void inserirProf();
-void excluirProf();
+void menuProf(void);
+void inserirProf(void);
+void excluirProf(void);
 int excluirProfNaLista(int indiceProf);
-void listarProf();
+void listarProf(void);
 /*Funções de Validação*/
 void gerarMatriculaProf(int inputIndiceProf);
 void validarNomeProf(char inputNome[]);

@@ -57,22 +57,38 @@ void inserirDisc()
     //Gerar código
     gerarCodigoDaDisc(DisciplinasCadastradas + 1);
     //Nome da disciplina
-    printf("Digite o nome da disciplina: ");
-    scanf("%33[^\n]%*c", disciplina[DisciplinasCadastradas + 1].nomeDisciplina);
+    nomeDaDisciplina();
     //Semestre da disciplina
-    printf("Digite o semestre da disciplina: ");
-    scanf("%1%*c", &disciplina[DisciplinasCadastradas + 1].semestre);
+    semestreDaDisciplina();
     //Nome do professor na disciplinar
-    printf("Digite o nome do professor que ensina a disciplina: ");
-    scanf("%51%[^\n]%*c", &disciplina[DisciplinasCadastradas + 1].professorDisciplina);
+    professorDaDisciplina();
     /*Validações dos campos inseridos*/
     validarNomeDisc(disciplina[DisciplinasCadastradas + 1].nomeDisciplina);
     validarSemestre(disciplina[DisciplinasCadastradas + 1].semestre);
     validarProfNaDisc(disciplina[DisciplinasCadastradas + 1].professorDisciplina);
+    
+    /*Contar os cadastros com sucesso*/
     if(chaveValidarDisciplina == 4)
         DisciplinasCadastradas++;
 }
 
+void nomeDaDisciplina()
+{
+    printf("Digite o nome da disciplina: ");
+    fgets(disciplina[DisciplinasCadastradas + 1].nomeDisciplina, TAM_NOME_DISC, stdin);
+}
+
+void semestreDaDisciplina()
+{
+    printf("Digite o semestre da disciplina: ");
+    scanf("%c", &disciplina[DisciplinasCadastradas + 1].semestre);
+}
+
+void professorDaDisciplina()
+{
+    printf("Digite o nome do professor que ensina a disciplina: ");
+    fgets(disciplina[DisciplinasCadastradas + 1].professorDisciplina, TAM_NOME_PROF_DISC, stdin);
+}
 void gerarCodigoDaDisc(int inputIndiceDisc)
 {
     //Decomposição do inteiro para char
@@ -86,20 +102,23 @@ void gerarCodigoDaDisc(int inputIndiceDisc)
     {
         if(iContador == 0)
         {
-            cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = caracterCentena;
+            disciplina[DisciplinasCadastradas + 1].codigo[iContador] = caracterCentena;
         }
         if(iContador == 1)
         {
-            cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = caracterDezena;
+            disciplina[DisciplinasCadastradas + 1].codigo[iContador] = caracterDezena;
         }
         if(iContador == 2)
         {
-            cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = caracterUnidade;
+            disciplina[DisciplinasCadastradas + 1].codigo[iContador] = caracterUnidade;
         }
         iContador++;
     }
     if(iContador == 3)
-        cadastroDisc[DisciplinasCadastradas + 1].codigo[iContador] = '\0';
+        disciplina[DisciplinasCadastradas + 1].codigo[iContador] = '\0';
+    
+    //Conclusão
+    printf("***Codigo da disciplina: %s***\n", disciplina[DisciplinasCadastradas + 1].codigo);
 }
 void validarNomeDisc(char inputDisciplina[])
 {

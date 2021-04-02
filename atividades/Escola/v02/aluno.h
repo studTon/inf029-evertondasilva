@@ -12,11 +12,11 @@ typedef struct
 }cadastroAluno;
 
 /*Funções principais*/
-void menuAluno();
-void inserirAluno();
-void excluirAluno();
+void menuAluno(void);
+void inserirAluno(void);
+void excluirAluno(void);
 int excluirAlunoNaLista(int indiceAluno);
-void listarAlunos();
+void listarAlunos(void);
 /*Funções de Validação*/
 void gerarMatriculaAluno(int inputIndiceAluno);
 void validarNomeAluno(char inputNome[]);

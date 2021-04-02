@@ -394,10 +394,10 @@ void inserirAluno()
         aluno[cadastrosComSucessoAluno + 1].sexo -= 32; //Tornar o input com letras maiúsculas
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucessoAluno + 1].dataNasc);
+    scanf("%[^\n]%*c", aluno[cadastrosComSucessoAluno + 1].dataNasc);
     //CPF
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucessoAluno + 1].cpf);
+    scanf("%[^\n]%*c", aluno[cadastrosComSucessoAluno + 1].cpf);
     /*Validações*/
     validarNomeAluno(aluno[cadastrosComSucessoAluno + 1].nome);
     validarSexoAluno(aluno[cadastrosComSucessoAluno + 1].sexo);

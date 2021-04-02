@@ -390,10 +390,10 @@ void inserirProf()
         professor[cadastrosComSucessoProf + 1].sexo -= 32; //Tornar o input com letras maiúsculas
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", &professor[cadastrosComSucessoProf + 1].dataNasc);
+    scanf("%[^\n]%*c", professor[cadastrosComSucessoProf + 1].dataNasc);
     //CPF
     printf("Digite o CPF do(a) professor(a)(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &professor[cadastrosComSucessoProf + 1].cpf);
+    scanf("%[^\n]%*c", professor[cadastrosComSucessoProf + 1].cpf);
     /*Validações*/
     validarNomeProf(professor[cadastrosComSucessoProf + 1].nome);
     validarSexoProf(professor[cadastrosComSucessoProf + 1].sexo);
