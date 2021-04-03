@@ -122,7 +122,21 @@ void gerarCodigoDaDisc(int inputIndiceDisc)
 }
 void validarNomeDisc(char inputDisciplina[])
 {
-    
+    int iContador = 0;
+    int contadorCaracteresReais = 0;
+    while(inputDisciplina[iContador] != '\0')
+    {
+		if((inputDisciplina[iContador] >= 'a'&&inputDisciplina[iContador] <= 'z')||(inputDisciplina[iContador] >= 'A'&&inputDisciplina[iContador] <= 'Z')||inputDisciplina[iContador] == ' ')
+        {
+            contadorCaracteresReais++;
+        }
+        iContador++;
+	}
+    if(contadorCaracteresReais == iContador)
+    {
+        printf("NOME DA DISCIPLINA VALIDO\n");
+        chaveValidarDisciplina++;
+    }   
 }
 void validarSemestre(char inputSemestre)
 {
