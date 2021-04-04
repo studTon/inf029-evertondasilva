@@ -3,8 +3,7 @@
 /*Variáveis para auxiliar a contagem dos alunos*/
 int chaveDeValidarProf;
 int cadastrosComSucessoProf = 0;
-/*Registro*/
-cadastroProfessor professor[QTD_DE_PROFS];
+int cadastrosProfExcluidos = 0;
 
 void menuProf()
 {
@@ -52,9 +51,13 @@ void menuProf()
 }
 /*Geração de matrícula*/
 void gerarMatriculaProf(int inputIndiceProf)
-{    
-    if(inputIndiceProf < QTD_DE_ALUNOS)
+{   
+    
+    inputIndiceProf++;//+1 para inicializar a numeração do cadastro
+    if(inputIndiceProf <= QTD_DE_ALUNOS)
     {
+        if(cadastrosProfExcluidos > 0)
+        inputIndiceProf += cadastrosProfExcluidos;
         /*É necessário somar o char '0' a todos os valores inteiros na 
          *conversão de inteiro para char, pois o valor inteiro do char
          *'0' somado ao número inteiro equivale ao seu char correspon-
@@ -64,6 +67,7 @@ void gerarMatriculaProf(int inputIndiceProf)
         char centenaProf = (inputIndiceProf / 100) + '0';
         char dezenaProf = ((inputIndiceProf % 100) / 10) + '0';
         char unidadeProf = (inputIndiceProf % 10) + '0';
+        inputIndiceProf--;//-1 para armazenar na variável correta
         //Ano
         char ano[TAM_CARACTER_ANO] = "2021\0";
         //Criação da string que representa a matrícula
@@ -94,7 +98,10 @@ void gerarMatriculaProf(int inputIndiceProf)
         	contador++;
         }
         if(contador == TAM_MATRICULA_PROF - 1)
+        {
             professor[inputIndiceProf].matricula[contador] = '\0';
+        }
+            
 
         printf("MATRICULA GERADA: %s\n", professor[inputIndiceProf].matricula);
         /*Matrícula do tipo: XXXX.XXX -> Ano.Número Do Professor*/
@@ -156,7 +163,7 @@ void validarCPFProf(char cpf[])
     }
     int somaContadores = contadorCaracterHifen + contadorCaracterPonto + contadorNumeros;
     /*Conclusão*/
-    if(somaContadores == CPF - 1)
+    if(somaContadores == TAM_CPF - 1)
     {
         printf("CPF VALIDO\n");
         chaveDeValidarProf++;
@@ -377,32 +384,48 @@ void inserirProf()
 {
     chaveDeValidarProf = 0;
     printf("***Cadastrar professor***\n");
-    //Matrícula
-    /*Gerar matrícula*/        
-    gerarMatriculaProf(cadastrosComSucessoProf + 1);
+    //Matrícula       
+    gerarMatriculaProf(cadastrosComSucessoProf);
     //Nome
-    printf("Digite o nome do(a) professor(a): ");
-    scanf("%51[^\n]%*c", professor[cadastrosComSucessoProf + 1].nome);
+    inserirNomeProf();
     //Sexo
-    printf("Digite o sexo do(a) professor(a)(F - Feminino|M - Masculino|O - Outro): ");
-    scanf("%1c%*c", &professor[cadastrosComSucessoProf + 1].sexo);
-    if(professor[cadastrosComSucessoProf + 1].sexo >= 'a' && professor[cadastrosComSucessoProf + 1].sexo <= 'z')
-        professor[cadastrosComSucessoProf + 1].sexo -= 32; //Tornar o input com letras maiúsculas
+    inserirSexoProf();
     //Data de nascimento
-    printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", &professor[cadastrosComSucessoProf + 1].dataNasc);
+    inserirDataProf();
     //CPF
-    printf("Digite o CPF do(a) professor(a)(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &professor[cadastrosComSucessoProf + 1].cpf);
+    inserirCpfProf();
     /*Validações*/
-    validarNomeProf(professor[cadastrosComSucessoProf + 1].nome);
-    validarSexoProf(professor[cadastrosComSucessoProf + 1].sexo);
-    validarNascProf(professor[cadastrosComSucessoProf + 1].dataNasc);
-    validarCPFProf(professor[cadastrosComSucessoProf + 1].cpf);
+    validarNomeProf(professor[cadastrosComSucessoProf].nome);
+    validarSexoProf(professor[cadastrosComSucessoProf].sexo);
+    validarNascProf(professor[cadastrosComSucessoProf].dataNasc);
+    validarCPFProf(professor[cadastrosComSucessoProf].cpf);
     if(chaveDeValidarProf == 4)
         cadastrosComSucessoProf++;
 }
-
+/*######Funções de preenchimento dos campos######*/
+void inserirNomeProf()
+{
+    printf("Digite o nome do(a) professor(a): ");
+    fgets(professor[cadastrosComSucessoProf].nome, TAM_NOME, stdin);
+}
+void inserirSexoProf()
+{
+    printf("Digite o sexo do(a) professor(a)(F - Feminino|M - Masculino|O - Outro): ");
+    scanf("%c", &professor[cadastrosComSucessoProf].sexo);
+    if(professor[cadastrosComSucessoProf].sexo >= 'a' && professor[cadastrosComSucessoProf].sexo <= 'z')
+        professor[cadastrosComSucessoProf].sexo -= 32; //Tornar o input com letras maiúsculas
+}
+void inserirDataProf()
+{
+    printf("Digite a data de nascimento(dd/mm/aaaa): ");
+    fgets(professor[cadastrosComSucessoProf].dataNasc, TAM_DATA_NASC, stdin);
+}
+void inserirCpfProf()
+{
+    printf("Digite o CPF do(a) professor(a)(XXX.XXX.XXX-XX): ");
+    fgets(professor[cadastrosComSucessoProf].cpf, TAM_CPF, stdin);
+}
+/*###############################################*/
 //Excluir professor
 void excluirProf()
 {
@@ -427,8 +450,8 @@ void excluirProf()
         {
             achou = 1;
             printf("PROFESSOR ENCONTRADO\n");
-            excluirProfNaLista(numeroDoProfEmLista);
-            cadastrosComSucessoProf -= achou;
+            cadastrosComSucessoProf += excluirProfNaLista(numeroDoProfEmLista);
+            cadastrosProfExcluidos += achou;
             break;
         }
         numeroDoProfEmLista++;
@@ -442,26 +465,32 @@ void excluirProf()
 //Excluir os dados do professor na lista
 int excluirProfNaLista(int indiceProf)
 {
-    for(int iContador = 0; professor[indiceProf].matricula[iContador] != '\0'; iContador++)
+    /*Shift para excluir os dados*/
+    while(indiceProf <= cadastrosComSucessoProf)
     {
-        //Apagar a matrícula cadastrada
-        professor[indiceProf].matricula[iContador] = 0;
-    }
-    
-    for(int iContador = 0; professor[indiceProf].nome[iContador] != '\0'; iContador++)
-    {
-        //Apagar o nome cadastrado
-        professor[indiceProf].nome[iContador] = 0;
-    }
-    
-    professor[indiceProf].sexo = 0; //Apagar o sexo cadastrado
-    
-    for(int iContador = 0; professor[indiceProf].cpf[iContador] != '\0'; iContador++)
-    {
-        //Apagar o CPF cadastrado
-        professor[indiceProf].cpf[iContador] = 0;
+        for(int iContador = 0; professor[indiceProf].matricula[iContador] != '\0'; iContador++)
+        {
+            //Apagar a matrícula cadastrada
+            professor[indiceProf].matricula[iContador] = 0;
+        }
+
+        for(int iContador = 0; professor[indiceProf].nome[iContador] != '\0' && professor[indiceProf + 1].nome[iContador] != '\0'; iContador++)
+        {
+            //Apagar o nome cadastrado
+            professor[indiceProf].nome[iContador] = 0;
+        }
+
+        professor[indiceProf].sexo = 0; //Apagar o sexo cadastrado
+
+        for(int iContador = 0; professor[indiceProf].cpf[iContador] != '\0'; iContador++)
+        {
+            //Apagar o CPF cadastrado
+            professor[indiceProf].cpf[iContador] = 0;
+        }
+        indiceProf++;
     }
     printf("**OS DADOS DO(A) PROFESSOR(A) FORAM EXCLUIDOS**\n\n");
+    return -1;
 }
 
 //Listar professores

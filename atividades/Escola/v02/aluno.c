@@ -3,9 +3,7 @@
 /*Variáveis para auxiliar a contagem dos alunos*/
 int chaveDeValidarAluno;
 int cadastrosComSucessoAluno = 0;
-/*Registro*/
-cadastroAluno aluno[QTD_DE_ALUNOS];
-
+int cadastrosAlunoExcluidos = 0;
 void menuAluno()
 {
     char escolha = '1';
@@ -52,9 +50,12 @@ void menuAluno()
 }
 /*Geração de matrícula*/
 void gerarMatriculaAluno(int inputIndiceAluno)
-{    
-    if(inputIndiceAluno < QTD_DE_ALUNOS)
+{   
+    inputIndiceAluno++;//+1 para inicializar a numeração do cadastro
+    if(inputIndiceAluno <= QTD_DE_ALUNOS)
     {
+        if(cadastrosAlunoExcluidos > 0)
+        inputIndiceAluno += cadastrosAlunoExcluidos;
         /*É necessário somar o char '0' a todos os valores inteiros na 
          *conversão de inteiro para char, pois o valor inteiro do char
          *'0' somado ao número inteiro equivale ao seu char correspon-
@@ -64,6 +65,7 @@ void gerarMatriculaAluno(int inputIndiceAluno)
         char centenaAluno = (inputIndiceAluno / 100) + '0';
         char dezenaAluno = ((inputIndiceAluno % 100) / 10) + '0';
         char unidadeAluno = (inputIndiceAluno % 10) + '0';
+        inputIndiceAluno--;//-1 para armazenar na variável correta
         //Ano e semestre
         char ano[TAM_CARACTER_ANO] = "2021\0";
         char semestre = '1';
@@ -160,7 +162,7 @@ void validarCPFAluno(char cpf[])
     }
     int somaContadores = contadorCaracterHifen + contadorCaracterPonto + contadorNumeros;
     /*Conclusão*/
-    if(somaContadores == CPF - 1)
+    if(somaContadores == TAM_CPF - 1)
     {
         printf("CPF VALIDO\n");
         chaveDeValidarAluno++;
@@ -381,32 +383,48 @@ void inserirAluno()
 {
     chaveDeValidarAluno = 0;
     printf("***Cadastrar aluno***\n");
-    //Matrícula
-    /*Gerar matrícula*/        
-    gerarMatriculaAluno(cadastrosComSucessoAluno + 1);
+    //Matrícula    
+    gerarMatriculaAluno(cadastrosComSucessoAluno);
     //Nome
-    printf("Digite o nome do(a) estudante: ");
-    scanf("%51[^\n]%*c", aluno[cadastrosComSucessoAluno + 1].nome);
+    inserirNomeAluno();
     //Sexo
-    printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
-    scanf("%1c%*c", &aluno[cadastrosComSucessoAluno + 1].sexo);
-    if(aluno[cadastrosComSucessoAluno + 1].sexo >= 'a' && aluno[cadastrosComSucessoAluno + 1].sexo <= 'z')
-        aluno[cadastrosComSucessoAluno + 1].sexo -= 32; //Tornar o input com letras maiúsculas
+    inserirSexoAluno();
     //Data de nascimento
-    printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucessoAluno + 1].dataNasc);
+    inserirDataAluno();
     //CPF
-    printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucessoAluno + 1].cpf);
+    inserirCpfAluno();
     /*Validações*/
-    validarNomeAluno(aluno[cadastrosComSucessoAluno + 1].nome);
-    validarSexoAluno(aluno[cadastrosComSucessoAluno + 1].sexo);
-    validarNascAluno(aluno[cadastrosComSucessoAluno + 1].dataNasc);
-    validarCPFAluno(aluno[cadastrosComSucessoAluno + 1].cpf);
+    validarNomeAluno(aluno[cadastrosComSucessoAluno].nome);
+    validarSexoAluno(aluno[cadastrosComSucessoAluno].sexo);
+    validarNascAluno(aluno[cadastrosComSucessoAluno].dataNasc);
+    validarCPFAluno(aluno[cadastrosComSucessoAluno].cpf);
     if(chaveDeValidarAluno == 4)
         cadastrosComSucessoAluno++;
 }
-
+/*######Funções para inserir os dados do aluno######*/
+void inserirNomeAluno()
+{
+    printf("Digite o nome do(a) estudante: ");
+    fgets(aluno[cadastrosComSucessoAluno].nome, TAM_NOME, stdin);
+}
+void inserirSexoAluno()
+{
+    printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
+    scanf("%c", &aluno[cadastrosComSucessoAluno].sexo);
+    if(aluno[cadastrosComSucessoAluno].sexo >= 'a' && aluno[cadastrosComSucessoAluno].sexo <= 'z')
+        aluno[cadastrosComSucessoAluno].sexo -= 32; //Tornar o input com letras maiúsculas
+}
+void inserirDataAluno()
+{
+    printf("Digite a data de nascimento(dd/mm/aaaa): ");
+    fgets(aluno[cadastrosComSucessoAluno].dataNasc, TAM_DATA_NASC, stdin);
+}
+void inserirCpfAluno()
+{
+    printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
+    scanf(aluno[cadastrosComSucessoAluno].cpf, TAM_CPF, stdin);
+}
+/*##################################################*/
 //Excluir aluno
 void excluirAluno()
 {
@@ -431,8 +449,8 @@ void excluirAluno()
         {
             achou = 1;
             printf("ALUNO ENCONTRADO\n");
-            excluirAlunoNaLista(numeroDoAlunoEmLista);
-            cadastrosComSucessoAluno -= achou;
+            cadastrosComSucessoAluno += excluirAlunoNaLista(numeroDoAlunoEmLista);
+            cadastrosAlunoExcluidos += achou;
             break;
         }
         numeroDoAlunoEmLista++;
@@ -446,26 +464,33 @@ void excluirAluno()
 //Excluir os dados do aluno na lista
 int excluirAlunoNaLista(int indiceAluno)
 {
-    for(int iContador = 0; aluno[indiceAluno].matricula[iContador] != '\0'; iContador++)
+    /*Aplicação simples de shift*/
+    while(indiceAluno <= cadastrosComSucessoAluno)
     {
-        //Apagar a matrícula cadastrada
-        aluno[indiceAluno].matricula[iContador] = 0;
+        for(int iContador = 0; aluno[indiceAluno].matricula[iContador] != '\0'; iContador++)
+        {
+            //Apagar a matrícula cadastrada
+            aluno[indiceAluno].matricula[iContador] = aluno[indiceAluno + 1].matricula[iContador];
+        }
+    
+        for(int iContador = 0; aluno[indiceAluno].nome[iContador] != '\0' && aluno[indiceAluno + 1].nome[iContador] != '\0'; iContador++)
+        {
+            //Apagar o nome cadastrado
+            aluno[indiceAluno].nome[iContador] = aluno[indiceAluno + 1].nome[iContador];
+        }
+    
+        aluno[indiceAluno].sexo = aluno[indiceAluno + 1].sexo; //Apagar o sexo cadastrado
+    
+        for(int iContador = 0; aluno[indiceAluno].cpf[iContador] != '\0'; iContador++)
+        {
+            //Apagar o CPF cadastrado
+            aluno[indiceAluno].cpf[iContador] = aluno[indiceAluno + 1].cpf[iContador];
+        }
+        indiceAluno++;
     }
     
-    for(int iContador = 0; aluno[indiceAluno].nome[iContador] != '\0'; iContador++)
-    {
-        //Apagar o nome cadastrado
-        aluno[indiceAluno].nome[iContador] = 0;
-    }
-    
-    aluno[indiceAluno].sexo = 0; //Apagar o sexo cadastrado
-    
-    for(int iContador = 0; aluno[indiceAluno].cpf[iContador] != '\0'; iContador++)
-    {
-        //Apagar o CPF cadastrado
-        aluno[indiceAluno].cpf[iContador] = 0;
-    }
     printf("**OS DADOS DO ALUNO FORAM EXCLUIDOS**\n\n");
+    return -1;
 }
 
 //Listar alunos
