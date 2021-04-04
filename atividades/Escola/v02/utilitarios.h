@@ -13,7 +13,7 @@
 #define TAM_CODIGO_DISC 4
 #define TAM_NOME_PROF_DISC 51
 #define TAM_NOME 51
-#define DATA_NASC 11
-#define CPF 15
+#define TAM_DATA_NASC 11
+#define TAM_CPF 15
 /*****************************/
 #endif
