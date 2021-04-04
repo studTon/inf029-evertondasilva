@@ -20,7 +20,7 @@ void menuProf()
         printf("2 - Excluir professor\n");
         printf("3 - Listar professor\n::");
 
-        scanf("%1c%*c", &escolha);
+        scanf("%c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
@@ -118,6 +118,7 @@ void validarNomeProf(char inputNome[])
     
     int tamanhoInputNome = 0;
     while(inputNome[tamanhoInputNome] != '\0') tamanhoInputNome++;
+    tamanhoInputNome--;
     int tamanhoNomeReal = 0;
     int contador = 0;
     while(inputNome[contador] != '\0')
@@ -136,6 +137,7 @@ void validarNomeProf(char inputNome[])
     }
     else
         printf("ERRO: Nome invalido\n");
+    printf("INPUT - %d\nREAL - %d\n", tamanhoInputNome, tamanhoNomeReal);
 }
 void validarCPFProf(char cpf[])
 {
@@ -407,6 +409,10 @@ void inserirNomeProf()
 {
     printf("Digite o nome do(a) professor(a): ");
     fgets(professor[cadastrosComSucessoProf].nome, TAM_NOME, stdin);
+    int contaCaracter = 0;
+    while(professor[cadastrosComSucessoProf].nome[contaCaracter] != '\n')contaCaracter++;
+    professor[cadastrosComSucessoProf].nome[contaCaracter] = '\n';
+    setbuf(stdin, NULL);
 }
 void inserirSexoProf()
 {
@@ -414,16 +420,19 @@ void inserirSexoProf()
     scanf("%c", &professor[cadastrosComSucessoProf].sexo);
     if(professor[cadastrosComSucessoProf].sexo >= 'a' && professor[cadastrosComSucessoProf].sexo <= 'z')
         professor[cadastrosComSucessoProf].sexo -= 32; //Tornar o input com letras maiúsculas
+    setbuf(stdin, NULL);
 }
 void inserirDataProf()
 {
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    fgets(professor[cadastrosComSucessoProf].dataNasc, TAM_DATA_NASC, stdin);
+    scanf("%[^\n]%*c", professor[cadastrosComSucessoProf].dataNasc);
+    setbuf(stdin, NULL);
 }
 void inserirCpfProf()
 {
     printf("Digite o CPF do(a) professor(a)(XXX.XXX.XXX-XX): ");
-    fgets(professor[cadastrosComSucessoProf].cpf, TAM_CPF, stdin);
+    scanf("%[^\n]%*c", professor[cadastrosComSucessoProf].cpf);
+    setbuf(stdin, NULL);
 }
 /*###############################################*/
 //Excluir professor

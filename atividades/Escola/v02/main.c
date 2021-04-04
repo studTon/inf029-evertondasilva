@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         printf("2 - Gerenciar professores\n");
         printf("3 - Gerenciar disciplina\n::");
 
-        scanf("%1c%*c", &escolhaMenu);
+        scanf("%c", &escolhaMenu);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolhaMenu)
         {

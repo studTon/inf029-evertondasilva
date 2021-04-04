@@ -19,7 +19,7 @@ void menuAluno()
         printf("2 - Excluir aluno\n");
         printf("3 - Listar alunos\n::");
 
-        scanf("%1c%*c", &escolha);
+        scanf("%c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
@@ -405,24 +405,41 @@ void inserirAluno()
 void inserirNomeAluno()
 {
     printf("Digite o nome do(a) estudante: ");
-    fgets(aluno[cadastrosComSucessoAluno].nome, TAM_NOME, stdin);
+    fgets(aluno[cadastrosComSucessoAluno].nome, sizeof(aluno[cadastrosComSucessoAluno].nome), stdin);
+    int contaCaracter = 0;
+    while(aluno[cadastrosComSucessoAluno].nome[contaCaracter] != '\n')contaCaracter++;
+    aluno[cadastrosComSucessoAluno].nome[contaCaracter] = '\0';
+    setbuf(stdin, NULL);
 }
 void inserirSexoAluno()
 {
     printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
+    //scanf("%c", aluno[cadastrosComSucessoAluno].sexo);
     scanf("%c", &aluno[cadastrosComSucessoAluno].sexo);
+    /* Pula o restante da linha */
+    while( getchar() != '\n' );
     if(aluno[cadastrosComSucessoAluno].sexo >= 'a' && aluno[cadastrosComSucessoAluno].sexo <= 'z')
         aluno[cadastrosComSucessoAluno].sexo -= 32; //Tornar o input com letras maiúsculas
 }
 void inserirDataAluno()
 {
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    fgets(aluno[cadastrosComSucessoAluno].dataNasc, TAM_DATA_NASC, stdin);
+    /*fgets(aluno[cadastrosComSucessoAluno].dataNasc, sizeof(aluno[cadastrosComSucessoAluno].dataNasc), stdin);
+    int contaCaracter = 0;
+    while(aluno[cadastrosComSucessoAluno].dataNasc[contaCaracter] != '\n')contaCaracter++;
+    aluno[cadastrosComSucessoAluno].dataNasc[contaCaracter] = '\0';*/
+    scanf("%[^\n]%*c", aluno[cadastrosComSucessoAluno].dataNasc);
+    setbuf(stdin, NULL);
 }
 void inserirCpfAluno()
 {
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf(aluno[cadastrosComSucessoAluno].cpf, TAM_CPF, stdin);
+    /*fgets(aluno[cadastrosComSucessoAluno].cpf, sizeof(aluno[cadastrosComSucessoAluno].cpf), stdin);
+    int contaCaracter = 0;
+    while(aluno[cadastrosComSucessoAluno].cpf[contaCaracter] != '\n')contaCaracter++;
+    aluno[cadastrosComSucessoAluno].cpf[contaCaracter] = '\0';*/
+    scanf("%[^\n]%*c", aluno[cadastrosComSucessoAluno].cpf);
+    setbuf(stdin, NULL);
 }
 /*##################################################*/
 //Excluir aluno
