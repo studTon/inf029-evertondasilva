@@ -414,6 +414,7 @@ void inserirNomeAluno()
 void inserirSexoAluno()
 {
     printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
+    //scanf("%c", aluno[cadastrosComSucessoAluno].sexo);
     scanf("%c", &aluno[cadastrosComSucessoAluno].sexo);
     /* Pula o restante da linha */
     while( getchar() != '\n' );
@@ -423,12 +424,20 @@ void inserirSexoAluno()
 void inserirDataAluno()
 {
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
+    /*fgets(aluno[cadastrosComSucessoAluno].dataNasc, sizeof(aluno[cadastrosComSucessoAluno].dataNasc), stdin);
+    int contaCaracter = 0;
+    while(aluno[cadastrosComSucessoAluno].dataNasc[contaCaracter] != '\n')contaCaracter++;
+    aluno[cadastrosComSucessoAluno].dataNasc[contaCaracter] = '\0';*/
     scanf("%[^\n]%*c", aluno[cadastrosComSucessoAluno].dataNasc);
     setbuf(stdin, NULL);
 }
 void inserirCpfAluno()
 {
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
+    /*fgets(aluno[cadastrosComSucessoAluno].cpf, sizeof(aluno[cadastrosComSucessoAluno].cpf), stdin);
+    int contaCaracter = 0;
+    while(aluno[cadastrosComSucessoAluno].cpf[contaCaracter] != '\n')contaCaracter++;
+    aluno[cadastrosComSucessoAluno].cpf[contaCaracter] = '\0';*/
     scanf("%[^\n]%*c", aluno[cadastrosComSucessoAluno].cpf);
     setbuf(stdin, NULL);
 }

@@ -137,6 +137,7 @@ void validarNomeProf(char inputNome[])
     }
     else
         printf("ERRO: Nome invalido\n");
+    printf("INPUT - %d\nREAL - %d\n", tamanhoInputNome, tamanhoNomeReal);
 }
 void validarCPFProf(char cpf[])
 {
@@ -417,8 +418,6 @@ void inserirSexoProf()
 {
     printf("Digite o sexo do(a) professor(a)(F - Feminino|M - Masculino|O - Outro): ");
     scanf("%c", &professor[cadastrosComSucessoProf].sexo);
-    /* Pula o restante da linha */
-    while( getchar() != '\n' );
     if(professor[cadastrosComSucessoProf].sexo >= 'a' && professor[cadastrosComSucessoProf].sexo <= 'z')
         professor[cadastrosComSucessoProf].sexo -= 32; //Tornar o input com letras maiúsculas
     setbuf(stdin, NULL);
