@@ -24,7 +24,7 @@ void menuDisc()
         printf("2 - Excluir disciplina\n");
         printf("3 - Listar disciplinas\n::");
 
-        scanf("%1c%*c", &escolha);
+        scanf("%c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
@@ -85,18 +85,19 @@ void semestreDaDisciplina()
 {
     printf("Digite o semestre da disciplina: ");
     scanf("%c", &disciplina[DisciplinasCadastradas].semestre);
+    while(getchar() != '\n');
 }
 
 void professorDaDisciplina()
 {
     printf("Digite o nome do professor que ensina a disciplina: ");
-    fgets(disciplina[DisciplinasCadastradas].professorDisciplina, TAM_NOME_PROF_DISC, stdin);
+    scanf("%[^\n]%*c", disciplina[DisciplinasCadastradas].professorDisciplina);
 }
 /*###################################################################*/
 void gerarCodigoDaDisc(int inputIndiceDisc)
 {
     inputIndiceDisc++;//+1 para inicializar a numeração do cadastro
-    if(inputIndiceDisc < QTD_DE_DISC)
+    if(inputIndiceDisc <= QTD_DE_DISC)
     {
         if(disciplinasExcluidas > 0)
             inputIndiceDisc += disciplinasExcluidas;
@@ -146,11 +147,15 @@ void validarNomeDisc(char inputDisciplina[])
         }
         iContador++;
 	}
-    if(contadorCaracteresReais == iContador)
+    if(contadorCaracteresReais == iContador - 1)
     {
         printf("NOME DA DISCIPLINA VALIDO\n");
         chaveValidarDisciplina++;
-    }   
+    }
+    else
+    {
+        printf("NOME INVALIDO PARA A DISCIPLINA\n");
+    }
 }
 void validarSemestre(char inputSemestre)
 {
@@ -166,11 +171,11 @@ void validarSemestre(char inputSemestre)
 }
 
 void validarProfNaDisc(char nomeProfessor[])
-{
+{   
     int professorEscolhido;
     int indiceProfessor = 0;
     int achou = 0;//0 - Não achou professor| 1 - Achou professor
-    while(indiceProfessor < DisciplinasCadastradas)
+    while(indiceProfessor <= DisciplinasCadastradas)
     {
         int iContador = 0;
         int caracteresIguais = 0;
