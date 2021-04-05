@@ -417,7 +417,7 @@ void inserirSexoAluno()
     //scanf("%c", aluno[cadastrosComSucessoAluno].sexo);
     scanf("%c", &aluno[cadastrosComSucessoAluno].sexo);
     /* Pula o restante da linha */
-    while( getchar() != '\n' );
+    while(getchar() != '\n');
     if(aluno[cadastrosComSucessoAluno].sexo >= 'a' && aluno[cadastrosComSucessoAluno].sexo <= 'z')
         aluno[cadastrosComSucessoAluno].sexo -= 32; //Tornar o input com letras maiúsculas
 }
