@@ -83,6 +83,9 @@ void nomeDaDisciplina()
 {
     printf("Digite o nome da disciplina: ");
     fgets(disciplina[disciplinasCadastradas].nomeDisciplina, TAM_NOME_DISC, stdin);
+    int iContador = 0;
+    while(disciplina[disciplinasCadastradas].nomeDisciplina[iContador] != '\n')iContador++;
+    disciplina[disciplinasCadastradas].nomeDisciplina[iContador] = '\0';
 }
 
 void semestreDaDisciplina()
@@ -363,7 +366,14 @@ void matricularAlunoEmDisc()
                 iContador++;
             }
             disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar][iContador] = '\0';
-            printf("***ALUNO CADASTRADO EM DISCIPLINA***\n");
+            iContador = 0;
+            while(iContador < TAM_NOME)
+            {
+                disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar + 1][iContador] = 0;
+                iContador++;
+            }
+            disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar + 1][iContador] = '\0';
+            printf("***ALUNO CADASTRADO COM SUCESSO***\n");
         }
         else
         {
@@ -416,19 +426,19 @@ void listarUmaDisciplina()
     }
     if(achou == 1)
     {
-        //###################Encontrei um problema de processamento aqui. Vou resolver#####################
-        /*printf("NOME DA DISCIPLINA: %s\n", disciplina[indiceDiscDesejada].nomeDisciplina);
+        printf("==========================\n");
+        printf("NOME DA DISCIPLINA: %s\n", disciplina[indiceDiscDesejada].nomeDisciplina);
         printf("CODIGO: %s\n", disciplina[indiceDiscDesejada].codigo);
-        printf("SEMESTRE: %s\n", disciplina[indiceDiscDesejada].semestre);
+        printf("SEMESTRE: %c\n", disciplina[indiceDiscDesejada].semestre);
         printf("PROFESSOR: %s\n", disciplina[indiceDiscDesejada].professorDisciplina);
         printf("===ALUNOS NA DISCIPLINA===\n");
         int indiceAluno = 0;
-        while(disciplina[indiceDiscDesejada].alunosEmDisciplina[indiceAluno] != 0)
+        while(disciplina[indiceDiscDesejada].alunosEmDisciplina[indiceAluno][0] != 0)
         {
             printf("%d -> %s\n", indiceAluno + 1, disciplina[indiceDiscDesejada].alunosEmDisciplina[indiceAluno]);
             indiceAluno++;
         }
-        printf("==========================\nFim da lista\n\n");*/   
+        printf("==========================\nFim da lista\n\n");  
     }
     else
         printf("DISCIPLINA NAO ENCONTRADA\n");
