@@ -12,7 +12,7 @@ typedef struct
 }cadastroProfessor;
 
 /*Registro*/
-cadastroProfessor professor[QTD_DE_PROFS];
+static cadastroProfessor professor[QTD_DE_PROFS];
 
 /*Variáveis para auxiliar a contagem dos alunos*/
 static int chaveDeValidarProf;

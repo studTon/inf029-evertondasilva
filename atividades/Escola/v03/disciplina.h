@@ -10,7 +10,7 @@ typedef struct{
     char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME_DISC];
 }cadastroDisc;
 /*Registro das disciplinas*/
-cadastroDisc disciplina[QTD_DE_DISC];
+static cadastroDisc disciplina[QTD_DE_DISC];
 
 /*Variáveis para auxiliar a contagem de disciplinas*/
 static int chaveValidarDisciplina;

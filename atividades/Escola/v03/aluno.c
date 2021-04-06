@@ -14,7 +14,8 @@ void menuAluno()
         printf("0 - Voltar\n");
         printf("1 - Inserir aluno\n");
         printf("2 - Excluir aluno\n");
-        printf("3 - Listar alunos\n::");
+        printf("3 - Listar alunos\n");
+        printf("4 - Atualizar dados de aluno\n::");
 
         scanf("%c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
@@ -35,6 +36,10 @@ void menuAluno()
             case '3':
             {
                 listarAlunos();
+            }break;
+            case '4':
+            {
+                atualizarDadosAluno();
             }break;
             default:
             {
@@ -526,4 +531,75 @@ void listarAlunos()
         iContador++;
     }
     printf("Listagem completa...\n\n");
+}
+
+//Atualizar dados
+void procurarAtualizarAluno()
+{
+    char inputNomeAluno[TAM_NOME];
+    printf("Digite o nome do aluno que voce deseja atualizar algum dado?:: ");
+    scanf("%51[^\n]%*c", inputNomeAluno);
+    while(indiceAluno <= cadastrosComSucessoAluno)
+    {
+        int iContador = 0;
+        int contadorCaracteresReais = 0;
+        while(inputNomeAluno[iContador] != '\0')
+        {
+	    	if(inputNomeAluno[iContador] == aluno[indiceAluno].nome[iContador])
+            {
+                contadorCaracteresReais++;
+            }
+            iContador++;
+	    }
+        if(contadorCaracteresReais == iContador - 1)
+        {
+            alterarDadosAluno(indiceAluno);
+        }
+        else
+        {
+            printf("NAO FOI POSSIVEL ENCONTRAR O ALUNO\n");
+            break;
+        }
+        indiceAluno++;
+    }
+}
+
+void alterarDadosAluno(int indiceAluno)
+{
+    printf("Digite qual dos dados do aluno deseja alterar:\n");
+    printf("0 - Voltar\n");
+    printf("1 - Alterar nome\n");
+    printf("2 - Alterar sexo\n");
+    printf("3 - Alterar CPF\n");
+    printf("4 - Alterar data de nascimento\n");
+    char opcao = '1';
+    scanf("%c", &opcao);
+    switch(opcao)
+    {
+        case '0':
+            {
+                
+            }break;
+        case '1':
+            {
+                
+            }break;
+        case '2':
+            {
+                
+            }break;
+        case '3':
+            {
+                
+            }break;
+        case '4':
+            {
+                
+            }break;
+        default:
+            {
+                
+            }break;
+    }
+    
 }

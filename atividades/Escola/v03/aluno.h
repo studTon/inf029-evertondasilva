@@ -12,7 +12,7 @@ typedef struct
 }cadastroAluno;
 
 /*Registro*/
-cadastroAluno aluno[QTD_DE_ALUNOS];
+static cadastroAluno aluno[QTD_DE_ALUNOS];
 
 /*Variáveis para auxiliar a contagem dos alunos*/
 static int chaveDeValidarAluno;
@@ -25,11 +25,14 @@ void inserirAluno(void);
 void excluirAluno(void);
 int excluirAlunoNaLista(int indiceAluno);
 void listarAlunos(void);
+void procurarAtualizarAluno(void);
 /*Funções para inserir os dados do aluno*/
 void inserirNomeAluno(void);
 void inserirSexoAluno(void);
 void inserirDataAluno(void);
 void inserirCpfAluno(void);
+//Alterar dados do aluno
+void alterarDadosAluno(int indiceAluno);
 /*######################################*/
 /*Funções de Validação*/
 void gerarMatriculaAluno(int inputIndiceAluno);
