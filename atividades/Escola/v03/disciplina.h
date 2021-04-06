@@ -24,6 +24,7 @@ void excluirDisc(void);
 int excluirDiscNaLista(int indiceDisc);
 void listarDisciplinas(void);
 void matricularAlunoEmDisc(void);
+void listarUmaDisciplina(void);
 /*Funções de preenchimento dos dados da disciplina*/
 void nomeDaDisciplina(void);
 void semestreDaDisciplina(void);
