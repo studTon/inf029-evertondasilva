@@ -36,9 +36,9 @@ void alterarDadosAluno(int indiceAluno);
 /*######################################*/
 /*Funções de Validação*/
 void gerarMatriculaAluno(int inputIndiceAluno);
-void validarNomeAluno(char inputNome[]);
-void validarCPFAluno(char cpf[]);
-void validarSexoAluno(char sexo);
-void validarNascAluno(char data[]);
+int validarNomeAluno(char inputNome[]);
+int validarCPFAluno(char cpf[]);
+int validarSexoAluno(char sexo);
+int validarNascAluno(char data[]);
 /**********************/
 #endif

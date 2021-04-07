@@ -39,7 +39,7 @@ void menuAluno()
             }break;
             case '4':
             {
-                atualizarDadosAluno();
+                procurarAtualizarAluno();
             }break;
             default:
             {
@@ -114,7 +114,7 @@ void gerarMatriculaAluno(int inputIndiceAluno)
 
 }
 /*Verificações da entrada de dados do cadastro*/
-void validarNomeAluno(char inputNome[])
+int validarNomeAluno(char inputNome[])
 {   
     
     int tamanhoInputNome = 0;
@@ -132,13 +132,17 @@ void validarNomeAluno(char inputNome[])
     }
     if(tamanhoInputNome == tamanhoNomeReal)
     {
-        printf("NOME VALIDO\n");
         chaveDeValidarAluno++;
+        return 1;
     }
     else
+    {
         printf("ERRO: Nome invalido\n");
+        return 0;
+    }
+        
 }
-void validarCPFAluno(char cpf[])
+int validarCPFAluno(char cpf[])
 {
     /*Análise dos campo CPF*/
     int tamDoInput = 0;
@@ -166,29 +170,30 @@ void validarCPFAluno(char cpf[])
     /*Conclusão*/
     if(somaContadores == TAM_CPF - 1)
     {
-        printf("CPF VALIDO\n");
         chaveDeValidarAluno++;
+        return 1;
     }
     else
     {
         printf("ERRO: CPF invalido\n");
-        //contaErros++;
+        return 0;
     }
     
 }
-void validarSexoAluno(char sexo)
+int validarSexoAluno(char sexo)
 {
     if(sexo == 'M'||sexo == 'F'||sexo == 'O')
     {
-        printf("SEXO VALIDO\n");
         chaveDeValidarAluno++;
+        return 1;
     }
     else
     {
         printf("ERRO: Sexo invalido\n");
+        return 0;
     }
 }
-void validarNascAluno(char data[])
+int validarNascAluno(char data[])
 {
     int errosData = 0;
     /*Decomposição da data*/
@@ -371,12 +376,13 @@ void validarNascAluno(char data[])
     /*Conclusão da validação*/
     if (errosData == 0)
     {
-        printf("DATA VALIDA\n");
         chaveDeValidarAluno++;
+        return 1;
     }
     else
     {
         printf("ERRO: Data invalida\n");
+        return 0;
     }
 }
 /*********************************************************/
@@ -401,7 +407,11 @@ void inserirAluno()
     validarNascAluno(aluno[cadastrosComSucessoAluno].dataNasc);
     validarCPFAluno(aluno[cadastrosComSucessoAluno].cpf);
     if(chaveDeValidarAluno == 4)
+    {
         cadastrosComSucessoAluno++;
+        printf("\n***ALUNO CADASTRADO COM SUCESSO***\n");
+    }
+        
 }
 /*######Funções para inserir os dados do aluno######*/
 void inserirNomeAluno()
@@ -416,7 +426,6 @@ void inserirNomeAluno()
 void inserirSexoAluno()
 {
     printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
-    //scanf("%c", aluno[cadastrosComSucessoAluno].sexo);
     scanf("%c", &aluno[cadastrosComSucessoAluno].sexo);
     /* Pula o restante da linha */
     while(getchar() != '\n');
@@ -539,6 +548,7 @@ void procurarAtualizarAluno()
     char inputNomeAluno[TAM_NOME];
     printf("Digite o nome do aluno que voce deseja atualizar algum dado?:: ");
     scanf("%51[^\n]%*c", inputNomeAluno);
+    int indiceAluno = 0;
     while(indiceAluno <= cadastrosComSucessoAluno)
     {
         int iContador = 0;
@@ -566,40 +576,92 @@ void procurarAtualizarAluno()
 
 void alterarDadosAluno(int indiceAluno)
 {
-    printf("Digite qual dos dados do aluno deseja alterar:\n");
-    printf("0 - Voltar\n");
-    printf("1 - Alterar nome\n");
-    printf("2 - Alterar sexo\n");
-    printf("3 - Alterar CPF\n");
-    printf("4 - Alterar data de nascimento\n");
     char opcao = '1';
-    scanf("%c", &opcao);
-    switch(opcao)
-    {
-        case '0':
+    while(opcao != '0')
+    {  
+        printf("\nDigite qual dos dados do aluno deseja alterar:\n");
+        printf("0 - Voltar\n");
+        printf("1 - Alterar nome\n");
+        printf("2 - Alterar sexo\n");
+        printf("3 - Alterar CPF\n");
+        printf("4 - Alterar data de nascimento\n");
+
+        scanf("%c", &opcao);
+        switch(opcao)
+        {
+            case '0':
             {
-                
+                printf("Voltar...");    
             }break;
-        case '1':
+            case '1':
+            {   
+                char nomeSubst[TAM_NOME];
+                printf("Digite nome que deseja colocar: ");
+                scanf("%51[^\n]%*c", nomeSubst);
+    
+                if(validarNomeAluno(nomeSubst) == 1)
+                {
+                    int iContador = 0;
+                    while(nomeSubst[iContador] != '\0')
+                    {
+                        aluno[indiceAluno].nome[iContador] = nomeSubst[iContador];
+                        iContador++;
+                    }
+                    aluno[indiceAluno].nome[iContador] = '\0';   
+                }    
+            }break;
+            case '2':
             {
-                
+                char sexoSubst;
+                printf("Digite o sexo que deseja colocar: ");
+                scanf("%c", &sexoSubst);
+                /* Pula o restante da linha */
+                while(getchar() != '\n');
+                if(sexoSubst >= 'a' && sexoSubst <= 'z')
+                    sexoSubst -= 32; //Tornar o input com letras maiúsculas
+                if(validarSexoAluno(sexoSubst) == 1)
+                {
+                    aluno[indiceAluno].sexo = sexoSubst;
+                }
             }break;
-        case '2':
+            case '3':
             {
-                
+                char cpfSubst[TAM_NOME];
+                printf("Digite o CPF que deseja colocar: ");
+                scanf("%[^\n]%*c", cpfSubst);
+                if(validarCPFAluno(cpfSubst) == 1)
+                {
+                    int iContador = 0;
+                    while(cpfSubst[iContador] != '\0')
+                    {
+                        aluno[indiceAluno].cpf[iContador] = cpfSubst[iContador];
+                        iContador++;
+                    }
+                    aluno[indiceAluno].cpf[iContador] = '\0';   
+                }
             }break;
-        case '3':
+            case '4':
             {
-                
+                char dataNascSubst[TAM_NOME];
+                aluno[indiceAluno].dataNasc;
+                printf("Digite a data de nascimento que deseja colocar: ");
+                scanf("%[^\n]%*c", dataNascSubst);
+                if(validarNascAluno(dataNascSubst) == 1)
+                {
+                    int iContador = 0;
+                    while(dataNascSubst[iContador] != '\0')
+                    {
+                        aluno[indiceAluno].dataNasc[iContador] = dataNascSubst[iContador];
+                        iContador++;
+                    }
+                    aluno[indiceAluno].dataNasc[iContador] = '\0';   
+                }
             }break;
-        case '4':
+            default:
             {
-                
+
             }break;
-        default:
-            {
-                
-            }break;
+        }
     }
     
 }

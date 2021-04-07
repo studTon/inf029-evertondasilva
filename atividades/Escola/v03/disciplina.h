@@ -16,7 +16,8 @@ static cadastroDisc disciplina[QTD_DE_DISC];
 static int chaveValidarDisciplina;
 static int disciplinasCadastradas = 0;
 static int disciplinasExcluidas = 0;
-
+//Verificar limite de disciplinas
+static int naoPossivelDisc;
 /*Funções principais*/
 void menuDisc(void);
 void inserirDisc(void);

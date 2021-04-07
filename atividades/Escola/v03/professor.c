@@ -127,7 +127,6 @@ void validarNomeProf(char inputNome[])
     }
     if(tamanhoInputNome == tamanhoNomeReal)
     {
-        printf("NOME VALIDO\n");
         chaveDeValidarProf++;
     }
     else
@@ -161,7 +160,6 @@ void validarCPFProf(char cpf[])
     /*Conclusão*/
     if(somaContadores == TAM_CPF - 1)
     {
-        printf("CPF VALIDO\n");
         chaveDeValidarProf++;
     }
     else
@@ -175,7 +173,6 @@ void validarSexoProf(char sexo)
 {
     if(sexo == 'M'||sexo == 'F'||sexo == 'O')
     {
-        printf("SEXO VALIDO\n");
         chaveDeValidarProf++;
     }
     else
@@ -366,7 +363,6 @@ void validarNascProf(char data[])
     /*Conclusão da validação*/
     if (errosData == 0)
     {
-        printf("DATA VALIDA\n");
         chaveDeValidarProf++;
     }
     else
@@ -396,7 +392,11 @@ void inserirProf()
     validarNascProf(professor[cadastrosComSucessoProf].dataNasc);
     validarCPFProf(professor[cadastrosComSucessoProf].cpf);
     if(chaveDeValidarProf == 4)
+    {
         cadastrosComSucessoProf++;
+        printf("\n***PROFESSOR CADASTRADO COM SUCESSO***\n");
+    }
+        
 }
 /*######Funções de preenchimento dos campos######*/
 void inserirNomeProf()

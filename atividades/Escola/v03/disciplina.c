@@ -63,20 +63,26 @@ void inserirDisc()
     printf("***Inserir disciplina***\n");
     //Gerar código
     gerarCodigoDaDisc(disciplinasCadastradas);
-    //Nome da disciplina
-    nomeDaDisciplina();
-    //Semestre da disciplina
-    semestreDaDisciplina();
-    //Nome do professor na disciplinar
-    professorDaDisciplina();
-    /*Validações dos campos inseridos*/
-    validarNomeDisc(disciplina[disciplinasCadastradas].nomeDisciplina);
-    validarSemestre(disciplina[disciplinasCadastradas].semestre);
-    validarProfNaDisc(disciplina[disciplinasCadastradas].professorDisciplina);
-    
-    /*Contar os cadastros com sucesso*/
-    if(chaveValidarDisciplina == 4)
-        disciplinasCadastradas++;
+    if(!naoPossivelDisc)
+    {
+        //Nome da disciplina
+        nomeDaDisciplina();
+        //Semestre da disciplina
+        semestreDaDisciplina();
+        //Nome do professor na disciplinar
+        professorDaDisciplina();
+        /*Validações dos campos inseridos*/
+        validarNomeDisc(disciplina[disciplinasCadastradas].nomeDisciplina);
+        validarSemestre(disciplina[disciplinasCadastradas].semestre);
+        validarProfNaDisc(disciplina[disciplinasCadastradas].professorDisciplina);
+
+        /*Contar os cadastros com sucesso*/
+        if(chaveValidarDisciplina == 3)
+        {
+            disciplinasCadastradas++;
+            printf("\n***DISCIPLINA CADASTRADA COM SUCESSO***\n");
+        }
+    }     
 }
 /*######Funções para inserir os campos do cadastro da disciplina######*/
 void nomeDaDisciplina()
@@ -98,7 +104,7 @@ void semestreDaDisciplina()
 void professorDaDisciplina()
 {
     printf("Digite o nome do professor que ensina a disciplina: ");
-    scanf("%[^\n]%*c", disciplina[disciplinasCadastradas].professorDisciplina);
+    scanf("%51[^\n]%*c", disciplina[disciplinasCadastradas].professorDisciplina);
 }
 /*###################################################################*/
 void gerarCodigoDaDisc(int inputIndiceDisc)
@@ -139,9 +145,11 @@ void gerarCodigoDaDisc(int inputIndiceDisc)
     else
     {
         printf("IMPOSSIVEL CADASTRAR MAIS DISCIPLINAS\n");
+        naoPossivelDisc = 1;
     }
     
 }
+/*###Validações dos dados inseridos###*/
 void validarNomeDisc(char inputDisciplina[])
 {
     int iContador = 0;
@@ -154,9 +162,8 @@ void validarNomeDisc(char inputDisciplina[])
         }
         iContador++;
 	}
-    if(contadorCaracteresReais == iContador - 1)
+    if(contadorCaracteresReais == iContador)
     {
-        printf("NOME DA DISCIPLINA VALIDO\n");
         chaveValidarDisciplina++;
     }
     else
@@ -168,7 +175,6 @@ void validarSemestre(char inputSemestre)
 {
     if(inputSemestre >= '1' && inputSemestre <= '8')
     {
-        printf("SEMESTRE VALIDO\n");
         chaveValidarDisciplina++;
     }
     else
@@ -176,7 +182,6 @@ void validarSemestre(char inputSemestre)
         printf("SEMESTRE INVALIDO\n");
     }
 }
-
 void validarProfNaDisc(char nomeProfessor[])
 {   
     int professorEscolhido;
@@ -194,7 +199,7 @@ void validarProfNaDisc(char nomeProfessor[])
             }
             iContador++;
         }
-        if(caracteresIguais == iContador)
+        if(caracteresIguais == iContador - 1)
         {   
             achou = 1;
             professorEscolhido = indiceProfessor;
@@ -202,9 +207,8 @@ void validarProfNaDisc(char nomeProfessor[])
         }
         indiceProfessor++;
     }
-    if(achou == 1)
+    if(!achou)
     {
-        printf("NOME DE PROFESSOR VALIDO: %s\n", professor[professorEscolhido].nome);
         chaveValidarDisciplina++;
     }
     else
@@ -212,7 +216,7 @@ void validarProfNaDisc(char nomeProfessor[])
         printf("NOME DE PROFESSOR INVALIDO\n");
     }
 }
-
+//#######################################
 void excluirDisc()
 {
     printf("****************************\n");
