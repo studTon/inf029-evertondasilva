@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         printf("*            ESCOLA          *\n");
         printf("******************************\n");
 
-        //Menu de escolhas
+        //Menu
         printf("\nEscolha uma opcao a seguir:\n");
         printf("0 - Sair\n");
         printf("1 - Gerenciar alunos\n");
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         printf("3 - Gerenciar disciplina\n");
         printf("4 - Relatorios\n::");
 
-        scanf("%c", &escolhaMenu);
+        scanf("%1c", &escolhaMenu);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolhaMenu)
         {

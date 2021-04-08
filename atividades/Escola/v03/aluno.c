@@ -586,7 +586,8 @@ void alterarDadosAluno(int indiceAluno)
         printf("3 - Alterar CPF\n");
         printf("4 - Alterar data de nascimento\n");
 
-        scanf("%c", &opcao);
+        scanf("%1c", &opcao);
+        while(getchar() != '\n');/*Pular o char new line no input*/
         switch(opcao)
         {
             case '0':
@@ -597,7 +598,7 @@ void alterarDadosAluno(int indiceAluno)
             {   
                 char nomeSubst[TAM_NOME];
                 printf("Digite nome que deseja colocar: ");
-                scanf("%51[^\n]%*c", nomeSubst);
+                scanf("%50[^\n]%*c", nomeSubst);
     
                 if(validarNomeAluno(nomeSubst) == 1)
                 {
@@ -614,7 +615,7 @@ void alterarDadosAluno(int indiceAluno)
             {
                 char sexoSubst;
                 printf("Digite o sexo que deseja colocar: ");
-                scanf("%c", &sexoSubst);
+                scanf("%1c", &sexoSubst);
                 /* Pula o restante da linha */
                 while(getchar() != '\n');
                 if(sexoSubst >= 'a' && sexoSubst <= 'z')
@@ -628,7 +629,7 @@ void alterarDadosAluno(int indiceAluno)
             {
                 char cpfSubst[TAM_NOME];
                 printf("Digite o CPF que deseja colocar: ");
-                scanf("%[^\n]%*c", cpfSubst);
+                scanf("%14[^\n]%*c", cpfSubst);
                 if(validarCPFAluno(cpfSubst) == 1)
                 {
                     int iContador = 0;
@@ -645,7 +646,7 @@ void alterarDadosAluno(int indiceAluno)
                 char dataNascSubst[TAM_NOME];
                 aluno[indiceAluno].dataNasc;
                 printf("Digite a data de nascimento que deseja colocar: ");
-                scanf("%[^\n]%*c", dataNascSubst);
+                scanf("%10[^\n]%*c", dataNascSubst);
                 if(validarNascAluno(dataNascSubst) == 1)
                 {
                     int iContador = 0;
@@ -659,7 +660,7 @@ void alterarDadosAluno(int indiceAluno)
             }break;
             default:
             {
-
+                printf("INPUT INVALIDO\n");
             }break;
         }
     }

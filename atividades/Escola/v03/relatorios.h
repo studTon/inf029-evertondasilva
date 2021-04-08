@@ -2,6 +2,7 @@
 #define RELATORIOS_H
 /*Principais funções*/
 void menuRelatorios(void);
-void listarAlunosOrdenadosNome(void);
+void listarAlunosPorSexo(void);
+void listarAlunosPorNome(void);
 
 #endif

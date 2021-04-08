@@ -20,7 +20,7 @@ void menuDisc()
         printf("4 - Matricular aluno em disciplina\n");
         printf("5 - Listar alunos em disciplina\n::");
 
-        scanf("%c", &escolha);
+        scanf("%1c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
@@ -385,6 +385,7 @@ void matricularAlunoEmDisc()
         }
         printf("Deseja continuar adicionando aluno em disciplina?\n0 - Voltar\nQualquer tecla - continuar\n::");
         scanf("%c", &escolha);
+        while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
             case '0':

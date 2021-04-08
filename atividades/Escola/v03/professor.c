@@ -16,7 +16,7 @@ void menuProf()
         printf("2 - Excluir professor\n");
         printf("3 - Listar professor\n::");
 
-        scanf("%c", &escolha);
+        scanf("%1c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
