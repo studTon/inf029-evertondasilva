@@ -1,15 +1,22 @@
 #include <stdio.h>
 #include "professor.h"
 
+int chaveDeValidarProf;
+int cadastrosComSucessoProf;
+int cadastrosProfExcluidos;
+cadastroProfessor professor[QTD_DE_PROFS];
+
 void menuProf()
 {
+    cadastrosComSucessoProf = 0;
+    cadastrosProfExcluidos = 0;
     char escolha = '1';
     while(escolha != '0')
     {
         printf("******************************\n");
         printf("*       INFO PROFESSOR       *\n");
         printf("******************************\n");
-        /*menu Aluno*/
+        /*menu Professor*/
         printf("\nEscolha uma opcao a seguir:\n");
         printf("0 - Voltar\n");
         printf("1 - Inserir professor\n");

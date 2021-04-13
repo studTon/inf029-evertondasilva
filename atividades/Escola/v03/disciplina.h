@@ -10,14 +10,14 @@ typedef struct{
     char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME_DISC];
 }cadastroDisc;
 /*Registro das disciplinas*/
-static cadastroDisc disciplina[QTD_DE_DISC];
+cadastroDisc disciplina[QTD_DE_DISC];
 
 /*Variáveis para auxiliar a contagem de disciplinas*/
-static int chaveValidarDisciplina;
-static int disciplinasCadastradas = 0;
-static int disciplinasExcluidas = 0;
+extern int chaveValidarDisciplina;
+extern int disciplinasCadastradas;
+extern int disciplinasExcluidas;
 //Verificar limite de disciplinas
-static int naoPossivelDisc;
+extern int naoPossivelDisc;
 /*Funções principais*/
 void menuDisc(void);
 void inserirDisc(void);

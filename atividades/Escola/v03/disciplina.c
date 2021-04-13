@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include "disciplina.h"
-#include "professor.h"
 #include "aluno.h"
+#include "professor.h"
+
+int chaveValidarDisciplina;
+int cadastrosComSucessoAluno;
+int cadastrosComSucessoProf;
+int disciplinasCadastradas;
+int disciplinasExcluidas;
+int naoPossivelDisc;
 
 void menuDisc()
 {
+    disciplinasCadastradas = 0;
+    disciplinasExcluidas = 0;
     char escolha = '1';
     while(escolha != '0')
     {
@@ -187,7 +196,7 @@ void validarProfNaDisc(char nomeProfessor[])
     int professorEscolhido;
     int indiceProfessor = 0;
     int achou = 0;//0 - Não achou professor| 1 - Achou professor
-    while(indiceProfessor <= disciplinasCadastradas)
+    while(indiceProfessor <= cadastrosComSucessoProf)
     {
         int iContador = 0;
         int caracteresIguais = 0;

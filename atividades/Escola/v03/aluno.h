@@ -10,15 +10,12 @@ typedef struct
     char dataNasc[TAM_DATA_NASC];
     char cpf[TAM_CPF];
 }cadastroAluno;
-
-/*Registro*/
-static cadastroAluno aluno[QTD_DE_ALUNOS];
-
 /*Variáveis para auxiliar a contagem dos alunos*/
-static int chaveDeValidarAluno;
-static int cadastrosComSucessoAluno = 0;
-static int cadastrosAlunoExcluidos = 0;
-
+extern int chaveDeValidarAluno;
+extern int cadastrosComSucessoAluno;
+extern int cadastrosAlunoExcluidos;
+/*Registro*/
+extern cadastroAluno aluno[QTD_DE_ALUNOS];
 /*Funções principais*/
 void menuAluno(void);
 void inserirAluno(void);
@@ -41,4 +38,6 @@ int validarCPFAluno(char cpf[]);
 int validarSexoAluno(char sexo);
 int validarNascAluno(char data[]);
 /**********************/
+/*Retornar cadastros realizados com sucesso*/
+int retornarCadastrosAluno(int valor);
 #endif

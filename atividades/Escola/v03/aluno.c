@@ -1,8 +1,16 @@
 #include <stdio.h>
 #include "aluno.h"
 
+int chaveDeValidarAluno;
+int cadastrosComSucessoAluno;
+int cadastrosAlunoExcluidos;
+cadastroAluno aluno[QTD_DE_ALUNOS];
+
 void menuAluno()
 {
+    cadastrosComSucessoAluno = 0;
+    cadastrosAlunoExcluidos = 0;
+    /**********************************************/
     char escolha = '1';
     while(escolha != '0')
     {
@@ -410,8 +418,7 @@ void inserirAluno()
     {
         cadastrosComSucessoAluno++;
         printf("\n***ALUNO CADASTRADO COM SUCESSO***\n");
-    }
-        
+    }    
 }
 /*######Funções para inserir os dados do aluno######*/
 void inserirNomeAluno()
@@ -665,4 +672,9 @@ void alterarDadosAluno(int indiceAluno)
         }
     }
     
+}
+
+int retornarCadastrosAluno(int valor)
+{
+    return valor;
 }
