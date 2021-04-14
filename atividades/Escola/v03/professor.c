@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "professor.h"
 
+int chaveDeValidarProf;
+int cadastrosComSucessoProf;
+int cadastrosProfExcluidos;
+cadastroProfessor professor[QTD_DE_PROFS];
+
 void menuProf()
 {
     char escolha = '1';
@@ -9,14 +14,14 @@ void menuProf()
         printf("******************************\n");
         printf("*       INFO PROFESSOR       *\n");
         printf("******************************\n");
-        /*menu Aluno*/
+        /*menu Professor*/
         printf("\nEscolha uma opcao a seguir:\n");
         printf("0 - Voltar\n");
         printf("1 - Inserir professor\n");
         printf("2 - Excluir professor\n");
         printf("3 - Listar professor\n::");
 
-        scanf("%c", &escolha);
+        scanf("%1c", &escolha);
         while(getchar() != '\n');/*Pular o char new line no input*/
         switch(escolha)
         {
@@ -113,7 +118,6 @@ void validarNomeProf(char inputNome[])
 {   
     int tamanhoInputNome = 0;
     while(inputNome[tamanhoInputNome] != '\0') tamanhoInputNome++;
-    tamanhoInputNome--;
     int tamanhoNomeReal = 0;
     int contador = 0;
     while(inputNome[contador] != '\0')
@@ -127,7 +131,6 @@ void validarNomeProf(char inputNome[])
     }
     if(tamanhoInputNome == tamanhoNomeReal)
     {
-        printf("NOME VALIDO\n");
         chaveDeValidarProf++;
     }
     else
@@ -161,7 +164,6 @@ void validarCPFProf(char cpf[])
     /*Conclusão*/
     if(somaContadores == TAM_CPF - 1)
     {
-        printf("CPF VALIDO\n");
         chaveDeValidarProf++;
     }
     else
@@ -175,7 +177,6 @@ void validarSexoProf(char sexo)
 {
     if(sexo == 'M'||sexo == 'F'||sexo == 'O')
     {
-        printf("SEXO VALIDO\n");
         chaveDeValidarProf++;
     }
     else
@@ -366,7 +367,6 @@ void validarNascProf(char data[])
     /*Conclusão da validação*/
     if (errosData == 0)
     {
-        printf("DATA VALIDA\n");
         chaveDeValidarProf++;
     }
     else
@@ -396,16 +396,22 @@ void inserirProf()
     validarNascProf(professor[cadastrosComSucessoProf].dataNasc);
     validarCPFProf(professor[cadastrosComSucessoProf].cpf);
     if(chaveDeValidarProf == 4)
+    {
         cadastrosComSucessoProf++;
+        printf("\n***PROFESSOR CADASTRADO COM SUCESSO***\n");
+    }
+        
 }
 /*######Funções de preenchimento dos campos######*/
 void inserirNomeProf()
 {
     printf("Digite o nome do(a) professor(a): ");
-    fgets(professor[cadastrosComSucessoProf].nome, TAM_NOME, stdin);
+    /*scanf("%50[^\n]%*c", professor[cadastrosComSucessoProf].nome);
+    setbuf(stdin, NULL);*/
+    fgets(professor[cadastrosComSucessoProf].nome, sizeof(professor[cadastrosComSucessoProf].nome), stdin);
     int contaCaracter = 0;
     while(professor[cadastrosComSucessoProf].nome[contaCaracter] != '\n')contaCaracter++;
-    professor[cadastrosComSucessoProf].nome[contaCaracter] = '\n';
+    professor[cadastrosComSucessoProf].nome[contaCaracter] = '\0';
     setbuf(stdin, NULL);
 }
 void inserirSexoProf()
@@ -506,7 +512,7 @@ void listarProf()
     */
     printf("\nLista de professores cadastrados(as)\n*******************************\n\n");
     int iContador = 0;
-    while(iContador <= cadastrosComSucessoProf)
+    while(iContador < cadastrosComSucessoProf)
     {
         printf("MATRICULA: %s\n", professor[iContador].matricula);
         printf("NOME: %s\n", professor[iContador].nome);

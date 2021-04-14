@@ -7,16 +7,17 @@ typedef struct{
     char codigo[TAM_CODIGO_DISC];
     char semestre;
     char professorDisciplina[TAM_NOME_PROF_DISC];
-    char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME_DISC];
+    char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME];
 }cadastroDisc;
 /*Registro das disciplinas*/
 cadastroDisc disciplina[QTD_DE_DISC];
 
 /*Variáveis para auxiliar a contagem de disciplinas*/
-static int chaveValidarDisciplina;
-static int disciplinasCadastradas = 0;
-static int disciplinasExcluidas = 0;
-
+extern int chaveValidarDisciplina;
+extern int disciplinasCadastradas;
+extern int disciplinasExcluidas;
+//Verificar limite de disciplinas
+extern int naoPossivelDisc;
 /*Funções principais*/
 void menuDisc(void);
 void inserirDisc(void);

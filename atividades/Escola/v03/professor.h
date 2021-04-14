@@ -12,12 +12,12 @@ typedef struct
 }cadastroProfessor;
 
 /*Registro*/
-cadastroProfessor professor[QTD_DE_PROFS];
+extern cadastroProfessor professor[QTD_DE_PROFS];
 
 /*Variáveis para auxiliar a contagem dos alunos*/
-static int chaveDeValidarProf;
-static int cadastrosComSucessoProf = 0;
-static int cadastrosProfExcluidos = 0;
+extern int chaveDeValidarProf;
+extern int cadastrosComSucessoProf;
+extern int cadastrosProfExcluidos;
 
 /*Funções principais*/
 void menuProf(void);
