@@ -9,11 +9,10 @@ int cadastrosComSucessoProf;
 int disciplinasCadastradas;
 int disciplinasExcluidas;
 int naoPossivelDisc;
+cadastroDisc disciplina[QTD_DE_DISC];
 
 void menuDisc()
 {
-    disciplinasCadastradas = 0;
-    disciplinasExcluidas = 0;
     char escolha = '1';
     while(escolha != '0')
     {
@@ -80,11 +79,15 @@ void inserirDisc()
         semestreDaDisciplina();
         //Nome do professor na disciplinar
         professorDaDisciplina();
+        //Anular campo de alunos em disciplina
+        for(int iContador = 0; iContador < QTD_DE_ALUNOS; iContador++)
+        {
+            disciplina[disciplinasCadastradas].alunosEmDisciplina[iContador][0] = 0;    
+        }
         /*Validações dos campos inseridos*/
         validarNomeDisc(disciplina[disciplinasCadastradas].nomeDisciplina);
         validarSemestre(disciplina[disciplinasCadastradas].semestre);
         validarProfNaDisc(disciplina[disciplinasCadastradas].professorDisciplina);
-
         /*Contar os cadastros com sucesso*/
         if(chaveValidarDisciplina == 3)
         {
@@ -418,7 +421,7 @@ void listarUmaDisciplina()
     int indiceDisciplina = 0;
     int indiceDiscDesejada;
     int achou = 0;
-    while(indiceDisciplina <= disciplinasCadastradas)
+    while(indiceDisciplina < disciplinasCadastradas)
     {
         int contaIguais = 0;
         int iContador = 0;

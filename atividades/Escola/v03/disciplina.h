@@ -7,7 +7,7 @@ typedef struct{
     char codigo[TAM_CODIGO_DISC];
     char semestre;
     char professorDisciplina[TAM_NOME_PROF_DISC];
-    char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME_DISC];
+    char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME];
 }cadastroDisc;
 /*Registro das disciplinas*/
 cadastroDisc disciplina[QTD_DE_DISC];

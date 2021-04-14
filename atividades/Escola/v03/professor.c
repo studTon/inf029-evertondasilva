@@ -8,8 +8,6 @@ cadastroProfessor professor[QTD_DE_PROFS];
 
 void menuProf()
 {
-    cadastrosComSucessoProf = 0;
-    cadastrosProfExcluidos = 0;
     char escolha = '1';
     while(escolha != '0')
     {
@@ -514,7 +512,7 @@ void listarProf()
     */
     printf("\nLista de professores cadastrados(as)\n*******************************\n\n");
     int iContador = 0;
-    while(iContador <= cadastrosComSucessoProf)
+    while(iContador < cadastrosComSucessoProf)
     {
         printf("MATRICULA: %s\n", professor[iContador].matricula);
         printf("NOME: %s\n", professor[iContador].nome);

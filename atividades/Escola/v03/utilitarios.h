@@ -15,5 +15,6 @@
 #define TAM_NOME 51
 #define TAM_DATA_NASC 11
 #define TAM_CPF 15
+#define LIMITE_DE_VAGAS 40
 /*****************************/
 #endif

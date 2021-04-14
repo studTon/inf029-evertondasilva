@@ -10,6 +10,8 @@ int cadastrosComSucessoProf;
 int disciplinasCadastradas;
 
 cadastroAluno aluno[QTD_DE_ALUNOS];
+cadastroDisc disciplina[QTD_DE_DISC];
+alunoIrregular alunosIrregulares[QTD_DE_ALUNOS];
 
 void menuRelatorios()
 {    
@@ -78,11 +80,11 @@ void menuRelatorios()
             }break;
             case '9':
             {
-                       
+                alunosComPoucaDisciplina();     
             }break;
             case 'A':
             {
-                       
+                turmasGrandes();        
             }break;
             default:
             {
@@ -817,6 +819,7 @@ void aniversariantesMes()
 }
 void buscarPessoas()
 {
+    printf("***BUSCAR PESSOAS***\n");
     char inputNome[TAM_NOME];
     printf("Digite o nome da pessoa procurada\n::");
     scanf("%50[^\n]%*c", inputNome);
@@ -845,5 +848,93 @@ void buscarPessoas()
             printf("- %s\n", aluno[iContador].nome);
         }
         iContador++;
+    }
+}
+void alunosComPoucaDisciplina()
+{
+    printf("***LISTA DE ALUNOS COM POUCAS DISCIPLINAS***\n");
+    int somaDisciplinas;
+    int nomeConfere;
+    int contaAlunosIrregulares = 0;
+    int completou = 0;
+    for(int iContador = 0; iContador < cadastrosComSucessoAluno; iContador++)
+    {
+        somaDisciplinas = 0;
+        int jContador = 0;
+        for(; jContador < disciplinasCadastradas; jContador++)
+        {
+            nomeConfere = 0;
+            for(int kContador = 0; disciplina[jContador].alunosEmDisciplina[kContador][0] != 0 && nomeConfere != 1; kContador++)
+            {
+                int letrasIguais = 0;
+                int tamNome;
+                for(tamNome = 0; disciplina[jContador].alunosEmDisciplina[kContador][tamNome] != '\0'; tamNome++)
+                {
+                    if(disciplina[jContador].alunosEmDisciplina[kContador][tamNome] == aluno[iContador].nome[tamNome])
+                    {
+                        letrasIguais++;
+                    }
+                }
+                if(letrasIguais == tamNome)
+                {
+                    nomeConfere = 1;  
+                }
+            }
+            if(nomeConfere == 1)
+                somaDisciplinas++;
+        }
+        if(jContador == disciplinasCadastradas)
+            completou = 1;
+        if(somaDisciplinas < 3 && completou == 1)
+        {
+            alunosIrregulares[contaAlunosIrregulares] = passarDadosAluno(aluno[iContador].nome, somaDisciplinas);
+            contaAlunosIrregulares++;
+        }
+    }
+    
+    listarAlunosIrregulares(contaAlunosIrregulares);
+}
+alunoIrregular passarDadosAluno(char nome[], int somaDisciplinas)
+{
+    alunoIrregular dadosAluno;
+    for(int iContador = 0; nome[iContador] != '\0'; iContador++)
+    {
+        dadosAluno.nome[iContador] = nome[iContador];
+    }
+    dadosAluno.quantDisciplinas = somaDisciplinas;
+    
+    return dadosAluno;
+}
+void listarAlunosIrregulares(int qtdAlunos)
+{
+    for(int iContador = 0; iContador < qtdAlunos; iContador++)
+    {
+        printf("- %s == %d disciplinas\n", alunosIrregulares[iContador].nome, alunosIrregulares[iContador].quantDisciplinas);
+    }
+}
+void turmasGrandes()
+{
+    printf("***TURMAS COM MAIS DE 40 ALUNOS***\n");
+    for(int iContador = 0; iContador < disciplinasCadastradas; iContador++)
+    {
+        if(verificarDisciplina(iContador) == 1)
+        {
+            printf("- %s\n", disciplina[iContador].nomeDisciplina);
+        }
+    }
+}
+
+int verificarDisciplina(int indice)
+{
+    int jContador;
+    for(jContador = 0; disciplina[indice].alunosEmDisciplina[jContador][0] != 0; jContador++);
+    
+    if(jContador > LIMITE_DE_VAGAS)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }

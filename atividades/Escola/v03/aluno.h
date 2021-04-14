@@ -38,6 +38,4 @@ int validarCPFAluno(char cpf[]);
 int validarSexoAluno(char sexo);
 int validarNascAluno(char data[]);
 /**********************/
-/*Retornar cadastros realizados com sucesso*/
-int retornarCadastrosAluno(int valor);
 #endif

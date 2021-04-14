@@ -8,8 +8,6 @@ cadastroAluno aluno[QTD_DE_ALUNOS];
 
 void menuAluno()
 {
-    cadastrosComSucessoAluno = 0;
-    cadastrosAlunoExcluidos = 0;
     /**********************************************/
     char escolha = '1';
     while(escolha != '0')
@@ -536,7 +534,7 @@ void listarAlunos()
     */
     printf("\nLista de alunos cadastrados\n*******************************\n\n");
     int iContador = 0;
-    while(iContador <= cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluno)
     {
         printf("MATRICULA: %s\n", aluno[iContador].matricula);
         printf("NOME: %s\n", aluno[iContador].nome);
@@ -672,9 +670,4 @@ void alterarDadosAluno(int indiceAluno)
         }
     }
     
-}
-
-int retornarCadastrosAluno(int valor)
-{
-    return valor;
 }
