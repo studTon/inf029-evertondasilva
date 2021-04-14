@@ -883,23 +883,28 @@ void buscarPessoas()
     int iContador = 0;
     int jContador;
     int kContador;
-    int achouSemelhante = 0;
+    int achouSemelhante;
     int tamNome;
     while(iContador < cadastrosComSucessoAluno)
     {
-        tamNome = 0;
-        while(aluno[iContador].nome[tamNome])tamNome++;
+        achouSemelhante = 0;
+        for(tamNome = 0; inputNome[tamNome] != '\0'; tamNome++);
         jContador = 0;
-        while(achouSemelhante == 0 || kContador <= tamNome - 3)
+        while(jContador <= tamNome - 2)
         {
-            if(inputNome[jContador] == aluno[iContador].nome[kContador] &&
-               inputNome[jContador + 1] == aluno[iContador].nome[kContador + 1] &&
-               inputNome[jContador + 2] == aluno[iContador].nome[kContador + 2])
+            if(inputNome[0] == aluno[iContador].nome[jContador] &&
+               inputNome[1] == aluno[iContador].nome[jContador + 1] &&
+               inputNome[2] == aluno[iContador].nome[jContador + 2])
+            {
                 achouSemelhante = 1;
-            kContador++;
+                break;
+            }
+            jContador++;
         }
-        if(!achouSemelhante)
+        if(achouSemelhante == 1)
+        {
             printf("- %s\n", aluno[iContador].nome);
+        }
         iContador++;
     }
 }
