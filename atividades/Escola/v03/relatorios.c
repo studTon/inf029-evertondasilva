@@ -636,240 +636,181 @@ void listarProfessorPorData()
 }
 void aniversariantesMes()
 {
+    typedef struct
+    {
+        char nome[TAM_NOME];
+        int data[2];
+        int tipoMatricula;
+    }fichaTemporaria;
+    
+    fichaTemporaria pessoa[QTD_DE_ALUNOS + QTD_DE_PROFS];
     /*Input*/
     printf("***ANIVERSARIANTES DO MES***\n");
     int mesProcurado = 0;
     printf("Digite o numero do mes em que procura aniversariantes: ");
     scanf("%d", &mesProcurado);
+    printf("::\n");
     if(mesProcurado >= 1 && mesProcurado <= 12)
     {
-        typedef struct
-        {
-            char nome[TAM_NOME];
-            int tipoMatricula;//0 - Aluno|1 - Professor
-            int listarData[2];
-        }fichaTemp;
-
-        fichaTemp pessoaListada[QTD_DE_PROFS + QTD_DE_ALUNOS];
-
-        
-        //Decompor a data de nascimento
-        int casaAlgarismo;
-        int indiceCaracter;
-        int compararMes;
-        int compararDia;
-        /*Captura da base dados do aluno*/
+        //decompor cadastro de data dos alunos
         int iContador = 0;
+        int kContador = 0;
         while(iContador < cadastrosComSucessoAluno)
         {
-            //Tipo de pessoa cadastrada
-            pessoaListada[iContador].tipoMatricula = 0;
-            //Copiar o nome
-            indiceCaracter = 0;
-            while(aluno[iContador].nome[indiceCaracter] != '\0')
+            int mesComparar = 0;
+            mesComparar += (aluno[iContador].dataNasc[3] - '0') * 10;
+            mesComparar += aluno[iContador].dataNasc[4] - '0';
+            if(mesComparar == mesProcurado)
             {
-                pessoaListada[iContador].nome[indiceCaracter] = aluno[iContador].nome[indiceCaracter];
-                indiceCaracter++;
+                //Tipo
+                pessoa[kContador].tipoMatricula = 0;
+                //O nome
+                int letra = 0;
+                while(aluno[iContador].nome[letra] != '\0')
+                {
+                    pessoa[kContador].nome[letra] = aluno[iContador].nome[letra];
+                    letra++;
+                }
+                pessoa[kContador].nome[letra] = '\0';
+                //A data
+                pessoa[kContador].data[1] = mesComparar;
+                pessoa[kContador].data[0] = (aluno[iContador].dataNasc[0] - '0') * 10;
+                pessoa[kContador].data[0] += aluno[iContador].dataNasc[1] - '0';
+                
+                kContador++;
             }
-            pessoaListada[iContador].nome[indiceCaracter] = '\0';
-            //Decompor e listar a data
-            indiceCaracter = 3;
-            casaAlgarismo = 10;
-            compararMes = 0;
-            while(aluno[iContador].dataNasc[indiceCaracter] != '/')
-            {
-                compararMes += (aluno[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
-                casaAlgarismo /= 10;
-                indiceCaracter++;
-            }
-            pessoaListada[iContador].listarData[1] = compararMes;
-            //****************
-            indiceCaracter = 0;
-            casaAlgarismo = 10;
-            compararDia = 0;
-            while(aluno[iContador].dataNasc[indiceCaracter] != '/')
-            {
-                compararDia += (aluno[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
-                casaAlgarismo /= 10;
-                indiceCaracter++;
-            }
-            pessoaListada[iContador].listarData[0] = compararDia;
-            iContador++; 
+            iContador++;
         }
-        /*Captura da base dados do professor*/
+        //decompor cadastro de data dos alunos
         iContador = 0;
         while(iContador < cadastrosComSucessoProf)
         {
-            //Tipo de pessoa cadastrada
-            pessoaListada[iContador + cadastrosComSucessoAluno].tipoMatricula = 1;
-            //Copiar o nome
-            indiceCaracter = 0;
-            while(professor[iContador].nome[indiceCaracter] != '\0')
+            int mesComparar = 0;
+            mesComparar += (professor[iContador].dataNasc[3] - '0') * 10;
+            mesComparar += professor[iContador].dataNasc[4] - '0';
+            if(mesComparar == mesProcurado)
             {
-                pessoaListada[iContador + cadastrosComSucessoAluno].nome[indiceCaracter] = professor[iContador].nome[indiceCaracter];
-                indiceCaracter++;
+                //Tipo
+                pessoa[kContador].tipoMatricula = 1;
+                //O nome
+                int letra = 0;
+                while(professor[iContador].nome[letra] != '\0')
+                {
+                    pessoa[kContador].nome[letra] = professor[iContador].nome[letra];
+                    letra++;
+                }
+                pessoa[kContador].nome[letra] = '\0';
+                //A data
+                pessoa[kContador].data[1] = mesComparar;
+                pessoa[kContador].data[0] = (professor[iContador].dataNasc[0] - '0') * 10;
+                pessoa[kContador].data[0] += professor[iContador].dataNasc[1] - '0';
+                kContador++;
             }
-            pessoaListada[iContador + cadastrosComSucessoAluno].nome[indiceCaracter] = '\0';
-            //Decompor e listar a data
-            indiceCaracter = 3;
-            casaAlgarismo = 10;
-            compararMes = 0;
-            while(professor[iContador].dataNasc[indiceCaracter] != '/')
-            {
-                compararMes += (professor[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
-                casaAlgarismo /= 10;
-                indiceCaracter++;
-            }
-            pessoaListada[iContador + cadastrosComSucessoAluno].listarData[1] = compararMes;
-            //****************
-            indiceCaracter = 0;
-            casaAlgarismo = 10;
-            compararDia = 0;
-            while(professor[iContador].dataNasc[indiceCaracter] != '/')
-            {
-                compararDia += (professor[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
-                casaAlgarismo /= 10;
-                indiceCaracter++;
-            }
-            pessoaListada[iContador + cadastrosComSucessoAluno].listarData[0] = compararDia;
-            
-            iContador++; 
+            iContador++;   
         }
-        
-        /*Listar por dia mês*/
-        iContador = 0;
-        int jContador;
-        int auxiliar;
-        int totalDeCadastros = cadastrosComSucessoAluno + cadastrosComSucessoProf;
-        char nomeTemp[TAM_NOME];
-        while(iContador < totalDeCadastros)
+        int totalAchado = kContador;
+        //Ordenar por dia
+        for(kContador = 0; kContador < totalAchado; kContador++)
         {
-            jContador = iContador + 1;
-            while(jContador < totalDeCadastros)
+            for(iContador = kContador + 1; iContador < totalAchado; iContador++)
             {
-                if(pessoaListada[iContador].listarData[0] < pessoaListada[jContador].listarData[0])
+                if(pessoa[kContador].data[0] > pessoa[iContador].data[0])
                 {
-                    //Trocar tipo
-                    auxiliar = pessoaListada[iContador].tipoMatricula;
-                    pessoaListada[iContador].tipoMatricula = pessoaListada[jContador].tipoMatricula;
-                    pessoaListada[jContador].tipoMatricula = auxiliar;
-                    //Trocar nome
-                    indiceCaracter = 0;
-                    while(pessoaListada[iContador].nome[indiceCaracter] != '\0')
+                    int auxiliar;
+                    //Tipo
+                    auxiliar = pessoa[kContador].tipoMatricula;
+                    pessoa[kContador].tipoMatricula = pessoa[iContador].tipoMatricula;
+                    pessoa[iContador].tipoMatricula = auxiliar;
+                    //Nome
+                    char nomeTemp[TAM_NOME];
+                    int letra = 0;
+                    while(pessoa[kContador].nome[letra] != '\0')
                     {
-                        nomeTemp[indiceCaracter] = pessoaListada[iContador].nome[indiceCaracter];
-                        indiceCaracter++;
+                        nomeTemp[letra] = pessoa[kContador].nome[letra];
+                        letra++;
                     }
-                    nomeTemp[indiceCaracter - 1] = '\0';
-                    indiceCaracter = 0;
-                    while(pessoaListada[jContador].nome[indiceCaracter] != '\0')
+                    nomeTemp[letra] = '\0';
+                    letra = 0;
+                    while(pessoa[iContador].nome[letra] != '\0')
                     {
-                        pessoaListada[iContador].nome[indiceCaracter] = pessoaListada[jContador].nome[indiceCaracter];
-                        indiceCaracter++;
+                        pessoa[kContador].nome[letra] = pessoa[iContador].nome[letra];
+                        letra++;
                     }
-                    pessoaListada[iContador].nome[indiceCaracter - 1] = '\0';
-                    indiceCaracter = 0;
-                    while(nomeTemp[indiceCaracter] != '\0')
+                    pessoa[kContador].nome[letra] = '\0';
+                    letra = 0;
+                    while(nomeTemp[letra] != '\0')
                     {
-                        pessoaListada[jContador].nome[indiceCaracter] = nomeTemp[indiceCaracter];
-                        indiceCaracter++;
+                        pessoa[iContador].nome[letra] = nomeTemp[letra];
+                        letra++;
                     }
-                    pessoaListada[jContador].nome[indiceCaracter - 1] = '\0';
-                    //Trocar datas
-                    auxiliar = pessoaListada[iContador].listarData[0];
-                    pessoaListada[iContador].listarData[0] = pessoaListada[jContador].listarData[0];
-                    pessoaListada[jContador].listarData[0] = auxiliar;
-                    auxiliar = pessoaListada[iContador].listarData[1];
-                    pessoaListada[iContador].listarData[1] = pessoaListada[jContador].listarData[1];
-                    pessoaListada[jContador].listarData[1] = auxiliar;
+                    pessoa[iContador].nome[letra] = '\0';
+                    //Data
+                    auxiliar = pessoa[kContador].data[0];
+                    pessoa[kContador].data[0] = pessoa[iContador].data[0];
+                    pessoa[iContador].data[0] = auxiliar;
+                    auxiliar = pessoa[kContador].data[1];
+                    pessoa[kContador].data[1] = pessoa[iContador].data[1];
+                    pessoa[iContador].data[1] = auxiliar;
                 }
-                if(pessoaListada[iContador].listarData[1] < pessoaListada[jContador].listarData[1])
-                {
-                    //Trocar tipo
-                    auxiliar = pessoaListada[iContador].tipoMatricula;
-                    pessoaListada[iContador].tipoMatricula = pessoaListada[jContador].tipoMatricula;
-                    pessoaListada[jContador].tipoMatricula = auxiliar;
-                    //Trocar nome
-                    indiceCaracter = 0;
-                    while(pessoaListada[iContador].nome[indiceCaracter] != '\0')
-                    {
-                        nomeTemp[indiceCaracter] = pessoaListada[iContador].nome[indiceCaracter];
-                        indiceCaracter++;
-                    }
-                    nomeTemp[indiceCaracter - 1] = '\0';
-                    indiceCaracter = 0;
-                    while(pessoaListada[jContador].nome[indiceCaracter] != '\0')
-                    {
-                        pessoaListada[iContador].nome[indiceCaracter] = pessoaListada[jContador].nome[indiceCaracter];
-                        indiceCaracter++;
-                    }
-                    pessoaListada[iContador].nome[indiceCaracter - 1] = '\0';
-                    indiceCaracter = 0;
-                    while(nomeTemp[indiceCaracter] != '\0')
-                    {
-                        pessoaListada[jContador].nome[indiceCaracter] = nomeTemp[indiceCaracter];
-                        indiceCaracter++;
-                    }
-                    pessoaListada[jContador].nome[indiceCaracter - 1] = '\0';
-                    //Trocar datas
-                    auxiliar = pessoaListada[iContador].listarData[0];
-                    pessoaListada[iContador].listarData[0] = pessoaListada[jContador].listarData[0];
-                    pessoaListada[jContador].listarData[0] = auxiliar;
-                    auxiliar = pessoaListada[iContador].listarData[1];
-                    pessoaListada[iContador].listarData[1] = pessoaListada[jContador].listarData[1];
-                    pessoaListada[jContador].listarData[1] = auxiliar;
-                }
-                jContador++;
             }
-            iContador++;
         }
-
-        
-        /*Busca pela lista do mês*/
-        
-        iContador = 0;
-        int achou = 0;
-        while(pessoaListada[iContador].listarData[1] != mesProcurado || iContador < totalDeCadastros)
+        //Ordenar por mês
+        for(kContador = 0; kContador < totalAchado; kContador++)
         {
-            iContador++;
+            for(iContador = kContador + 1; iContador < totalAchado; iContador++)
+            {
+                if(pessoa[kContador].data[1] > pessoa[iContador].data[1])
+                {
+                    int auxiliar;
+                    //Tipo
+                    auxiliar = pessoa[kContador].tipoMatricula;
+                    pessoa[kContador].tipoMatricula = pessoa[iContador].tipoMatricula;
+                    pessoa[iContador].tipoMatricula = auxiliar;
+                    //Nome
+                    char nomeTemp[TAM_NOME];
+                    int letra = 0;
+                    while(pessoa[kContador].nome[letra] != '\0')
+                    {
+                        nomeTemp[letra] = pessoa[kContador].nome[letra];
+                        letra++;
+                    }
+                    nomeTemp[letra] = '\0';
+                    letra = 0;
+                    while(pessoa[iContador].nome[letra] != '\0')
+                    {
+                        pessoa[kContador].nome[letra] = pessoa[iContador].nome[letra];
+                        letra++;
+                    }
+                    pessoa[kContador].nome[letra] = '\0';
+                    letra = 0;
+                    while(nomeTemp[letra] != '\0')
+                    {
+                        pessoa[iContador].nome[letra] = nomeTemp[letra];
+                        letra++;
+                    }
+                    pessoa[iContador].nome[letra] = '\0';
+                    //Data
+                    auxiliar = pessoa[kContador].data[0];
+                    pessoa[kContador].data[0] = pessoa[iContador].data[0];
+                    pessoa[iContador].data[0] = auxiliar;
+                    auxiliar = pessoa[kContador].data[1];
+                    pessoa[kContador].data[1] = pessoa[iContador].data[1];
+                    pessoa[iContador].data[1] = auxiliar;
+                }
+            }
         }
-        if(pessoaListada[iContador].listarData[1] == mesProcurado)
-            achou = 1;
-        
-        if(achou == 1)
+        //Exibir lista
+        for(kContador = 0; kContador < totalAchado; kContador++)
         {
-            //Listagem do mês
-            switch(mesProcurado)
+            if(pessoa[kContador].tipoMatricula == 0)
             {
-                case 1: printf("JANEIRO:\n"); break;
-                case 2: printf("FEVEREIRO:\n"); break;
-                case 3: printf("MARCO:\n"); break;
-                case 4: printf("ABRIL:\n"); break;
-                case 5: printf("MAIO:\n"); break;
-                case 6: printf("JUNHO:\n"); break;
-                case 7: printf("JULHO:\n"); break;
-                case 8: printf("AGOSTO:\n"); break;
-                case 9: printf("SETEMBRO:\n"); break;
-                case 10: printf("OUTUBRO:\n"); break;
-                case 11: printf("NOVEMBRO:\n"); break;
-                case 12: printf("DEZEMBRO:\n"); break;
+                printf("- %s - ALUNO - DATA: %d / %d \n", pessoa[kContador].nome, pessoa[kContador].data[0], pessoa[kContador].data[1]);
             }
-            while(pessoaListada[iContador].listarData[1] == mesProcurado)
+            else
             {
-                if(pessoaListada[iContador].tipoMatricula == 0)
-                {
-                    printf("- %s - ALUNO - %d / %d\n", pessoaListada[iContador].nome, pessoaListada[iContador].listarData[0], pessoaListada[iContador].listarData[1]);
-                }
-                    
-                else
-                {
-                    printf("- %s - PROFESSOR - %d / %d\n", pessoaListada[iContador].nome, pessoaListada[iContador].listarData[0], pessoaListada[iContador].listarData[1]);
-                }
-                iContador++;
+                printf("- %s - PROFESSOR - DATA: %d / %d \n", pessoa[kContador].nome, pessoa[kContador].data[0], pessoa[kContador].data[1]);
             }
         }
-        else
-            printf("NAO EXISTEM ANIVERSARIANTES NO MES PROCURADO\n");
     }
     else
         printf("INPUT INVALIDO\n");
@@ -877,12 +818,10 @@ void aniversariantesMes()
 void buscarPessoas()
 {
     char inputNome[TAM_NOME];
-    printf("Digite o nome da pessoa procurada\n");
+    printf("Digite o nome da pessoa procurada\n::");
     scanf("%50[^\n]%*c", inputNome);
-    //int totalDeCadastros = cadastrosComSucessoProf + cadastrosComSucessoAluno;
     int iContador = 0;
     int jContador;
-    int kContador;
     int achouSemelhante;
     int tamNome;
     while(iContador < cadastrosComSucessoAluno)

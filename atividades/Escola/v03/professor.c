@@ -120,7 +120,6 @@ void validarNomeProf(char inputNome[])
 {   
     int tamanhoInputNome = 0;
     while(inputNome[tamanhoInputNome] != '\0') tamanhoInputNome++;
-    tamanhoInputNome--;
     int tamanhoNomeReal = 0;
     int contador = 0;
     while(inputNome[contador] != '\0')
@@ -409,10 +408,12 @@ void inserirProf()
 void inserirNomeProf()
 {
     printf("Digite o nome do(a) professor(a): ");
-    fgets(professor[cadastrosComSucessoProf].nome, TAM_NOME, stdin);
+    /*scanf("%50[^\n]%*c", professor[cadastrosComSucessoProf].nome);
+    setbuf(stdin, NULL);*/
+    fgets(professor[cadastrosComSucessoProf].nome, sizeof(professor[cadastrosComSucessoProf].nome), stdin);
     int contaCaracter = 0;
     while(professor[cadastrosComSucessoProf].nome[contaCaracter] != '\n')contaCaracter++;
-    professor[cadastrosComSucessoProf].nome[contaCaracter] = '\n';
+    professor[cadastrosComSucessoProf].nome[contaCaracter] = '\0';
     setbuf(stdin, NULL);
 }
 void inserirSexoProf()
