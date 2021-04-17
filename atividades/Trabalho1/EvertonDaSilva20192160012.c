@@ -87,15 +87,42 @@ int q1(char *data)
     int datavalida = 1;
 
     //quebrar a string data em strings sDia, sMes, sAno
-    char *sDia;
-    char *sMes;
-    char *sAno;
-    
-    int indiceLetra;
-    for(indiceLetra = 0; data[indiceLetra] != '\0'; indiceLetra++)
+    char sDia[3];
+    char sMes[3];
+    char sAno[5];
+    int tamData = 0;
+    int indiceLetra = 0;
+    while( data[tamData] != '/' )
     {
-        
+        sDia[indiceLetra] = data[tamData];
+        indiceLetra++;
+        tamData++;
     }
+    sDia[indiceLetra] = '\0';
+    
+    tamData++;
+    indiceLetra = 0;
+    while( indiceLetra < 2 )
+    {
+        sMes[indiceLetra] = data[tamData];
+        indiceLetra++;
+        tamData++;
+    }
+    sMes[indiceLetra] = '\0';
+    
+    tamData++;
+    indiceLetra = 0;
+    while( indiceLetra < 5 )
+    {
+        sAno[indiceLetra] = data[tamData];
+        indiceLetra++;
+        tamData++;
+    }
+    sAno[indiceLetra] = '\0';
+        
+    printf("Dia %s\n", sDia);
+    printf("Mes %s\n", sMes);
+    printf("Ano %s\n", sAno);
 
     //converter sDia, sMes e sAno em inteiros (ex: atoi)
 
