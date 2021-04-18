@@ -86,51 +86,92 @@ int q1(char *data)
 {
     int datavalida = 1;
 
-    //quebrar a string data em strings sDia, sMes, sAno
-    char sDia[3];
-    char sMes[3];
-    char sAno[5];
+    char dataDia[3];
+    char dataMes[3];
+    char dataAno[5];
+    int dataInt[3];
     int tamData = 0;
-    int indiceLetra = 0;
-    while( data[tamData] != '/' )
-    {
-        sDia[indiceLetra] = data[tamData];
-        indiceLetra++;
-        tamData++;
-    }
-    sDia[indiceLetra] = '\0';
+    int contaDiaNumero = 0;
+    int contaMesNumero = 0;
+    int contaAnoNumero = 0;
+    int contaCaracterBarra = 0;
     
-    tamData++;
-    indiceLetra = 0;
-    while( indiceLetra < 2 )
+    while(data[tamData] != '\0')
     {
-        sMes[indiceLetra] = data[tamData];
-        indiceLetra++;
+        if(tamData != 2 && tamData != 5)
+        {
+            if(tamData < 2)
+            {
+                if(data[tamData] >= '0' && data[tamData] <= '9')
+                    contaDiaNumero++;
+            }
+            if(tamData > 2 && tamData < 5)
+            {
+                if(data[tamData] >= '0' && data[tamData] <= '9')
+                    contaMesNumero++;
+            }
+            if(tamData > 5 && tamData < 10)
+            {
+                if(data[tamData] >= '0' && data[tamData] <= '9')
+                    contaAnoNumero++;
+            }
+        }
+        if ((tamData == 2 || tamData == 5 )&& data[tamData] == '/')
+        {
+            contaCaracterBarra++;
+        }
         tamData++;
     }
-    sMes[indiceLetra] = '\0';
-    
-    tamData++;
-    indiceLetra = 0;
-    while( indiceLetra < 5 )
+    if(contaDiaNumero != 2||contaMesNumero != 2||contaAnoNumero != 4||contaCaracterBarra != 2)
     {
-        sAno[indiceLetra] = data[tamData];
-        indiceLetra++;
-        tamData++;
-    }
-    sAno[indiceLetra] = '\0';
+        datavalida = 0;
+    }    
+    else
+    {
+        int iContador = 0;
+        int jContador = 0;
         
-    printf("Dia %s\n", sDia);
-    printf("Mes %s\n", sMes);
-    printf("Ano %s\n", sAno);
+        while( jContador < 2 )
+        {
+            dataDia[jContador] = data[iContador];
+            iContador++;
+            jContador++;
+        }
+        dataDia[jContador] = '\0';
+        dataInt[0] = (dataDia[0] - '0') * 10;
+        dataInt[0] += dataDia[1] - '0';
+        
+        iContador = 3;
+        jContador = 0;
+        while( jContador < 2 && data[iContador] != '/')
+        {
+            dataMes[jContador] = data[iContador];
+            iContador++;
+            jContador++;
+        }
+        dataMes[jContador] = '\0';
+        dataInt[1] = (dataMes[0] - '0') * 10;
+        dataInt[1] += dataMes[1] - '0';
+        
+        iContador = 6;
+        jContador = 0;
+        while( jContador < 4 && data[iContador] != '\0' )
+        {
+            dataAno[jContador] = data[iContador];
+            iContador++;
+            jContador++;
+        }
+        dataAno[jContador] = '\0';
+        dataInt[2] = (dataAno[0] - '0') * 1000;
+        dataInt[2] += (dataAno[1] - '0') * 100;
+        dataInt[2] += (dataAno[2] - '0') * 10;
+        dataInt[2] += (dataAno[3] - '0');
+        
+        
+        printf("Data %d / %d / %d\n", dataInt[0], dataInt[1], dataInt[2]);
+    }
 
-    //converter sDia, sMes e sAno em inteiros (ex: atoi)
-
-    //criar as variáveis iDia, iMes, iAno
-
-    //printf("%s\n", data);
-
-    if (datavalida)
+    if (datavalida == 1)
         return 1;
     else
         return 0;
