@@ -32,4 +32,4 @@ int q6(int numerobase, int numerobusca);
 
 /*Funções extras*/
 //Q1
-
+int verificarData(int arranjoData[]);
