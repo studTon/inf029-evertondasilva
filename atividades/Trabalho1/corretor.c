@@ -33,9 +33,9 @@ int main()
 {
     //testSomar();
     //testFatorial();
-    testQ1();
+    //testQ1();
     //testQ2();
-    //testQ3();
+    testQ3();
     //testQ4();
     //testQ5();
     //testQ6();
@@ -142,12 +142,13 @@ void testQ2()
 void testQ3()
 {
     char str[250];
-    strcpy(str, "Renato Lima Novais");
-    printf("%d\n", q3(str, 'a', 0) == 3);
-    printf("%d\n", q3(str, 'b', 0) == 0);
-    printf("%d\n", q3(str, 'l', 1) == 0);
-    printf("%d\n", q3(str, 'l', 0) == 1);
-    printf("%d\n", q3(str, 'L', 0) == 1);
+    strcpy(str, "Glória Pêral Náscar");
+    //printf("%d\n", q3(str, 'a', 0) == 3);
+    //printf("%d\n", q3(str, 'b', 0) == 0);
+    //printf("%d\n", q3(str, 'l', 1) == 0);
+    printf("%d\n", q3(str, 'l', 1) == 2);
+    printf("%d\n", q3(str, 'l', 0) == 2);
+    printf("%d\n", q3(str, 'L', 0) == 2);
 }
 
 void testQ4()

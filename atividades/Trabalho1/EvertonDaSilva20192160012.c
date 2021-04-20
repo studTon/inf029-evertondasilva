@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include "EvertonDaSilva20192160012.h"
 /*
 ## função utilizada para testes  ##
@@ -355,8 +356,47 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
  */
 int q3(char *texto, char c, int isCaseSensitive)
 {
-    int qtdOcorrencias = -1;
-
+    //printf("local %s\n", setlocale(LC_ALL, ""));
+    //setlocale(LC_ALL, "");
+    //printf("%s\n", texto);
+    int qtdOcorrencias = 0;
+    
+    if(isCaseSensitive == 1)
+    {
+        int iContador = 0;
+        while( texto[iContador] != '\0')
+        {
+            if(texto[iContador] == c)
+            {
+                qtdOcorrencias++;
+            }
+            iContador++;
+        }
+    }
+    else
+    {
+        int iContador = 0;
+        while( texto[iContador] != '\0')
+        {
+            if(c >= 'A' && c <= 'Z')
+            {
+                if(texto[iContador] == c || texto[iContador] == c + 32)
+                {
+                    qtdOcorrencias++;
+                }
+            }
+            
+            if(c >= 'a' && c <= 'z')
+            {
+                if(texto[iContador] == c || texto[iContador] == c - 32)
+                {
+                    qtdOcorrencias++;
+                }
+            }
+            iContador++;
+        }
+    }
+    //printf("qtd %d\n", qtdOcorrencias);
     return qtdOcorrencias;
 }
 
