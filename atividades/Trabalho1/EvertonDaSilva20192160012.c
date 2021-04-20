@@ -419,6 +419,31 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias = 0;
+    
+    int aux = numerobusca;
+    int tamanhoNum = 0;
+
+    printf("tam %d\n", tamanhoNum);
+    
+    aux = numerobase;
+    int potDez = 10;
+    int contadorLimite = 0;
+    while( (aux / 10) != 0 )
+    {
+        aux /= 10;
+        potDez *= 10;
+        contadorLimite++;
+        //printf("%d\n", aux);
+    }
+    printf("pot %d\n", potDez);
+    printf("cont %d\n", contadorLimite);
+    aux = numerobase;
+    /*
+    potAux = potDez;
+    potMenor = potDez % */
+    
+    
+    
     return qtdOcorrencias;
 }
