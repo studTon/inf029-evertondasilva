@@ -359,6 +359,8 @@ int q3(char *texto, char c, int isCaseSensitive)
     //printf("local %s\n", setlocale(LC_ALL, ""));
     //setlocale(LC_ALL, "");
     //printf("%s\n", texto);
+    //char l = 'á'
+    //printf("%c", l);
     int qtdOcorrencias = 0;
     
     if(isCaseSensitive == 1)

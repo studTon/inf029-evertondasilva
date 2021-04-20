@@ -141,6 +141,8 @@ void testQ2()
 
 void testQ3()
 {
+    //printf("local %s\n", setlocale(LC_ALL, ""));
+    //setlocale(LC_ALL, "");
     char str[250];
     strcpy(str, "Glória Pêral Náscar");
     //printf("%d\n", q3(str, 'a', 0) == 3);
