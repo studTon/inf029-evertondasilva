@@ -32,8 +32,8 @@ void testQ6();
 int main()
 {
     //testSomar();
-    testFatorial();
-    //testQ1();
+    //testFatorial();
+    testQ1();
     //testQ2();
     //testQ3();
     //testQ4();
@@ -70,6 +70,8 @@ void testQ1()
     char str[11];
     strcpy(str, "29/02/2015");
     printf("%d\n", q1(str) == 0);
+    strcpy(str, "18/03/2020");
+    printf("%d\n", q1(str) == 1);
     strcpy(str, "29/02/2012");
     printf("%d\n", q1(str) == 1);
     strcpy(str, "9/13/2014");
@@ -78,6 +80,10 @@ void testQ1()
     printf("%d\n", q1(str) == 0);
     strcpy(str, "/9/2014");
     printf("%d\n", q1(str) == 0);
+    strcpy(str, "//");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "1/1/01");
+    printf("%d\n", q1(str) == 1);
 }
 
 void testQ2()

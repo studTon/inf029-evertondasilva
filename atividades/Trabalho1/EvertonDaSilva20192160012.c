@@ -22,7 +22,8 @@
 // #################################################
 
 #include <stdio.h>
-
+#include <stdlib.h>
+#include "EvertonDaSilva20192160012.h"
 /*
 ## função utilizada para testes  ##
 
@@ -84,29 +85,226 @@ int fatorial(int x)
  */
 int q1(char *data)
 {
-    int datavalida = 1;
-
-    //quebrar a string data em strings sDia, sMes, sAno
-    char *sDia;
-    char *sMes;
-    char *sAno;
+    int datavalida;
+    int bomInput = 0;
+    int tamData = 0;
     
-    int indiceLetra;
-    for(indiceLetra = 0; data[indiceLetra] != '\0'; indiceLetra++)
+    int contaCorretos = 0;
+    while(data[tamData] != '/')
     {
-        
+        if(data[tamData] >= '0' && data[tamData] <= '9')
+        {
+            contaCorretos++;
+        }
+        tamData++;
     }
 
-    //converter sDia, sMes e sAno em inteiros (ex: atoi)
+    if(contaCorretos >= 1 && contaCorretos <= 2)
+    {
+        bomInput++;
+    }
+    
+    tamData++;
+    contaCorretos = 0;
+    while(data[tamData] != '/')
+    {
+        if(data[tamData] >= '0' && data[tamData] <= '9')
+        {
+            contaCorretos++;
+        }
+        tamData++;
+    }
+    if(contaCorretos >= 1 && contaCorretos <= 2)
+    {
+        bomInput++;
+    }
 
-    //criar as variáveis iDia, iMes, iAno
+    tamData++;
+    contaCorretos = 0;
+    while(data[tamData] != '\0' || tamData < 10)
+    {
+        if(data[tamData] >= '0' && data[tamData] <= '9')
+        {
+            contaCorretos++;
+        }
+        tamData++;
+    }
+    if(contaCorretos >= 2 && contaCorretos <= 4)
+    {
+        bomInput++;
+    }
+    
+    contaCorretos = 0;
+    tamData = 0;
+    while( data[tamData] != '\0' || tamData < 10)
+    {
+        if (data[tamData] == '/' && (tamData >= 1 && tamData <= 5))
+        {
+            contaCorretos++;
+        }
+        tamData++;
+    }
 
-    //printf("%s\n", data);
-
-    if (datavalida)
-        return 1;
+    if( contaCorretos == 2 )
+    {
+        bomInput++;
+    }
+    
+    
+    if(bomInput == 4)
+    {
+        int dataInt[3];
+        
+        dataInt[0] = decomporDataDia(data);
+        dataInt[1] = decomporDataMes(data);
+        dataInt[2] = decomporDataAno(data);
+        
+        datavalida = verificarData(dataInt);
+    }    
     else
-        return 0;
+    {
+        datavalida = 0; 
+    }
+
+    return datavalida;
+}
+
+int decomporDataDia(char data[])
+{
+    char dataDia[3];
+    int dataInt;
+
+    int iContador = 0;
+    int jContador = 0;
+
+    while( data[iContador] != '/' )
+    {
+        dataDia[jContador] = data[iContador];
+        iContador++;
+        jContador++;
+    }
+    dataDia[jContador] = '\0';
+    if( jContador == 2 )
+    {
+        dataInt = (dataDia[0] - '0') * 10;
+        dataInt += dataDia[1] - '0';    
+    }
+    else
+        dataInt = dataDia[0] - '0';
+
+    return dataInt;
+}
+int decomporDataMes(char data[])
+{
+    int dataInt;
+    char dataMes[3];
+    
+    int iContador = 0;
+    while(data[iContador] != '/') iContador++;
+    iContador++;
+    int jContador = 0;
+    while( data[iContador] != '/')
+    {
+        dataMes[jContador] = data[iContador];
+        iContador++;
+        jContador++;
+    }
+    dataMes[jContador] = '\0';
+    if( jContador == 2 )
+    {
+        dataInt = (dataMes[0] - '0') * 10;
+        dataInt += dataMes[1] - '0';    
+    }
+    else
+        dataInt = dataMes[0] - '0';
+    
+    return dataInt;
+}
+
+int decomporDataAno(char data[])
+{
+    char dataAno[5];
+    int dataInt;
+    int iContador = 0;
+    int contaBarras = 0;
+    while(contaBarras < 2)
+    {
+        if(data[iContador] == '/')
+            contaBarras++;
+        iContador++;
+    }
+    int jContador = 0;
+    while( jContador < 4 || dataAno[jContador] != '\0')
+    {
+        dataAno[jContador] = data[iContador];
+        iContador++;
+        jContador++;
+    }
+    dataAno[jContador] = '\0';
+
+    if( jContador == 3 )
+    {
+        dataInt = atoi(dataAno);
+    }
+    else   
+    {
+        dataInt = atoi(dataAno) + 2000;
+    }
+   
+    return dataInt;
+}
+
+int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
+{
+    
+    int bissexto = 0;
+    if((arranjoData[2] % 400 == 0) || ((arranjoData[2] % 4 == 0) && (arranjoData[2] % 100 != 0)))
+    {
+        bissexto = 1;
+    }
+    
+    if
+    (arranjoData[1] == 1||arranjoData[1] == 3||arranjoData[1] == 5||arranjoData[1] == 7||
+     arranjoData[1] == 8||arranjoData[1] == 10||arranjoData[1] == 12)
+    {
+        if(arranjoData[0] >= 1 && arranjoData[0] <= 31)
+            return 1;
+        else
+            return 0;
+    }
+    if
+    (arranjoData[1] == 4||arranjoData[1] == 6||arranjoData[1] == 9||arranjoData[1] == 11)
+    {
+        if(arranjoData[0] >= 1 && arranjoData[0] <= 30)
+            return 1;
+        else
+            return 0;
+    }
+
+
+    if(bissexto == 1)
+    {
+        if(arranjoData[1] == 2 && (arranjoData[0] >= 1 && arranjoData[0] <= 29))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else
+    if(bissexto == 0)
+    {
+        if(arranjoData[1] == 2 && (arranjoData[0] >= 1 && arranjoData[0] <= 28))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }
 
 /*
