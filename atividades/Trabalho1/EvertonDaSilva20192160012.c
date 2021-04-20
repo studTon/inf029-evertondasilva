@@ -84,33 +84,80 @@ int fatorial(int x)
  */
 int q1(char *data)
 {
-    int datavalida;
-
-    char *dataDia;
-    char *dataMes;
-    char *dataAno;
-    int dataInt[3];
+    int datavalida = 0;
+    int bomInput = 0;
     int tamData = 0;
-    int contaDiaNumero = 0;
-    int contaMesNumero = 0;
-    int contaAnoNumero = 0;
-    int contaCaracterBarra = 0;
     
-    while(data[tamData] != '\0')
+    int contaCorretos = 0;
+    while(data[tamData] != '/')
     {
-        //Falta editar
-        if (data[tamData] == '/' && (tamData == 1 ||tamData == 2 ||tamData == 3 ||tamData == 4 ||tamData == 5))
+        if(data[tamData] >= '0' && data[tamData] <= '9')
         {
-            contaCaracterBarra++;
+            contaCorretos++;
         }
         tamData++;
     }
-    if(contaDiaNumero != 2||contaMesNumero != 2||contaAnoNumero != 4||contaCaracterBarra != 2)
+
+    if(contaCorretos >= 1 && contaCorretos <= 2)
     {
-        datavalida = 0;
-    }    
-    else
+        bomInput++;
+    }
+    
+    tamData++;
+    contaCorretos = 0;
+    while(data[tamData] != '/')
     {
+        if(data[tamData] >= '0' && data[tamData] <= '9')
+        {
+            contaCorretos++;
+        }
+        tamData++;
+    }
+    if(contaCorretos >= 1 && contaCorretos <= 2)
+    {
+        bomInput++;
+    }
+
+    tamData++;
+    contaCorretos = 0;
+    while(data[tamData] != '\0' || tamData < 10)
+    {
+        if(data[tamData] >= '0' && data[tamData] <= '9')
+        {
+            contaCorretos++;
+        }
+        tamData++;
+    }
+    if(contaCorretos >= 2 && contaCorretos <= 4)
+    {
+        bomInput++;
+    }
+    
+    contaCorretos = 0;
+    tamData = 0;
+    while( data[tamData] != '\0' || tamData < 10)
+    {
+        if (data[tamData] == '/' && (tamData >= 1 && tamData <= 5))
+        {
+            contaCorretos++;
+        }
+        tamData++;
+    }
+
+    if( contaCorretos == 2 )
+    {
+        bomInput++;
+    }
+    
+    //printf("Input %d\n", bomInput);
+    
+    if(bomInput == 4)
+    {
+        char dataDia[3];
+        char dataMes[3];
+        char dataAno[5];
+        int dataInt[3];
+        
         int iContador = 0;
         int jContador = 0;
         
@@ -128,9 +175,9 @@ int q1(char *data)
         }
         else
             dataInt[0] = dataDia[0] - '0';
+        //printf("jD %d\n", jContador);
         
-        
-        iContador = 3;
+        iContador++;
         jContador = 0;
         while( data[iContador] != '/')
         {
@@ -146,11 +193,11 @@ int q1(char *data)
         }
         else
             dataInt[1] = dataMes[0] - '0';
+        //printf("jM %d\n", jContador);
         
-        
-        iContador = 6;
+        iContador++;
         jContador = 0;
-        while( jContador < 4 && data[iContador] != '\0' )
+        while( jContador < 4 || data[iContador] != '\0' )
         {
             dataAno[jContador] = data[iContador];
             iContador++;
@@ -164,23 +211,26 @@ int q1(char *data)
             dataInt[2] += (dataAno[2] - '0') * 10;
             dataInt[2] += (dataAno[3] - '0');    
         }
-        else
-        if( jContador == 3 )
-        {
-            dataInt[2] = (dataAno[0] - '0') * 100;
-            dataInt[2] += (dataAno[1] - '0') * 10;
-            dataInt[2] += (dataAno[2] - '0');
-        }
-        else
-        if( jContador == 2 )
-        {
-            dataInt[2] = (dataAno[0] - '0') * 10;
-            dataInt[2] += (dataAno[1] - '0');
-        }
+        else if( jContador == 3 )
+                {
+                    dataInt[2] = (dataAno[0] - '0') * 100;
+                    dataInt[2] += (dataAno[1] - '0') * 10;
+                    dataInt[2] += (dataAno[2] - '0');
+                }
+                else if( jContador == 2 )
+                        {
+                            dataInt[2] = (dataAno[0] - '0') * 10;
+                            dataInt[2] += (dataAno[1] - '0');
+                        }
+        //printf("jA %d\n", jContador);
         
         //printf("Data %d / %d / %d\n", dataInt[0], dataInt[1], dataInt[2]);
         
         datavalida = verificarData(dataInt);
+    }    
+    else
+    {
+        datavalida = 0; 
     }
 
     if (datavalida == 1)
