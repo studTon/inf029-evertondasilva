@@ -33,3 +33,6 @@ int q6(int numerobase, int numerobusca);
 /*Funções extras*/
 //Q1
 int verificarData(int arranjoData[]);
+int decomporDataDia(char data[]);
+int decomporDataMes(char data[]);
+int decomporDataAno(char data[]);

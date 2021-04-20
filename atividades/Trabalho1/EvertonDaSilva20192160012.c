@@ -22,6 +22,7 @@
 // #################################################
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "EvertonDaSilva20192160012.h"
 /*
 ## função utilizada para testes  ##
@@ -84,7 +85,7 @@ int fatorial(int x)
  */
 int q1(char *data)
 {
-    int datavalida = 0;
+    int datavalida;
     int bomInput = 0;
     int tamData = 0;
     
@@ -149,82 +150,14 @@ int q1(char *data)
         bomInput++;
     }
     
-    //printf("Input %d\n", bomInput);
     
     if(bomInput == 4)
     {
-        char dataDia[3];
-        char dataMes[3];
-        char dataAno[5];
         int dataInt[3];
         
-        int iContador = 0;
-        int jContador = 0;
-        
-        while( data[iContador] != '/' )
-        {
-            dataDia[jContador] = data[iContador];
-            iContador++;
-            jContador++;
-        }
-        dataDia[jContador] = '\0';
-        if( jContador == 2 )
-        {
-            dataInt[0] = (dataDia[0] - '0') * 10;
-            dataInt[0] += dataDia[1] - '0';    
-        }
-        else
-            dataInt[0] = dataDia[0] - '0';
-        //printf("jD %d\n", jContador);
-        
-        iContador++;
-        jContador = 0;
-        while( data[iContador] != '/')
-        {
-            dataMes[jContador] = data[iContador];
-            iContador++;
-            jContador++;
-        }
-        dataMes[jContador] = '\0';
-        if( jContador == 2 )
-        {
-            dataInt[1] = (dataMes[0] - '0') * 10;
-            dataInt[1] += dataMes[1] - '0';    
-        }
-        else
-            dataInt[1] = dataMes[0] - '0';
-        //printf("jM %d\n", jContador);
-        
-        iContador++;
-        jContador = 0;
-        while( jContador < 4 || data[iContador] != '\0' )
-        {
-            dataAno[jContador] = data[iContador];
-            iContador++;
-            jContador++;
-        }
-        dataAno[jContador] = '\0';
-        if( jContador == 4 )
-        {
-            dataInt[2] = (dataAno[0] - '0') * 1000;
-            dataInt[2] += (dataAno[1] - '0') * 100;
-            dataInt[2] += (dataAno[2] - '0') * 10;
-            dataInt[2] += (dataAno[3] - '0');    
-        }
-        else if( jContador == 3 )
-                {
-                    dataInt[2] = (dataAno[0] - '0') * 100;
-                    dataInt[2] += (dataAno[1] - '0') * 10;
-                    dataInt[2] += (dataAno[2] - '0');
-                }
-                else if( jContador == 2 )
-                        {
-                            dataInt[2] = (dataAno[0] - '0') * 10;
-                            dataInt[2] += (dataAno[1] - '0');
-                        }
-        //printf("jA %d\n", jContador);
-        
-        //printf("Data %d / %d / %d\n", dataInt[0], dataInt[1], dataInt[2]);
+        dataInt[0] = decomporDataDia(data);
+        dataInt[1] = decomporDataMes(data);
+        dataInt[2] = decomporDataAno(data);
         
         datavalida = verificarData(dataInt);
     }    
@@ -233,14 +166,97 @@ int q1(char *data)
         datavalida = 0; 
     }
 
-    if (datavalida == 1)
-        return 1;
+    return datavalida;
+}
+
+int decomporDataDia(char data[])
+{
+    char dataDia[3];
+    int dataInt;
+
+    int iContador = 0;
+    int jContador = 0;
+
+    while( data[iContador] != '/' )
+    {
+        dataDia[jContador] = data[iContador];
+        iContador++;
+        jContador++;
+    }
+    dataDia[jContador] = '\0';
+    if( jContador == 2 )
+    {
+        dataInt = (dataDia[0] - '0') * 10;
+        dataInt += dataDia[1] - '0';    
+    }
     else
-        return 0;
+        dataInt = dataDia[0] - '0';
+
+    return dataInt;
+}
+int decomporDataMes(char data[])
+{
+    int dataInt;
+    char dataMes[3];
+    
+    int iContador = 0;
+    while(data[iContador] != '/') iContador++;
+    iContador++;
+    int jContador = 0;
+    while( data[iContador] != '/')
+    {
+        dataMes[jContador] = data[iContador];
+        iContador++;
+        jContador++;
+    }
+    dataMes[jContador] = '\0';
+    if( jContador == 2 )
+    {
+        dataInt = (dataMes[0] - '0') * 10;
+        dataInt += dataMes[1] - '0';    
+    }
+    else
+        dataInt = dataMes[0] - '0';
+    
+    return dataInt;
+}
+
+int decomporDataAno(char data[])
+{
+    char dataAno[5];
+    int dataInt;
+    int iContador = 0;
+    int contaBarras = 0;
+    while(contaBarras < 2)
+    {
+        if(data[iContador] == '/')
+            contaBarras++;
+        iContador++;
+    }
+    int jContador = 0;
+    while( jContador < 4 || dataAno[jContador] != '\0')
+    {
+        dataAno[jContador] = data[iContador];
+        iContador++;
+        jContador++;
+    }
+    dataAno[jContador] = '\0';
+
+    if( jContador == 3 )
+    {
+        dataInt = atoi(dataAno);
+    }
+    else   
+    {
+        dataInt = atoi(dataAno) + 2000;
+    }
+   
+    return dataInt;
 }
 
 int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
 {
+    
     int bissexto = 0;
     if((arranjoData[2] % 400 == 0) || ((arranjoData[2] % 4 == 0) && (arranjoData[2] % 100 != 0)))
     {
@@ -264,8 +280,8 @@ int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == a
         else
             return 0;
     }
-        
-    
+
+
     if(bissexto == 1)
     {
         if(arranjoData[1] == 2 && (arranjoData[0] >= 1 && arranjoData[0] <= 29))
