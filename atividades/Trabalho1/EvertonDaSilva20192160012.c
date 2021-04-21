@@ -423,8 +423,16 @@ int q6(int numerobase, int numerobusca)
     
     int aux = numerobusca;
     int tamanhoNum = 0;
-
-    printf("tam %d\n", tamanhoNum);
+    
+    while(aux != 0)
+    {   
+        if(aux % 10 > 0)
+        {
+            tamanhoNum++;
+        }
+        aux /= 10;
+    }
+    
     
     aux = numerobase;
     int potDez = 10;
@@ -434,14 +442,30 @@ int q6(int numerobase, int numerobusca)
         aux /= 10;
         potDez *= 10;
         contadorLimite++;
-        //printf("%d\n", aux);
     }
-    printf("pot %d\n", potDez);
-    printf("cont %d\n", contadorLimite);
+    
+    int divTam;
+    int iContador;
+    for(divTam = 1, iContador = 0; iContador < tamanhoNum; divTam *= 10, iContador++ );
+    
     aux = numerobase;
-    /*
-    potAux = potDez;
-    potMenor = potDez % */
+    int divDez = divTam / divTam;
+    //printf("tam %d\n", divDez);
+    int dezFixo = divTam;
+    //printf("dec-fixo %d\n", dezFixo);
+    int comparador;
+    while( divTam <= potDez )
+    {
+        comparador = ((aux % divTam) - (aux % divDez)) / divDez;
+        //printf("- %d\n", comparador);
+        if( comparador == numerobusca )
+        {
+            qtdOcorrencias++;
+        }
+            
+        divTam *= dezFixo;
+        divDez *= dezFixo;
+    }
     
     
     
