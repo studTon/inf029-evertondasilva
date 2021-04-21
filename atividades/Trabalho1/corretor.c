@@ -1,27 +1,27 @@
 // #################################################
 //  Instituto Federal da Bahia
 //  Salvador - BA
-//  Curso de AnÃ¡lise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
-//  Disciplina: INF029 - LaboratÃ³rio de ProgramaÃ§Ã£o
+//  Curso de Análise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
+//  Disciplina: INF029 - Laboratório de Programação
 //  Professor: Renato Novais - renato@ifba.edu.br
 
-//  ----- OrientaÃ§Ãµes gerais -----
-//  DescriÃ§Ã£o: esse arquivo contÃ©m exemplos de testes das questÃµes do trabalho.
+//  ----- Orientações gerais -----
+//  Descrição: esse arquivo contém exemplos de testes das questões do trabalho.
 //  o aluno pode incrementar os testes
 
-//  Copyright Â© 2016 Renato Novais. All rights reserved.
-// Ãšltima atualizaÃ§Ã£o: 19/08/2016 - 12/12/2018
+//  Copyright © 2016 Renato Novais. All rights reserved.
+// Última atualização: 19/08/2016 - 12/12/2018
 
 // #################################################
 
 #include <stdio.h>
 #include <string.h>
-
+#include <locale.h>
 //renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.c
 #include "EvertonDaSilva20192160012.h"
 
-void testSomar();    //funÃ§Ã£o utilizada para testes
-void testFatorial(); //funÃ§Ã£o utilizada para testes
+void testSomar();    //função utilizada para testes
+void testFatorial(); //função utilizada para testes
 void testQ1();
 void testQ2();
 void testQ3();
@@ -35,10 +35,10 @@ int main()
     //testFatorial();
     //testQ1();
     //testQ2();
-    //testQ3();
+    testQ3();
     //testQ4();
     //testQ5();
-    testQ6();
+    //testQ6();
 }
 
 int mainData()
@@ -141,13 +141,16 @@ void testQ2()
 
 void testQ3()
 {
+    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_CTYPE, "Portuguese");
+    setlocale(LC_NUMERIC, "Portuguese");
     char str[250];
-    strcpy(str, "Renato Lima Novais");
+    strcpy(str, "Glória Limá Gôuveà");
     printf("%d\n", q3(str, 'a', 0) == 3);
     printf("%d\n", q3(str, 'b', 0) == 0);
-    printf("%d\n", q3(str, 'l', 1) == 0);
-    printf("%d\n", q3(str, 'l', 0) == 1);
-    printf("%d\n", q3(str, 'L', 0) == 1);
+    printf("%d\n", q3(str, 'l', 1) == 1);
+    printf("%d\n", q3(str, 'l', 0) == 2);
+    printf("%d\n", q3(str, 'L', 0) == 2);
 }
 
 void testQ4()
@@ -160,7 +163,7 @@ void testQ4()
     {
         posicoes[i] = -1;
     }
-    strcpy(strTexto, "Laboratorio de programacao: para ratos de programaÃ§Ã£o");
+    strcpy(strTexto, "Laboratorio de programacao: para ratos de programação");
     strcpy(strBusca, "rato");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
     printf("%d\n", posicoes[0] == 5);
@@ -172,7 +175,7 @@ void testQ4()
     {
         posicoes[i] = -1;
     }
-    strcpy(strTexto, "OlÃ¡, o mundo Ã© muito grande. Tem muitas pessoas, e muitos problemas");
+    strcpy(strTexto, "Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas");
     strcpy(strBusca, "mui");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 3);
     printf("%d\n", posicoes[0] == 16);

@@ -1,31 +1,32 @@
 // #################################################
 //  Instituto Federal da Bahia
 //  Salvador - BA
-//  Curso de AnÃ¡lise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
-//  Disciplina: INF029 - LaboratÃ³rio de ProgramaÃ§Ã£o
+//  Curso de Análise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
+//  Disciplina: INF029 - Laboratório de Programação
 //  Professor: Renato Novais - renato@ifba.edu.br
 
-//  ----- OrientaÃ§Ãµes gerais -----
-//  DescriÃ§Ã£o: esse arquivo deve conter as questÃµes do trabalho do aluno.
+//  ----- Orientações gerais -----
+//  Descrição: esse arquivo deve conter as questões do trabalho do aluno.
 //  Cada aluno deve renomear esse arquivo para Aluno<MATRICULA>.c
-//  O aluno deve preencher seus dados abaixo, e implementar as questÃµes do trabalho
+//  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
 
 //  ----- Dados do Aluno -----
 //  Nome: Everton Souza da Silva
 //  email: 20192160012@ifba.edu.br
-//  MatrÃ­cula: 20192160012
+//  Matrícula: 20192160012
 //  Semestre: 2021.1
 
-//  Copyright Â© 2016 Renato Novais. All rights reserved.
-// Ãšltima atualizaÃ§Ã£o: 20/06/2018 - 19/08/2016
+//  Copyright © 2016 Renato Novais. All rights reserved.
+// Última atualização: 20/06/2018 - 19/08/2016
 
 // #################################################
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include "EvertonDaSilva20192160012.h"
 /*
-## funÃ§Ã£o utilizada para testes  ##
+## função utilizada para testes  ##
 
  somar = somar dois valores
 @objetivo
@@ -43,18 +44,18 @@ int somar(int x, int y)
 }
 
 /*
-## funÃ§Ã£o utilizada para testes  ##
+## função utilizada para testes  ##
 
- fatorial = fatorial de um nÃºmero
+ fatorial = fatorial de um número
 @objetivo
-    calcular o fatorial de um nÃºmero
+    calcular o fatorial de um número
 @entrada
     um inteiro x
 @saida
     fatorial de x -> x!
  */
 int fatorial(int x)
-{ //funÃ§Ã£o utilizada para testes
+{ //função utilizada para testes
     int fat = 1;
     if(x == 0 || x == 1)
         fat = 1;
@@ -75,12 +76,12 @@ int fatorial(int x)
 @objetivo
     Validar uma data
 @entrada
-    uma string data. Formatos que devem ser aceitos: dd/mm/aaaa, onde dd = dia, mm = mÃªs, e aaaa, igual ao ano. dd em mm podem ter apenas um digito, e aaaa podem ter apenas dois digitos.
+    uma string data. Formatos que devem ser aceitos: dd/mm/aaaa, onde dd = dia, mm = mês, e aaaa, igual ao ano. dd em mm podem ter apenas um digito, e aaaa podem ter apenas dois digitos.
 @saida
-    0 -> se data invÃ¡lida
-    1 -> se data vÃ¡lida
- @restriÃ§Ãµes
-    NÃ£o utilizar funÃ§Ãµes prÃ³prias de string (ex: strtok)   
+    0 -> se data inválida
+    1 -> se data válida
+ @restrições
+    Não utilizar funções próprias de string (ex: strtok)   
     pode utilizar strlen para pegar o tamanho da string
  */
 int q1(char *data)
@@ -254,7 +255,7 @@ int decomporDataAno(char data[])
     return dataInt;
 }
 
-int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mÃªs| [2] == ano*/
+int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
 {
     
     int bissexto = 0;
@@ -308,21 +309,21 @@ int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mÃªs| [2] == a
 }
 
 /*
- Q2 = diferenÃ§a entre duas datas
+ Q2 = diferença entre duas datas
  @objetivo
-    Calcular a diferenÃ§a em anos, meses e dias entre duas datas
+    Calcular a diferença em anos, meses e dias entre duas datas
  @entrada
-    uma string datainicial, uma string datafinal. AlÃ©m disso, a funÃ§Ã£o tem trÃªs parÃ¢metros qtdDias, qtdMeses e qtdAnos. Esses trÃªs parÃ¢metros devem ser utilizados para guardar os resultados dos cÃ¡lculos. Na chamada da funÃ§Ã£o deve passar o valor -1 para os trÃªs
+    uma string datainicial, uma string datafinal. Além disso, a função tem três parâmetros qtdDias, qtdMeses e qtdAnos. Esses três parâmetros devem ser utilizados para guardar os resultados dos cálculos. Na chamada da função deve passar o valor -1 para os três
  @saida
-    1 -> cÃ¡lculo de diferenÃ§a realizado com sucesso
-    2 -> datainicial invÃ¡lida
-    3 -> datafinal invÃ¡lida
+    1 -> cálculo de diferença realizado com sucesso
+    2 -> datainicial inválida
+    3 -> datafinal inválida
     4 -> datainicial > datafinal
  */
 int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdAnos)
 {
 
-    //calcule os dados e armazene nas trÃªs variÃ¡veis a seguir
+    //calcule os dados e armazene nas três variáveis a seguir
     int nDias, nMeses, nAnos;
 
     if (q1(datainicial) == 0)
@@ -332,8 +333,8 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
     nMeses = 10;
     nAnos = 2;
 
-    /*mantenha o cÃ³digo abaixo, para salvar os dados em 
-    nos parÃ¢metros da funcao
+    /*mantenha o código abaixo, para salvar os dados em 
+    nos parâmetros da funcao
     */
     *qtdDias = nDias;
     *qtdAnos = nAnos;
@@ -348,31 +349,176 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
  @objetivo
     Pesquisar quantas vezes um determinado caracter ocorre em um texto
  @entrada
-    uma string texto, um caracter c e um inteiro que informa se Ã© uma pesquisa Case Sensitive ou nÃ£o. Se isCaseSensitive = 1, a pesquisa deve considerar diferenÃ§as entre maiÃºsculos e minÃºsculos.
-        Se isCaseSensitive != 1, a pesquisa nÃ£o deve  considerar diferenÃ§as entre maiÃºsculos e minÃºsculos.
+    uma string texto, um caracter c e um inteiro que informa se é uma pesquisa Case Sensitive ou não. Se isCaseSensitive = 1, a pesquisa deve considerar diferenças entre maiúsculos e minúsculos.
+        Se isCaseSensitive != 1, a pesquisa não deve  considerar diferenças entre maiúsculos e minúsculos.
  @saida
-    Um nÃºmero n >= 0.
+    Um número n >= 0.
  */
 int q3(char *texto, char c, int isCaseSensitive)
 {
-    int qtdOcorrencias = -1;
-
+    //printf("local %s\n", setlocale(LC_ALL, ""));
+    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_CTYPE, "Portuguese");
+    setlocale(LC_NUMERIC, "Portuguese");
+    //printf("%s\n", texto);
+    //char l = 'á'
+    //printf("%c", l);
+    int qtdOcorrencias = 0;
+    
+    if(isCaseSensitive == 1)
+    {
+        int iContador = 0;
+        while( texto[iContador] != '\0')
+        {
+            /*####################################Vogais acentuadas###################################*/
+            if(texto[iContador] == 'á'||texto[iContador] == 'à'||texto[iContador] == 'â'||texto[iContador] == 'ã'||texto[iContador] == 'ä')
+            {
+                texto[iContador] = 'a';
+            }
+            if(texto[iContador] == 'Á'||texto[iContador] == 'À'||texto[iContador] == 'Â'||texto[iContador] == 'Ã'||texto[iContador] == 'Ä')
+            {
+                texto[iContador] = 'A';
+            }
+            if(texto[iContador] == 'é'||texto[iContador] == 'è'||texto[iContador] == 'ê'||texto[iContador] == 'ë')
+            {
+                texto[iContador] = 'e';
+            }
+            if(texto[iContador] == 'É'||texto[iContador] == 'È'||texto[iContador] == 'Ê'||texto[iContador] == 'Ë')
+            {
+                texto[iContador] = 'E';
+            }
+            if(texto[iContador] == 'í'||texto[iContador] == 'ì'||texto[iContador] == 'ï'||texto[iContador] == 'î')
+            {
+                texto[iContador] = 'i'; 
+            }
+            if(texto[iContador] == 'Í'||texto[iContador] == 'Ì'||texto[iContador] == 'Ï'||texto[iContador] == 'Î')
+            {
+                texto[iContador] = 'I'; 
+            }
+            if(texto[iContador] == 'ó'||texto[iContador] == 'ò'||texto[iContador] == 'ö'||texto[iContador] == 'ô'||texto[iContador] == 'õ')
+            {
+                texto[iContador] = 'o'; 
+            }
+            if(texto[iContador] == 'Ó'||texto[iContador] == 'Ò'||texto[iContador] == 'Ö'||texto[iContador] == 'Ô'||texto[iContador] == 'Õ')
+            {
+                texto[iContador] = 'O'; 
+            }
+            if(texto[iContador] == 'ú'||texto[iContador] == 'ù'||texto[iContador] == 'ü'||texto[iContador] == 'û')
+            {
+                texto[iContador] = 'u'; 
+            }
+            if(texto[iContador] == 'Ú'||texto[iContador] == 'Ù'||texto[iContador] == 'Ü'||texto[iContador] == 'Û')
+            {
+                texto[iContador] = 'U'; 
+            }
+            if(texto[iContador] == 'ç')
+            {
+                texto[iContador] = 'c';
+            }
+            if(texto[iContador] == 'Ç')
+            {
+                texto[iContador] = 'C';
+            }
+            /*###########################################################################################*/
+            
+            if(texto[iContador] == c)
+            {
+                qtdOcorrencias++;
+            }
+            iContador++;
+        }
+    }
+    else
+    {
+        int iContador = 0;
+        while( texto[iContador] != '\0')
+        {
+            /*####################################Vogais acentuadas###################################*/
+            if(texto[iContador] == 'á'||texto[iContador] == 'à'||texto[iContador] == 'â'||texto[iContador] == 'ã'||texto[iContador] == 'ä')
+            {
+                texto[iContador] = 'a';
+            }
+            if(texto[iContador] == 'Á'||texto[iContador] == 'À'||texto[iContador] == 'Â'||texto[iContador] == 'Ã'||texto[iContador] == 'Ä')
+            {
+                texto[iContador] = 'A';
+            }
+            if(texto[iContador] == 'é'||texto[iContador] == 'è'||texto[iContador] == 'ê'||texto[iContador] == 'ë')
+            {
+                texto[iContador] = 'e';
+            }
+            if(texto[iContador] == 'É'||texto[iContador] == 'È'||texto[iContador] == 'Ê'||texto[iContador] == 'Ë')
+            {
+                texto[iContador] = 'E';
+            }
+            if(texto[iContador] == 'í'||texto[iContador] == 'ì'||texto[iContador] == 'ï'||texto[iContador] == 'î')
+            {
+                texto[iContador] = 'i'; 
+            }
+            if(texto[iContador] == 'Í'||texto[iContador] == 'Ì'||texto[iContador] == 'Ï'||texto[iContador] == 'Î')
+            {
+                texto[iContador] = 'I'; 
+            }
+            if(texto[iContador] == 'ó'||texto[iContador] == 'ò'||texto[iContador] == 'ö'||texto[iContador] == 'ô'||texto[iContador] == 'õ')
+            {
+                texto[iContador] = 'o'; 
+            }
+            if(texto[iContador] == 'Ó'||texto[iContador] == 'Ò'||texto[iContador] == 'Ö'||texto[iContador] == 'Ô'||texto[iContador] == 'Õ')
+            {
+                texto[iContador] = 'O'; 
+            }
+            if(texto[iContador] == 'ú'||texto[iContador] == 'ù'||texto[iContador] == 'ü'||texto[iContador] == 'û')
+            {
+                texto[iContador] = 'u'; 
+            }
+            if(texto[iContador] == 'Ú'||texto[iContador] == 'Ù'||texto[iContador] == 'Ü'||texto[iContador] == 'Û')
+            {
+                texto[iContador] = 'U'; 
+            }
+            if(texto[iContador] == 'ç')
+            {
+                texto[iContador] = 'c';
+            }
+            if(texto[iContador] == 'Ç')
+            {
+                texto[iContador] = 'C';
+            }
+            /*###########################################################################################*/
+            
+            if(c >= 'A' && c <= 'Z')
+            {
+                if(texto[iContador] == c || texto[iContador] == c + 32)
+                {
+                    qtdOcorrencias++;
+                }
+            }
+            
+            if(c >= 'a' && c <= 'z')
+            {
+                if(texto[iContador] == c || texto[iContador] == c - 32)
+                {
+                    qtdOcorrencias++;
+                }
+            }
+            iContador++;
+        }
+    }
+    //printf("qtd %d\n", qtdOcorrencias);
     return qtdOcorrencias;
 }
 
 /*
  Q4 = encontrar palavra em texto
  @objetivo
-    Pesquisar todas as ocorrÃªncias de uma palavra em um texto
+    Pesquisar todas as ocorrências de uma palavra em um texto
  @entrada
-    uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irÃ¡ guardar as posiÃ§Ãµes de inÃ­cio e fim de cada ocorrÃªncia da palavra (strBusca) no texto base (texto).
+    uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irá guardar as posições de início e fim de cada ocorrência da palavra (strBusca) no texto base (texto).
  @saida
-    Um nÃºmero n >= 0 correspondente a quantidade de ocorrÃªncias encontradas.
-    O vetor posicoes deve ser preenchido com cada entrada e saÃ­da correspondente. Por exemplo, se tiver uma Ãºnica ocorrÃªncia, a posiÃ§Ã£o 0 do vetor deve ser preenchido com o Ã­ndice de inÃ­cio do texto, e na posiÃ§Ã£o 1, deve ser preenchido com o Ã­ndice de fim da ocorrencias. Se tiver duas ocorrÃªncias, a segunda ocorrÃªncia serÃ¡ amazenado nas posiÃ§Ãµes 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como hÃ¡ uma ocorrÃªncia da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
+    Um número n >= 0 correspondente a quantidade de ocorrências encontradas.
+    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
         posicoes[0] = 13;
         posicoes[1] = 16;
-        Observe que o Ã­ndice da posiÃ§Ã£o no texto deve comeÃ§ar ser contado a partir de 1.
-        O retorno da funÃ§Ã£o, n, nesse caso seria 1;
+        Observe que o índice da posição no texto deve começar ser contado a partir de 1.
+        O retorno da função, n, nesse caso seria 1;
 
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
@@ -383,13 +529,13 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 }
 
 /*
- Q5 = inverte nÃºmero
+ Q5 = inverte número
  @objetivo
-    Inverter nÃºmero inteiro
+    Inverter número inteiro
  @entrada
     uma int num.
  @saida
-    NÃºmero invertido
+    Número invertido
  */
 
 int q5(int num)
@@ -408,13 +554,13 @@ int q5(int num)
 }
 
 /*
- Q5 = ocorrÃªncia de um nÃºmero em outro
+ Q5 = ocorrência de um número em outro
  @objetivo
-    Verificar quantidade de vezes da ocorrÃªncia de um nÃºmero em outro
+    Verificar quantidade de vezes da ocorrência de um número em outro
  @entrada
-    Um nÃºmero base (numerobase) e um nÃºmero de busca (numerobusca).
+    Um número base (numerobase) e um número de busca (numerobusca).
  @saida
-    Quantidade de vezes que nÃºmero de busca ocorre em nÃºmero base
+    Quantidade de vezes que número de busca ocorre em número base
  */
 
 int q6(int numerobase, int numerobusca)
