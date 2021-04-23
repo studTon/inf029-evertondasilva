@@ -437,23 +437,71 @@ int calcularDias(char *datainicial, char *datafinal)
     int finalAno = decomporDataAno(datafinal);
     
     int diasDosMeses[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int diasDosAnos = 365;
     
-    /*int anosBissextos = 0;
-    for(int aux = finalAno; aux >= inicialAno; aux--)
+    anos = finalAno;
+    while(anos >= inicialAno)
     {
-        if(anoBissexto(aux) == 1)
+        if(anos - inicialAno > 0)
         {
-            anosBissextos++;
+            if(finalMes >= inicialMes && finalDia >= inicialDia)
+            {
+                dias += diasDosAnos;
+                if(finalMes == inicialMes)
+                {
+                    dias += finalDia - inicialDia;
+                }
+                else
+                {
+                    for(jContador = inicialMes - 1; jContador <= finalMes - 1; jContador++)
+                    {
+                        if(jContador == inicialMes - 1)
+                        {
+                            dias += diasDosMeses[inicialMes - 1] - inicialDia;
+                        }
+                        else
+                        {
+                            if(jContador == final - 1)
+                            {
+                                dias += finalDia;
+                            }
+                            else
+                                dias += diasDosMeses[jContador];
+                        }
+                    }
+                }
+            }
+            else
+            {
+                
+            }
+            
         }
-    }*/
-    
-    /*if(inicialDia > finalDia)
-    {
-        if(finalMes == 2)
+        else
         {
-            if(anoBissexto())
+            if(finalMes > inicialMes)
+            {
+                for(int iContador = inicialMes - 1; iContador <= finalMes - 1; iContador++)
+                {
+                    if(iContador == inicialMes - 1)
+                    {
+                        dias += diasDosMeses[inicialMes - 1] - inicialDia;
+                    }
+                    else
+                    {
+                        if(iContador == finalMes - 1)
+                        {
+                            dias += finalDia;
+                        }
+                        else
+                            dias += diasDosMeses[iContador];
+                    }
+                        
+                }
+            }
         }
-    }*/
+        anos--;
+    }
     
     return dias;
 }

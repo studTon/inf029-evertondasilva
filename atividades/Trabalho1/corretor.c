@@ -98,7 +98,7 @@ void testQ2()
     qtdAnos = -1;
 
     strcpy(datainicial, "01/06/2015");
-    strcpy(datafinal, "01/06/2011");
+    strcpy(datafinal, "01/06/2016");
     retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
     printf("%d\n", retorno == 1);
     //printf("%d\n", qtdDias == 0);
