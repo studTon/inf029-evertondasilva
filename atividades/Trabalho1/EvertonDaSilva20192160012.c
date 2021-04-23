@@ -170,7 +170,7 @@ int q1(char *data)
     return datavalida;
 }
 
-int decomporDataDia(char data[])
+int decomporDataDia(char *data)
 {
     char dataDia[3];
     int dataInt;
@@ -195,7 +195,7 @@ int decomporDataDia(char data[])
 
     return dataInt;
 }
-int decomporDataMes(char data[])
+int decomporDataMes(char *data)
 {
     int dataInt;
     char dataMes[3];
@@ -222,7 +222,7 @@ int decomporDataMes(char data[])
     return dataInt;
 }
 
-int decomporDataAno(char data[])
+int decomporDataAno(char *data)
 {
     char dataAno[5];
     int dataInt;
@@ -255,14 +255,23 @@ int decomporDataAno(char data[])
     return dataInt;
 }
 
-int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
+int anoBissexto(int arranjoData[])
 {
-    
     int bissexto = 0;
+    
     if((arranjoData[2] % 400 == 0) || ((arranjoData[2] % 4 == 0) && (arranjoData[2] % 100 != 0)))
     {
         bissexto = 1;
     }
+    
+    return bissexto;
+}
+
+int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
+{
+    
+    int bissexto = anoBissexto(arranjoData);
+    
     
     if
     (arranjoData[1] == 1||arranjoData[1] == 3||arranjoData[1] == 5||arranjoData[1] == 7||
@@ -325,14 +334,40 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
 
     //calcule os dados e armazene nas três variáveis a seguir
     int nDias, nMeses, nAnos;
-
-    if (q1(datainicial) == 0)
-        return 2;
-
-    nDias = 4;
-    nMeses = 10;
-    nAnos = 2;
-
+    int validadeDistancia = 1;
+    if ( q1(datainicial) == 0 )
+    {
+        validadeDistancia = 0;
+        return validadeDistancia;
+    }    
+    else
+        if( q1(datafinal) == 0 )
+        {
+            validadeDistancia = 0;
+            return validadeDistancia;
+        }
+        else
+            if(calcularMaiorData(datainicial, datafinal) == 0)
+            {
+                validadeDistancia = 0;
+                return validadeDistancia;
+            }
+            
+    //printf("in: %d\nfi: %d\n";
+    nDias = 0;
+    nMeses = 0;
+    nAnos = 0;
+    
+    /*
+    int inicialDia = decomporDataDia(datainicial);
+    int inicialMes = decomporDataMes(datainicial);
+    int inicialAno = decomporDataAno(datainicial);
+    int finalDia = decomporDataDia(datainicial);
+    int finalMes = decomporDataMes(datainicial);
+    int finalAno = decomporDataAno(datainicial);
+    */
+    
+    //calcularDias(inicialDia, finalDia);
     /*mantenha o código abaixo, para salvar os dados em 
     nos parâmetros da funcao
     */
@@ -341,7 +376,86 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
     *qtdMeses = nMeses;
 
     //coloque o retorno correto
-    return 1;
+    return validadeDistancia;
+}
+
+int calcularMaiorData(char *datainicial, char *datafinal)
+{
+    int inicialDia = decomporDataDia(datainicial);
+    int inicialMes = decomporDataMes(datainicial);
+    int inicialAno = decomporDataAno(datainicial);
+    int finalDia = decomporDataDia(datafinal);
+    int finalMes = decomporDataMes(datafinal);
+    int finalAno = decomporDataAno(datafinal);
+    
+    int dataInicialMaior = 0;
+    if(finalAno < inicialAno)
+        return dataInicialMaior;
+    else
+    {
+        if(finalAno == inicialAno)
+        {
+            if(finalMes < inicialMes)
+                return dataInicialMaior;
+            else
+            {
+                if(finalMes == inicialMes)
+                {
+                    if(finalDia < inicialDia)
+                        return dataInicialMaior;
+                    else
+                    {
+                        dataInicialMaior = 1;
+                        return dataInicialMaior;
+                    }
+                        
+                }
+                if(finalMes > inicialMes)
+                {
+                    dataInicialMaior = 1;
+                    return dataInicialMaior;
+                }
+            }
+        }
+        else
+        {
+            dataInicialMaior = 1;
+           return dataInicialMaior; 
+        }
+    }
+}
+
+int calcularDias(char *datainicial, char *datafinal)
+{
+    int dias = 0;
+    
+    int inicialDia = decomporDataDia(datainicial);
+    int inicialMes = decomporDataMes(datainicial);
+    int inicialAno = decomporDataAno(datainicial);
+    int finalDia = decomporDataDia(datafinal);
+    int finalMes = decomporDataMes(datafinal);
+    int finalAno = decomporDataAno(datafinal);
+    
+    int diasDosMeses[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    /*int anosBissextos = 0;
+    for(int aux = finalAno; aux >= inicialAno; aux--)
+    {
+        if(anoBissexto(aux) == 1)
+        {
+            anosBissextos++;
+        }
+    }*/
+    
+    /*if(inicialDia > finalDia)
+    {
+        if(finalMes == 2)
+        {
+            if(anoBissexto())
+        }
+    }*/
+    
+    return dias;
 }
 
 /*
@@ -554,7 +668,7 @@ int q5(int num)
 }
 
 /*
- Q5 = ocorrência de um número em outro
+ Q6 = ocorrência de um número em outro
  @objetivo
     Verificar quantidade de vezes da ocorrência de um número em outro
  @entrada
