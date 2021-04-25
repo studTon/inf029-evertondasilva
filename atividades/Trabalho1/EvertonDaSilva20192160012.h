@@ -36,7 +36,7 @@ int verificarData(int arranjoData[]);
 int decomporDataDia(char data[]);
 int decomporDataMes(char data[]);
 int decomporDataAno(char data[]);
-int anoBissexto(int arranjoData[]);
+int anoBissexto(int ano);
 //Q2
 int calcularDias(char *datainicial, char *datafinal);
 int calcularMaiorData(char *datainicial, char *datafinal);

@@ -243,7 +243,7 @@ int decomporDataAno(char *data)
     }
     dataAno[jContador] = '\0';
 
-    if( jContador == 3 )
+    if( jContador == 4 )
     {
         dataInt = atoi(dataAno);
     }
@@ -255,11 +255,11 @@ int decomporDataAno(char *data)
     return dataInt;
 }
 
-int anoBissexto(int arranjoData[])
+int anoBissexto(int ano)
 {
     int bissexto = 0;
     
-    if((arranjoData[2] % 400 == 0) || ((arranjoData[2] % 4 == 0) && (arranjoData[2] % 100 != 0)))
+    if((ano % 400 == 0) || ((ano % 4 == 0) && (ano % 100 != 0)))
     {
         bissexto = 1;
     }
@@ -270,7 +270,7 @@ int anoBissexto(int arranjoData[])
 int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
 {
     
-    int bissexto = anoBissexto(arranjoData);
+    int bissexto = anoBissexto(arranjoData[2]);
     
     
     if
@@ -354,6 +354,7 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
             }
             
     //printf("in: %d\nfi: %d\n";
+    calcularDias(datainicial, datafinal);
     nDias = 0;
     nMeses = 0;
     nAnos = 0;
@@ -388,39 +389,39 @@ int calcularMaiorData(char *datainicial, char *datafinal)
     int finalMes = decomporDataMes(datafinal);
     int finalAno = decomporDataAno(datafinal);
     
-    int dataInicialMaior = 0;
+    int dataFinalMaior = 0;
     if(finalAno < inicialAno)
-        return dataInicialMaior;
+        return dataFinalMaior;
     else
     {
         if(finalAno == inicialAno)
         {
             if(finalMes < inicialMes)
-                return dataInicialMaior;
+                return dataFinalMaior;
             else
             {
                 if(finalMes == inicialMes)
                 {
                     if(finalDia < inicialDia)
-                        return dataInicialMaior;
+                        return dataFinalMaior;
                     else
                     {
-                        dataInicialMaior = 1;
-                        return dataInicialMaior;
+                        dataFinalMaior = 1;
+                        return dataFinalMaior;
                     }
                         
                 }
                 if(finalMes > inicialMes)
                 {
-                    dataInicialMaior = 1;
-                    return dataInicialMaior;
+                    dataFinalMaior = 1;
+                    return dataFinalMaior;
                 }
             }
         }
         else
         {
-            dataInicialMaior = 1;
-           return dataInicialMaior; 
+            dataFinalMaior = 1;
+           return dataFinalMaior; 
         }
     }
 }
@@ -435,74 +436,86 @@ int calcularDias(char *datainicial, char *datafinal)
     int finalDia = decomporDataDia(datafinal);
     int finalMes = decomporDataMes(datafinal);
     int finalAno = decomporDataAno(datafinal);
-    
+    //printf("Final ano %d\n", finalAno);
+                          /*J   F   M   A   M   J   J   A   S   O   N   D*/
     int diasDosMeses[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     int diasDosAnos = 365;
     
-    anos = finalAno;
-    while(anos >= inicialAno)
+    int anoAnalizado = finalAno;
+    int indice = inicialMes;/*
+            Esse indice será inicializado com o indice do próximo mês ao inicial, pois em C o vetor é contador a partir de 0
+            */
+    while(anoAnalizado >= inicialAno)
     {
-        if(anos - inicialAno > 0)
+        if(anoAnalizado != inicialAno && anoAnalizado != finalAno)
         {
-            if(finalMes >= inicialMes && finalDia >= inicialDia)
-            {
+            if( anoBissexto(anoAnalizado) == 1 )
+                dias += diasDosAnos + 1;
+            else
                 dias += diasDosAnos;
-                if(finalMes == inicialMes)
-                {
-                    dias += finalDia - inicialDia;
-                }
+            printf("Ano %d : %d\n", anoAnalizado, dias);
+        }
+        
+        if(anoAnalizado == inicialAno)
+        {
+            while(indice <= finalMes - 2)
+            {
+                if(anoBissexto(anoAnalizado) == 1 && indice == 1)
+                    dias += 29;
                 else
-                {
-                    for(jContador = inicialMes - 1; jContador <= finalMes - 1; jContador++)
-                    {
-                        if(jContador == inicialMes - 1)
-                        {
-                            dias += diasDosMeses[inicialMes - 1] - inicialDia;
-                        }
-                        else
-                        {
-                            if(jContador == final - 1)
-                            {
-                                dias += finalDia;
-                            }
-                            else
-                                dias += diasDosMeses[jContador];
-                        }
-                    }
-                }
+                    dias += diasDosMeses[indice];
+                indice++;
             }
+            if(inicialMes == finalMes)
+                dias += (finalDia - inicialDia);
             else
             {
-                
+                dias += diasDosMeses[inicialMes - 1] - inicialDia;
+                dias += finalDia;
             }
-            
         }
         else
         {
-            if(finalMes > inicialMes)
+            if(anoAnalizado > inicialAno && anoAnalizado < finalAno)
             {
-                for(int iContador = inicialMes - 1; iContador <= finalMes - 1; iContador++)
+                indice = 0;
+
+                while(indice <= 11)
                 {
-                    if(iContador == inicialMes - 1)
-                    {
-                        dias += diasDosMeses[inicialMes - 1] - inicialDia;
-                    }
+                    if(anoBissexto(anoAnalizado) == 1 && indice == 1)
+                        dias += 29;
                     else
-                    {
-                        if(iContador == finalMes - 1)
-                        {
-                            dias += finalDia;
-                        }
-                        else
-                            dias += diasDosMeses[iContador];
-                    }
-                        
+                        dias += diasDosMeses[indice];
+                    indice++;
                 }
+                if(inicialMes == finalMes)
+                    dias += (finalDia - inicialDia);
+                else
+                {
+                    dias += diasDosMeses[inicialMes - 1] - inicialDia;
+                    dias += finalDia;
+                }
+                printf("Ano %d : %d\n", anoAnalizado, dias);
             }
+            else
+            {
+                indice = 0;
+                while(indice <= finalMes - 2)
+                {
+                   if(anoBissexto(anoAnalizado) == 1 && indice == 1)
+                        dias += 29;
+                    else
+                        dias += diasDosMeses[indice];
+                    indice++; 
+                }
+                dias += finalDia;
+                printf("Ano %d : %d\n", anoAnalizado, dias);
+            }
+            
         }
-        anos--;
+        anoAnalizado--;
     }
-    
+    printf("Total Dias: %d\n", dias);
     return dias;
 }
 
