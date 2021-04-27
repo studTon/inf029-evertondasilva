@@ -1,7 +1,7 @@
 // #################################################
 //  Instituto Federal da Bahia
 //  Salvador - BA
-//  Curso de Análise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
+//  Curso de Anßlise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
 //  Disciplina: INF029 - Laboratório de Programação
 //  Professor: Renato Novais - renato@ifba.edu.br
 
@@ -10,7 +10,7 @@
 //  o aluno pode incrementar os testes
 
 //  Copyright © 2016 Renato Novais. All rights reserved.
-// Última atualização: 19/08/2016 - 12/12/2018
+// Útima atualização: 19/08/2016 - 12/12/2018
 
 // #################################################
 
@@ -20,8 +20,8 @@
 //renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.c
 #include "EvertonDaSilva20192160012.h"
 
-void testSomar();    //função utilizada para testes
-void testFatorial(); //função utilizada para testes
+void testSomar();    //fun??o utilizada para testes
+void testFatorial(); //fun??o utilizada para testes
 void testQ1();
 void testQ2();
 void testQ3();
@@ -34,8 +34,8 @@ int main()
     //testSomar();
     //testFatorial();
     //testQ1();
-    //testQ2();
-    testQ3();
+    testQ2();
+    //testQ3();
     //testQ4();
     //testQ5();
     //testQ6();
@@ -98,12 +98,19 @@ void testQ2()
     qtdAnos = -1;
 
     strcpy(datainicial, "01/06/2015");
-    strcpy(datafinal, "01/06/2016");
+    strcpy(datafinal, "15/07/2015");
+    //
+    //
+    //strcpy(datainicial, "01/06/2015");
+    //strcpy(datafinal, "17/11/2015");
+    //strcpy(datainicial, "01/06/2015");
+    //strcpy(datafinal, "25/08/2020");
+    
     retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
     printf("%d\n", retorno == 1);
-    printf("%d\n", qtdDias == 0);
-    printf("%d\n", qtdMeses == 0);
-    printf("%d\n", qtdAnos == 1);
+    printf("%d\n", qtdDias == 14);
+    printf("%d\n", qtdMeses == 1);
+    printf("%d\n", qtdAnos == 0);
 
     //teste 2 - retornos
     qtdDias = -1;
@@ -126,6 +133,7 @@ void testQ2()
     printf("%d\n", retorno == 4);
 
     //teste 3
+    
     qtdDias = -1;
     qtdMeses = -1;
     qtdAnos = -1;
@@ -137,6 +145,21 @@ void testQ2()
     printf("%d\n", qtdDias == 1);
     printf("%d\n", qtdMeses == 1);
     printf("%d\n", qtdAnos == 0);
+    
+    //teste 4
+    
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+    
+    strcpy(datainicial, "01/06/2015");
+    strcpy(datafinal, "04/06/2015");
+    
+    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
+    printf("%d\n", retorno == 1);
+    printf("%d\n", qtdDias == 3);
+    printf("%d\n", qtdMeses == 0);
+    printf("%d\n", qtdAnos == 0);
 }
 
 void testQ3()
@@ -145,7 +168,7 @@ void testQ3()
     setlocale(LC_CTYPE, "Portuguese");
     setlocale(LC_NUMERIC, "Portuguese");
     char str[250];
-    strcpy(str, "Glória Limá Gôuveà");
+    strcpy(str, "Glória Limá Gôuveá");
     printf("%d\n", q3(str, 'a', 0) == 3);
     printf("%d\n", q3(str, 'b', 0) == 0);
     printf("%d\n", q3(str, 'l', 1) == 1);
@@ -163,7 +186,7 @@ void testQ4()
     {
         posicoes[i] = -1;
     }
-    strcpy(strTexto, "Laboratorio de programacao: para ratos de programação");
+    strcpy(strTexto, "Laboratorio de programacão: para ratos de programação");
     strcpy(strBusca, "rato");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
     printf("%d\n", posicoes[0] == 5);

@@ -20,11 +20,11 @@
 // Última atualização: 20/06/2018 - 19/08/2016
 
 // #################################################
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
 #include "EvertonDaSilva20192160012.h"
+tipoData dataProcessada;
 /*
 ## função utilizada para testes  ##
 
@@ -170,7 +170,7 @@ int q1(char *data)
     return datavalida;
 }
 
-int decomporDataDia(char data[])
+int decomporDataDia(char *data)
 {
     char dataDia[3];
     int dataInt;
@@ -195,7 +195,7 @@ int decomporDataDia(char data[])
 
     return dataInt;
 }
-int decomporDataMes(char data[])
+int decomporDataMes(char *data)
 {
     int dataInt;
     char dataMes[3];
@@ -222,7 +222,7 @@ int decomporDataMes(char data[])
     return dataInt;
 }
 
-int decomporDataAno(char data[])
+int decomporDataAno(char *data)
 {
     char dataAno[5];
     int dataInt;
@@ -243,7 +243,7 @@ int decomporDataAno(char data[])
     }
     dataAno[jContador] = '\0';
 
-    if( jContador == 3 )
+    if( jContador == 4 )
     {
         dataInt = atoi(dataAno);
     }
@@ -255,14 +255,16 @@ int decomporDataAno(char data[])
     return dataInt;
 }
 
+int anoBissexto(int ano)
+{
+    return ((ano % 400 == 0) || ((ano % 4 == 0) && (ano % 100 != 0)));
+}
+
 int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
 {
     
-    int bissexto = 0;
-    if((arranjoData[2] % 400 == 0) || ((arranjoData[2] % 4 == 0) && (arranjoData[2] % 100 != 0)))
-    {
-        bissexto = 1;
-    }
+    int bissexto = anoBissexto(arranjoData[2]);
+    
     
     if
     (arranjoData[1] == 1||arranjoData[1] == 3||arranjoData[1] == 5||arranjoData[1] == 7||
@@ -322,17 +324,34 @@ int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == an
  */
 int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdAnos)
 {
-
+    int validadeDistancia = 1;
+    if ( q1(datainicial) == 0 )
+    {
+        validadeDistancia = 2;
+        return validadeDistancia;
+    }    
+    else
+        if( q1(datafinal) == 0 )
+        {
+            validadeDistancia = 3;
+            return validadeDistancia;
+        }
+        else
+            if(calcularMaiorData(datainicial, datafinal) == 0)
+            {
+                validadeDistancia = 4;
+                return validadeDistancia;
+            }
+    
     //calcule os dados e armazene nas três variáveis a seguir
     int nDias, nMeses, nAnos;
-
-    if (q1(datainicial) == 0)
-        return 2;
-
-    nDias = 4;
-    nMeses = 10;
-    nAnos = 2;
-
+    
+    dataProcessada = calcularDataSeparada(calcularDias(datainicial, datafinal));
+    nDias = dataProcessada.dia;
+    nMeses = dataProcessada.mes;
+    nAnos = dataProcessada.ano;
+    
+    
     /*mantenha o código abaixo, para salvar os dados em 
     nos parâmetros da funcao
     */
@@ -341,7 +360,201 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
     *qtdMeses = nMeses;
 
     //coloque o retorno correto
-    return 1;
+    return validadeDistancia;
+}
+
+int calcularMaiorData(char *datainicial, char *datafinal)
+{
+    int inicialDia = decomporDataDia(datainicial);
+    int inicialMes = decomporDataMes(datainicial);
+    int inicialAno = decomporDataAno(datainicial);
+    int finalDia = decomporDataDia(datafinal);
+    int finalMes = decomporDataMes(datafinal);
+    int finalAno = decomporDataAno(datafinal);
+    
+    int dataFinalMaior = 0;
+    if(finalAno < inicialAno)
+        return dataFinalMaior;
+    else
+    {
+        if(finalAno == inicialAno)
+        {
+            if(finalMes < inicialMes)
+                return dataFinalMaior;
+            else
+            {
+                if(finalMes == inicialMes)
+                {
+                    if(finalDia < inicialDia)
+                        return dataFinalMaior;
+                    else
+                        if(finalDia == inicialDia)
+                            return dataFinalMaior;
+                        else
+                        {
+                            dataFinalMaior = 1;
+                            return dataFinalMaior;
+                        }
+                        
+                }
+                if(finalMes > inicialMes)
+                {
+                    dataFinalMaior = 1;
+                    return dataFinalMaior;
+                }
+            }
+        }
+        else
+        {
+            dataFinalMaior = 1;
+           return dataFinalMaior; 
+        }
+    }
+}
+
+int calcularDias(char *datainicial, char *datafinal)
+{
+    int inicialDia = decomporDataDia(datainicial);
+    int inicialMes = decomporDataMes(datainicial);
+    int inicialAno = decomporDataAno(datainicial);
+    int finalDia = decomporDataDia(datafinal);
+    int finalMes = decomporDataMes(datafinal);
+    int finalAno = decomporDataAno(datafinal);
+    //printf("Final ano %d\n", finalAno);
+                                  /*J   F   M   A   M   J   J   A   S   O   N   D*/
+    int diasDosMeses[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+                               {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
+    
+    int anoAnalizado = inicialAno;
+    /*
+    Esse indice será inicializado com o indice do próximo mês ao inicial, pois em C o vetor é contador a partir de 0        */
+    int indice = inicialMes;
+    int dias = 0;
+    int bissexto;
+    while(anoAnalizado <= finalAno)
+    {
+        bissexto = anoBissexto(anoAnalizado);
+        if(bissexto == 1)
+        {
+            if(inicialAno == finalAno)
+            {
+                if(inicialMes == finalMes)
+                {
+                    dias += (finalDia - inicialDia);
+                }
+                if(inicialMes + 1 == finalMes)
+                {
+                    dias += (diasDosMeses[bissexto][inicialMes] - inicialDia);
+                    dias += finalDia;
+                }
+                if(finalMes - inicialMes >= 2)
+                {
+                    dias += diasDosMeses[bissexto][inicialMes] - inicialDia;
+                    for(int indice = inicialMes + 1; indice <= finalMes - 1; indice++)
+                    {
+                        dias += diasDosMeses[bissexto][indice];
+                    }
+                    dias += finalDia;
+                }
+            }
+            if(anoAnalizado == inicialAno && anoAnalizado != finalAno)
+            {
+                dias += diasDosMeses[bissexto][inicialMes] - inicialDia;
+                
+                for(int indice = inicialMes + 1; indice <= 12; indice++)
+                {
+                    dias += diasDosMeses[bissexto][indice];
+                }
+            }
+            if(anoAnalizado != inicialAno && anoAnalizado != finalAno)
+            {
+                for(int indice = 1; indice <= 12; indice++)
+                {
+                    dias += diasDosMeses[bissexto][indice];
+                }
+            }
+            if(anoAnalizado == finalAno && anoAnalizado != inicialAno)
+            {
+                if(finalMes != 1)
+                {
+                    for(int indice = 1; indice <= finalMes - 1; indice++)
+                    {
+                        dias += diasDosMeses[bissexto][indice];
+                    }
+                    dias += finalDia;
+                }   
+                else
+                    dias += finalDia;
+            }
+        }
+        else
+        {
+            if(inicialAno == finalAno)
+            {
+                if(inicialMes == finalMes)
+                {
+                    dias += (finalDia - inicialDia);
+                }
+                if(inicialMes + 1 == finalMes)
+                {
+                    dias += (diasDosMeses[bissexto][inicialMes] - inicialDia);
+                    dias += finalDia;
+                }
+                if(finalMes - inicialMes >= 2)
+                {
+                    dias += (diasDosMeses[bissexto][inicialMes] - inicialDia);
+                    for(int indice = inicialMes + 1; indice <= finalMes - 1; indice++)
+                    {
+                        dias += diasDosMeses[bissexto][indice];
+                    }
+                    dias += finalDia;
+                }
+            }
+            if(anoAnalizado == inicialAno && anoAnalizado != finalAno)
+            {
+                dias += diasDosMeses[bissexto][inicialMes] - inicialDia;
+                
+                for(int indice = inicialMes + 1; indice <= 12; indice++)
+                {
+                    dias += diasDosMeses[bissexto][indice];
+                }
+            }
+            if(anoAnalizado != inicialAno && anoAnalizado != finalAno)
+            {
+                for(int indice = 1; indice <= 12; indice++)
+                {
+                    dias += diasDosMeses[bissexto][indice];
+                }
+            }
+            if(anoAnalizado == finalAno && anoAnalizado != inicialAno)
+            {
+                if(finalMes != 1)
+                {
+                    for(int indice = 1; indice <= finalMes - 1; indice++)
+                    {
+                        dias += diasDosMeses[bissexto][indice];
+                    }
+                    dias += finalDia;
+                }   
+                else
+                    dias += finalDia;
+            }
+        }
+        anoAnalizado++;  
+    }
+     
+    return dias;
+}
+
+tipoData calcularDataSeparada(int dias)
+{
+    tipoData dataCalculada;
+    
+    dataCalculada.ano = dias / 365;
+    dataCalculada.mes = dias / 30;
+    dataCalculada.dia = dias % 30;
+    
+    return dataCalculada;
 }
 
 /*
@@ -554,7 +767,7 @@ int q5(int num)
 }
 
 /*
- Q5 = ocorrência de um número em outro
+ Q6 = ocorrência de um número em outro
  @objetivo
     Verificar quantidade de vezes da ocorrência de um número em outro
  @entrada
