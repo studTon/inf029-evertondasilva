@@ -20,11 +20,11 @@
 // Última atualização: 20/06/2018 - 19/08/2016
 
 // #################################################
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
 #include "EvertonDaSilva20192160012.h"
+tipoData dataProcessada;
 /*
 ## função utilizada para testes  ##
 
@@ -257,14 +257,7 @@ int decomporDataAno(char *data)
 
 int anoBissexto(int ano)
 {
-    int bissexto = 0;
-    
-    if((ano % 400 == 0) || ((ano % 4 == 0) && (ano % 100 != 0)))
-    {
-        bissexto = 1;
-    }
-    
-    return bissexto;
+    return ((ano % 400 == 0) || ((ano % 4 == 0) && (ano % 100 != 0)));
 }
 
 int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
@@ -331,44 +324,34 @@ int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == an
  */
 int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdAnos)
 {
-
-    //calcule os dados e armazene nas três variáveis a seguir
-    int nDias, nMeses, nAnos;
     int validadeDistancia = 1;
     if ( q1(datainicial) == 0 )
     {
-        validadeDistancia = 0;
+        validadeDistancia = 2;
         return validadeDistancia;
     }    
     else
         if( q1(datafinal) == 0 )
         {
-            validadeDistancia = 0;
+            validadeDistancia = 3;
             return validadeDistancia;
         }
         else
             if(calcularMaiorData(datainicial, datafinal) == 0)
             {
-                validadeDistancia = 0;
+                validadeDistancia = 4;
                 return validadeDistancia;
             }
-            
-    //printf("in: %d\nfi: %d\n";
-    calcularDias(datainicial, datafinal);
-    nDias = 0;
-    nMeses = 0;
-    nAnos = 0;
     
-    /*
-    int inicialDia = decomporDataDia(datainicial);
-    int inicialMes = decomporDataMes(datainicial);
-    int inicialAno = decomporDataAno(datainicial);
-    int finalDia = decomporDataDia(datainicial);
-    int finalMes = decomporDataMes(datainicial);
-    int finalAno = decomporDataAno(datainicial);
-    */
+    //calcule os dados e armazene nas três variáveis a seguir
+    int nDias, nMeses, nAnos;
     
-    //calcularDias(inicialDia, finalDia);
+    dataProcessada = calcularDataSeparada(calcularDias(datainicial, datafinal));
+    nDias = dataProcessada.dia;
+    nMeses = dataProcessada.mes;
+    nAnos = dataProcessada.ano;
+    
+    
     /*mantenha o código abaixo, para salvar os dados em 
     nos parâmetros da funcao
     */
@@ -405,10 +388,13 @@ int calcularMaiorData(char *datainicial, char *datafinal)
                     if(finalDia < inicialDia)
                         return dataFinalMaior;
                     else
-                    {
-                        dataFinalMaior = 1;
-                        return dataFinalMaior;
-                    }
+                        if(finalDia == inicialDia)
+                            return dataFinalMaior;
+                        else
+                        {
+                            dataFinalMaior = 1;
+                            return dataFinalMaior;
+                        }
                         
                 }
                 if(finalMes > inicialMes)
@@ -556,11 +542,19 @@ int calcularDias(char *datainicial, char *datafinal)
         }
         anoAnalizado++;  
     }
-    
-    printf("Total Dias: %d\n", dias);
-    
-    
+     
     return dias;
+}
+
+tipoData calcularDataSeparada(int dias)
+{
+    tipoData dataCalculada;
+    
+    dataCalculada.ano = dias / 365;
+    dataCalculada.mes = dias / 30;
+    dataCalculada.dia = dias % 30;
+    
+    return dataCalculada;
 }
 
 /*

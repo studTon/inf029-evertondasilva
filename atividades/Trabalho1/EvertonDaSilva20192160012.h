@@ -20,6 +20,14 @@
 // Última atualização: 12/12/2017
 
 // #################################################
+typedef struct
+{
+    int dia;
+    int mes;
+    int ano;
+}tipoData;
+
+tipoData dataProcessada;
 
 int somar(int x, int y); //função utilizada para testes
 int fatorial(int x); //função utilizada para testes
@@ -40,3 +48,5 @@ int anoBissexto(int ano);
 //Q2
 int calcularDias(char *datainicial, char *datafinal);
 int calcularMaiorData(char *datainicial, char *datafinal);
+tipoData calcularDataSeparada(int dias);
+
