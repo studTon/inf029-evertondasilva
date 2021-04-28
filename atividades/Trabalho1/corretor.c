@@ -33,12 +33,12 @@ int main()
 {
     //testSomar();
     //testFatorial();
-    //testQ1();
-    //testQ2();
-    //testQ3();
+    testQ1();
+    testQ2();
+    testQ3();
     testQ4();
-    //testQ5();
-    //testQ6();
+    testQ5();
+    testQ6();
 }
 
 int mainData()
@@ -99,13 +99,6 @@ void testQ2()
 
     strcpy(datainicial, "01/06/2015");
     strcpy(datafinal, "15/07/2015");
-    //
-    //
-    //strcpy(datainicial, "01/06/2015");
-    //strcpy(datafinal, "17/11/2015");
-    //strcpy(datainicial, "01/06/2015");
-    //strcpy(datafinal, "25/08/2020");
-    
     retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
     printf("%d\n", retorno == 1);
     printf("%d\n", qtdDias == 14);
