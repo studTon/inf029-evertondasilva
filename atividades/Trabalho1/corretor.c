@@ -34,9 +34,9 @@ int main()
     //testSomar();
     //testFatorial();
     //testQ1();
-    testQ2();
+    //testQ2();
     //testQ3();
-    //testQ4();
+    testQ4();
     //testQ5();
     //testQ6();
 }
@@ -178,22 +178,23 @@ void testQ3()
 
 void testQ4()
 {
+    setlocale(LC_ALL, "");
+    
     char strTexto[250];
     char strBusca[50];
     int posicoes[30];
     int i;
+    
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
     }
-    strcpy(strTexto, "Laboratorio de programacão: para ratos de programação");
-    strcpy(strBusca, "rato");
+    strcpy(strTexto, "A casa do casamento");
+    strcpy(strBusca, "casa");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
-    printf("%d\n", posicoes[0] == 5);
-    printf("%d\n", posicoes[1] == 8);
-    printf("%d\n", posicoes[2] == 34);
-    printf("%d\n", posicoes[3] == 37);
-
+    printf("%d\n", posicoes[0] == 2);
+    printf("%d\n", posicoes[1] == 10);
+    
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
@@ -201,12 +202,19 @@ void testQ4()
     strcpy(strTexto, "Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas");
     strcpy(strBusca, "mui");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 3);
-    printf("%d\n", posicoes[0] == 16);
-    printf("%d\n", posicoes[1] == 18);
-    printf("%d\n", posicoes[2] == 34);
-    printf("%d\n", posicoes[3] == 36);
-    printf("%d\n", posicoes[4] == 52);
-    printf("%d\n", posicoes[5] == 54);
+    printf("%d\n", posicoes[0] == 15);
+    printf("%d\n", posicoes[1] == 33);
+    printf("%d\n", posicoes[2] == 51);
+    
+    for (i = 0; i < 30; i++)
+    {
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto, "Sra. Pêra é muito inteligente. Cozêramos uma feijoada para ela");
+    strcpy(strBusca, "êra");
+    printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
+    printf("%d\n", posicoes[0] == 6);
+    printf("%d\n", posicoes[1] == 34);
 }
 
 void testQ5()
