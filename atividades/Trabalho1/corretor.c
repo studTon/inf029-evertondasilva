@@ -178,10 +178,13 @@ void testQ3()
 
 void testQ4()
 {
+    setlocale(LC_ALL, "");
+    
     char strTexto[250];
     char strBusca[50];
     int posicoes[30];
     int i;
+    
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
@@ -191,7 +194,7 @@ void testQ4()
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
     printf("%d\n", posicoes[0] == 2);
     printf("%d\n", posicoes[1] == 10);
-    /*
+    
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
@@ -201,7 +204,17 @@ void testQ4()
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 3);
     printf("%d\n", posicoes[0] == 15);
     printf("%d\n", posicoes[1] == 33);
-    printf("%d\n", posicoes[3] == 51);*/
+    printf("%d\n", posicoes[2] == 51);
+    
+    for (i = 0; i < 30; i++)
+    {
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto, "Sra. Pêra é muito inteligente. Cozêramos uma feijoada para ela");
+    strcpy(strBusca, "êra");
+    printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
+    printf("%d\n", posicoes[0] == 6);
+    printf("%d\n", posicoes[1] == 34);
 }
 
 void testQ5()

@@ -736,7 +736,7 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-    
+    setlocale(LC_ALL, "");
     
     int tamSubStr;
     for(tamSubStr = 0; strBusca[tamSubStr] != '\0'; tamSubStr++);
@@ -754,6 +754,105 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
         {
             if(indBusca == 0)
                 aux = indice;
+            /*####################################Vogais acentuadas###################################*/
+            if(strTexto[indiceAux] == 'á'||strTexto[indiceAux] == 'à'||strTexto[indiceAux] == 'â'||strTexto[indiceAux] == 'ã'||strTexto[indiceAux] == 'ä')
+            {
+                strTexto[indiceAux] = 'a';
+            }
+            if(strTexto[indiceAux] == 'Á'||strTexto[indiceAux] == 'À'||strTexto[indiceAux] == 'Â'||strTexto[indiceAux] == 'Ã'||strTexto[indiceAux] == 'Ä')
+            {
+                strTexto[indiceAux] = 'A';
+            }
+            if(strTexto[indiceAux] == 'é'||strTexto[indiceAux] == 'è'||strTexto[indiceAux] == 'ê'||strTexto[indiceAux] == 'ë')
+            {
+                strTexto[indiceAux] = 'e';
+            }
+            if(strTexto[indiceAux] == 'É'||strTexto[indiceAux] == 'È'||strTexto[indiceAux] == 'Ê'||strTexto[indiceAux] == 'Ë')
+            {
+                strTexto[indiceAux] = 'E';
+            }
+            if(strTexto[indiceAux] == 'í'||strTexto[indiceAux] == 'ì'||strTexto[indiceAux] == 'ï'||strTexto[indiceAux] == 'î')
+            {
+                strTexto[indiceAux] = 'i';
+            }
+            if(strTexto[indiceAux] == 'Í'||strTexto[indiceAux] == 'Ì'||strTexto[indiceAux] == 'Ï'||strTexto[indiceAux] == 'Î')
+            {
+                strTexto[indiceAux] = 'I';
+            }
+            if(strTexto[indiceAux] == 'ó'||strTexto[indiceAux] == 'ò'||strTexto[indiceAux] == 'ö'||strTexto[indiceAux] == 'ô'||strTexto[indiceAux] == 'õ')
+            {
+                strTexto[indiceAux] = 'o';
+            }
+            if(strTexto[indiceAux] == 'Ó'||strTexto[indiceAux] == 'Ò'||strTexto[indiceAux] == 'Ö'||strTexto[indiceAux] == 'Ô'||strTexto[indiceAux] == 'Õ')
+            {
+                strTexto[indiceAux] = 'O';
+            }
+            if(strTexto[indiceAux] == 'ú'||strTexto[indiceAux] == 'ù'||strTexto[indiceAux] == 'ü'||strTexto[indiceAux] == 'û')
+            {
+                strTexto[indiceAux] = 'u';
+            }
+            if(strTexto[indiceAux] == 'Ú'||strTexto[indiceAux] == 'Ù'||strTexto[indiceAux] == 'Ü'||strTexto[indiceAux] == 'Û')
+            {
+                strTexto[indiceAux] = 'U';
+            }
+            if(strTexto[indiceAux] == 'ç')
+            {
+                strTexto[indiceAux] = 'c';
+            }
+            if(strTexto[indiceAux] == 'Ç')
+            {
+                strTexto[indiceAux] = 'C';
+            }
+            
+            if(strBusca[indBusca] == 'à' || strBusca[indBusca] == 'á' || strBusca[indBusca] == 'â' || strBusca[indBusca] == 'ã'|| strBusca[indBusca] == 'ä')
+            {
+                strBusca[indBusca] = 'a';
+            }
+            if(strBusca[indBusca] == 'À' || strBusca[indBusca] == 'Á' || strBusca[indBusca] == 'Â' || strBusca[indBusca] == 'Ã'|| strBusca[indBusca] == 'Ä')
+            {
+                strBusca[indBusca] = 'A';
+            }
+            if(strBusca[indBusca] == 'è' || strBusca[indBusca] == 'é' || strBusca[indBusca] == 'ê' || strBusca[indBusca] == 'ë')
+            {
+                strBusca[indBusca] = 'e';
+            }
+            if(strBusca[indBusca] == 'È' || strBusca[indBusca] == 'É' || strBusca[indBusca] == 'Ê' || strBusca[indBusca] == 'Ë')
+            {
+                strBusca[indBusca] = 'E';
+            }
+            if(strBusca[indBusca] == 'ì' || strBusca[indBusca] == 'í' || strBusca[indBusca] == 'î' || strBusca[indBusca] == 'ï')
+            {
+                strBusca[indBusca] = 'i';
+            }
+            if(strBusca[indBusca] == 'Ì' || strBusca[indBusca] == 'Í' || strBusca[indBusca] == 'Î' || strBusca[indBusca] == 'Ï')
+            {
+                strBusca[indBusca] = 'I';
+            }
+            if(strBusca[indBusca] == 'ò' || strBusca[indBusca] == 'ó' || strBusca[indBusca] == 'ô' || strBusca[indBusca] == 'õ'|| strBusca[indBusca] == 'ö')
+            {
+                strBusca[indBusca] = 'o';
+            }
+            if(strBusca[indBusca] == 'Ò' || strBusca[indBusca] == 'Ó' || strBusca[indBusca] == 'Ô' || strBusca[indBusca] == 'Õ'|| strBusca[indBusca] == 'Ö')
+            {
+                strBusca[indBusca] = 'O';
+            }
+            if(strBusca[indBusca] == 'ù' || strBusca[indBusca] == 'ú' || strBusca[indBusca] == 'û' || strBusca[indBusca] == 'ü')
+            {
+                strBusca[indBusca] = 'u';
+            }
+            if(strBusca[indBusca] == 'Ù' || strBusca[indBusca] == 'Ú' || strBusca[indBusca] == 'Û' || strBusca[indBusca] == 'Ü')
+            {
+                strBusca[indBusca] = 'U';
+            }
+            if(strBusca[indBusca] == 'ç')
+            {
+                strBusca[indBusca] = 'c';
+            }
+            if(strBusca[indBusca] == 'Ç')
+            {
+                strBusca[indBusca] = 'c';
+            }
+            
             if(strTexto[indiceAux] == strBusca[indBusca])
                 contaCorretos++;
         }
@@ -764,7 +863,6 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
         }
             
     }
-    
     return qtdOcorrencias;
 }
 
