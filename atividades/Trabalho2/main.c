@@ -1,39 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
 #include "estruturaVetores.h"
 
 int main(void)
 {
 	setlocale(LC_ALL, "Portuguese");
-	//int *estrutura[QTD_POSICOES];
 	
-	int opcao = 0;
-	do
-	{
-		printf("Digite a opção que deseja escolher: ");
+	int estrutura[TAM];
+	int op;
+	do{
+		system("cls");
+		printf("Escolha uma das opções:\n");
 		printf("0 - Sair\n");
-		printf("1 - Inserir elemento\n");
-		scanf("%d", &opcao);
+		printf("1 - Inserir elemento em estrutura auxiliar\n::");
+		scanf("%d", &op);
+		while(getchar() != '\n');
 		
-		switch(opcao)
+		limparVetor(estrutura);
+		switch(op)
 		{
-			case 0: printf("Sair\n");break;
-			case 1:{
-				//Inserir elemento
+			case 0: printf("Saindo...\n");break;
+			case 1: {
+				inserirElemento();
 			}break;
-			case 2:{
-
-			}break;
-			case 3:{
-
-			}break;
-			case 4:{
-					
-			}break;
-			default: printf("Inválido\n");
+			default: printf("INPUT INVÁLIDO\n");break;
 		}
-	}while(opcao != 0);
-	
-	
+	}while(op != 0);
+		
 	return 0;
 }

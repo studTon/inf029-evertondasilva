@@ -1,7 +1,11 @@
 #ifndef ESTRUTURAVETORES_H
 #define ESTRUTURAVETORES_H
-#define QTD_POSICOES 10
-#define CORRETO 1
-#define INCORRETO 1
-//int *estrutura[QTD_POSICOES];
+#define TAM 10
+#define CONFIGURAR 2
+#define SUCESSO 1
+#define INCORRETO 0
+int estrutura[TAM];
+void limparVetor(int *vetor);
+int inserirElemento(void);
+int checarEstruturaAux(int posicao);
 #endif
