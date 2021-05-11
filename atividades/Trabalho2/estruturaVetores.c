@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "estruturaVetores.h"
 
 int estrutura[TAM];
@@ -9,24 +10,60 @@ void limparVetor(int *vetor)
 		vetor[iCont] = 0;
 }
 
-int inserirElemento(void) 
+void inserirElemento(void) 
 {
+	int op = 1;
 	int posicao;
-	printf("Digite o número da posição em que deseja colocar o elemento (Entre 1 e 10): ");
-	scanf("%d", &posicao);
-	while(getchar() != '\n');
-	
-	if(checarEstruturaAux(posicao) == SUCESSO)
+	do
 	{
-		return SUCESSO;
-	}
-
-	return posicao;	
+		printf("Digite o número da posição em que deseja colocar o elemento (Entre 1 e 10): ");
+		scanf("%d", &posicao);
+		while(getchar() != '\n');
+		
+		if(checarEstruturaAux(posicao) == SUCESSO)
+		{
+			int posAuxiliar;
+			int elemento;
+			printf("Digite a posição que deseja inserir o elemento na estrutura auxiliar(tamanho %d espaços)\n::", sizeof(estrutura[posicao]));
+			scanf("%d", &posAuxiliar);
+			while(getchar() != '\n');
+			printf("Digite o valor do elemento::\n");
+			scanf("%d", &elemento);
+			while(getchar() != '\n');
+			//resolver aqui
+			estrutura[posicao][posAuxiliar] = elemento;
+			printf("SUCESSO\n");
+		}
+		else
+		{
+			printf("Você precisa configurar uma estrutura auxiliar na posição %d\n", posicao);
+			
+			int tamanho;
+			printf("Qual o tamanho da estrutura auxiliar que você deseja criar?\n");
+			scanf("%d", &tamanho);
+			
+			if(criarEstruturaAux(posicao, tamanho) == SUCESSO)
+			{
+				printf("Estrutura auxiliar criada com SUCESSO\n");
+			}
+			else
+			{
+				printf("Ocorreu algum erro\n");
+			}
+		}
+		
+		printf("Deseja continuar? (0 - Voltar|Outro número - Continuar)\n::");
+		scanf("%d", &op);
+		while(getchar() != '\n');
+		system("pause");
+		
+	}while(op != 0);
+	printf("Saindo...\n");
 }
 
 int checarEstruturaAux(int posicao)
 {
-	if (posicao == 0)
+	if (estrutura[posicao] == 0)
 	{
 		return CONFIGURAR; 
 	}
@@ -34,4 +71,11 @@ int checarEstruturaAux(int posicao)
 	{
 		return SUCESSO;
 	}
+}
+
+int criarEstruturaAux(int posicao, int tamanho)
+{
+	int *auxiliar = malloc(tamanho * sizeof(int));
+	estrutura[posicao] = *auxiliar;
+	return SUCESSO;
 }
