@@ -31,7 +31,7 @@ void inserirElemento(void)
 			scanf("%d", &elemento);
 			while(getchar() != '\n');
 			//resolver aqui
-			estrutura[posicao][posAuxiliar] = elemento;
+			*estrutura[posicao] + posAuxiliar = elemento;
 			printf("SUCESSO\n");
 		}
 		else

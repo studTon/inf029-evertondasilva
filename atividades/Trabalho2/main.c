@@ -7,7 +7,7 @@ int main(void)
 {
 	setlocale(LC_ALL, "Portuguese");
 	
-	int estrutura[TAM];
+	int *estrutura = malloc(TAM * sizeof(int));
 	int op;
 	do{
 		system("cls");
@@ -27,6 +27,7 @@ int main(void)
 			default: printf("INPUT INVÁLIDO\n");break;
 		}
 	}while(op != 0);
-		
+	
+	free(estrutura);
 	return 0;
 }
