@@ -7,7 +7,7 @@ int main(void)
 {
 	setlocale(LC_ALL, "Portuguese");
 	
-	int *estrutura = malloc(TAM * sizeof(int));
+	int *estrutura[TAM];
 	int op;
 	do{
 		system("cls");
@@ -28,6 +28,6 @@ int main(void)
 		}
 	}while(op != 0);
 	
-	free(estrutura);
+	//free(estrutura);
 	return 0;
 }

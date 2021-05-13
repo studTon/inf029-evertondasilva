@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "estruturaVetores.h"
 
-int estrutura[TAM];
+int *estrutura[TAM];
 
-void limparVetor(int *vetor)
+void limparVetor(int **vetor)
 {
 	for(int iCont = 0; iCont < TAM; iCont++)
 		vetor[iCont] = 0;
@@ -24,14 +24,15 @@ void inserirElemento(void)
 		{
 			int posAuxiliar;
 			int elemento;
-			printf("Digite a posição que deseja inserir o elemento na estrutura auxiliar(tamanho %d espaços)\n::", sizeof(estrutura[posicao]));
+			printf("Digite a posição que deseja inserir o elemento na estrutura auxiliar\n::");
 			scanf("%d", &posAuxiliar);
 			while(getchar() != '\n');
 			printf("Digite o valor do elemento::\n");
 			scanf("%d", &elemento);
 			while(getchar() != '\n');
 			//resolver aqui
-			*estrutura[posicao] + posAuxiliar = elemento;
+			//
+			(estrutura)[posAuxiliar] = elemento;
 			printf("SUCESSO\n");
 		}
 		else
@@ -78,4 +79,17 @@ int criarEstruturaAux(int posicao, int tamanho)
 	int *auxiliar = malloc(tamanho * sizeof(int));
 	estrutura[posicao] = *auxiliar;
 	return SUCESSO;
+}
+
+void exibirElementos(int posProcurada)
+{
+	if(checarEstruturaAux(posProcurada) == SUCESSO)
+	{
+		printf("Listar elementos da lista %d\n", posProcurada);
+		for(int iCont = 0; iCont < sizeof(estrutura[posProcurada]; iCont++))
+		{
+			printf("-- %d\n", estrutura[posProcurada] + iCont);
+		}
+	}
+	
 }
