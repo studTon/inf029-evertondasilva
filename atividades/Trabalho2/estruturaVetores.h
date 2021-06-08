@@ -6,7 +6,5 @@
 #define INCORRETO 0
 void limparVetor(int *vetor);
 void inserirElemento(void);
-int checarEstruturaAux(int posicao);
-int criarEstruturaAux(int posicao, int tamanho);
-void exibirElementos(int posProcurada);
+int criarEstruturaAux(void);
 #endif

@@ -19,9 +19,13 @@ int main(void)
 		
 		switch(op)
 		{
-			case 0: printf("Sair\n"); break;
-			case 1: printf("Inserir estrutura auxiliar\n"); break;
-			default: printf("Entrada invÃ¡lida\n"); break;		
+			case 0: printf("Saindo...\n"); break;
+			case 1: {
+				printf("Inserir estrutura auxiliar\n");
+				
+			}
+				break;
+			default: printf("Entrada inválida\n"); break;		
 		}
 		
 	}

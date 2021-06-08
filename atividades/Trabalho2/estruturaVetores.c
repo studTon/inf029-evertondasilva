@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "estruturaVetores.h"
 
+int principal[TAM];
+
 
 void limparVetor(int *vetor)
 {
@@ -15,34 +17,21 @@ void inserirElemento(void)
 	int posicao;
 }
 
-int checarEstruturaAux(int posicao)
+int criarEstruturaAux(void)
 {
-	/*if ()
-	{
-		return CONFIGURAR; 
-	}
-	else
-	{
-		return SUCESSO;
-	}*/
-}
-
-int criarEstruturaAux(int posicao, int tamanho)
-{
-	int auxiliar[tamanho];
-	//*estrutura[posicao] = &auxiliar[0];
-	return SUCESSO;
-}
-
-void exibirElementos(int posProcurada)
-{
-	if(checarEstruturaAux(posProcurada) == SUCESSO)
-	{
-		/*printf("Listar elementos da lista %d\n", posProcurada);
-		for(int iCont = 0; iCont > 1 ;sizeof(); iCont++)
-		{
-			printf("-- %d\n", estrutura[posProcurada] + iCont);
-		}*/
-	}
+	limparVetor(principal);
+	int posicao;
 	
+	printf("Digite em qual posição deseja inserir uma estrutura auxiliar:");
+	scanf("%d*%c", &posicao);
+	
+	int tamanho;
+	printf("Digite o tamanho da estrutura:");
+	scanf("%d*%c", &tamanho);
+	
+	int auxiliar[tamanho];
+	
+	//principal[posicao] = auxiliar;
+	
+	return SUCESSO;
 }
