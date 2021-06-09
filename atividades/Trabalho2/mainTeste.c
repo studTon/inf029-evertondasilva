@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "EstruturaVetores.h"
+#include "estruturaVetores.h"
 
 void show_log(char *str);
 

@@ -1,28 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "EstruturaVetores.h"
+#include <locale.h>
+#include "estruturaVetores.h"
 
 int menu();
 
-void dobrar(int *x);
+//void dobrar(int *x);
 
 int menu()
 {
     int op;
-    printf("Digite as op√ß√£o desejada\n");
+    printf("Digite as opÁ„o desejada\n");
     printf("0 - Sair\n");
     printf("1 - Inserir\n");
     printf("2 - Excluir\n");
     printf("3 - Listar uma estrutura\n");
     printf("4 - Dobrar Numero\n");
-    printf("5 - \n");
+    printf("5 - \n::");
     scanf("%d", &op);
     return op;
 }
 
 int main()
 {
+	setlocale(LC_ALL, "Portuguese");
     inicializar();
     int op;
     int sair = 0;
@@ -41,14 +42,14 @@ int main()
         case 1:
         { //inserir
             //TODO
-            ret = inserirNumeroEmEstrutura(5, 25);
+            //ret = inserirNumeroEmEstrutura(5, 25);
             if (ret == SUCESSO)
             {
                 printf("Inserido com sucesso");
             }
             else if (ret == SEM_ESPACO)
             {
-                printf("Sem Espa√ßo");
+                printf("Sem EspaÁo");
             }
             else if (ret == SEM_ESTRUTURA_AUXILIAR)
             {
@@ -69,17 +70,17 @@ int main()
             printf("Qual a estrutura a ser listada (1..10)?");
             scanf("%d", &posicao);
 
-            int qtd = getQuantidadeElementosEstruturaAuxiliar(posicao);
+            int qtd = 0;//getQuantidadeElementosEstruturaAuxiliar(posicao);
 
             if (qtd == POSICAO_INVALIDA)
             {
-                printf("Posi√ß√£o inv√°lida");
+                printf("PosiÁ„o inv·lida\n");
             }
             else
             { // existe elemento
                 int vetorAux[qtd];
 
-                retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
+                //retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
 
                 if (retorno == SUCESSO)
                 {
@@ -100,7 +101,7 @@ int main()
             int valor;
             scanf("%i", &valor);
 
-            dobrar(&valor);
+            //dobrar(&valor);
 
             //passar para um funcao (void dobrar(...)) que recebe o numero e dobra (EstruturaVetores.c)
 

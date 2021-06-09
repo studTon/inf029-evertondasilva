@@ -1,5 +1,5 @@
-#ifndef TRABALHO2_ESTRUTURAVETORES_H
-#define TRABALHO2_ESTRUTURAVETORES_H
+#ifndef ESTRUTURAVETORES_H
+#define ESTRUTURAVETORES_H
 
 // enumeracoes (enum) ajudam a deixar o codigo mais legivel, possibilitando que voce de significado
 // as suas constantes, para mais informacoes https://en.cppreference.com/w/c/language/enum
@@ -15,7 +15,7 @@ typedef struct reg {
 } No;
 
 int criarEstruturaAuxiliar(int posicao, int tamanho);
-int inserirNumeroEmEstrutura(int posicao, int valor);
+/*int inserirNumeroEmEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor);
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]);
@@ -27,9 +27,9 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao);
 No *montarListaEncadeadaComCabecote();
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]);
 void destruirListaEncadeadaComCabecote(No **inicio);
-
+*/
 void inicializar();
 void finalizar();
-void dobrar(int *x);
+//void dobrar(int *x);
 
 #endif  // TRABALHO2_ESTRUTURAVETORES_H

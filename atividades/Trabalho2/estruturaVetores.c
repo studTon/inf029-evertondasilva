@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 10
-
-#include "EstruturaVetores.h"
+#include "estruturaVetores.h"
 
 int vetorPrincipal[TAM];
 
@@ -265,6 +264,8 @@ Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 
 void inicializar()
 {
+	printf("***ESTRUTURA DE NÚMEROS***\n\n");
+	
 }
 
 /*
