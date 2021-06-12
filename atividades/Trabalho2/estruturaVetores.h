@@ -14,8 +14,10 @@ typedef struct reg {
     struct reg *prox;
 } No;
 
+#define TAM 11
+
 int criarEstruturaAuxiliar(int posicao, int tamanho);
-/*int inserirNumeroEmEstrutura(int posicao, int valor);
+int inserirNumeroEmEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor);
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]);
@@ -27,7 +29,7 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao);
 No *montarListaEncadeadaComCabecote();
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]);
 void destruirListaEncadeadaComCabecote(No **inicio);
-*/
+
 void inicializar();
 void finalizar();
 //void dobrar(int *x);
