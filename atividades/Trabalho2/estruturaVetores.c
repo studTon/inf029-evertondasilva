@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM 10
 #include "estruturaVetores.h"
 
-int vetorPrincipal[TAM];
+int* vetorPrincipal[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -18,17 +17,24 @@ Rertono (int)
 */
 int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
-
-    int retorno = 0;
+    	int retorno = 0;
     // a posicao pode já existir estrutura auxiliar
-    retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+	if(posicao < 1 || posicao > 10)
+    	retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+	else
     // se posição é um valor válido {entre 1 e 10}
-    retorno = POSICAO_INVALIDA;
+	if(tamanho <= TAM - 1 && tamanho >= 1)
+    	retorno = POSICAO_INVALIDA;
+	else
     // o tamanho ser muito grande
-    retorno = SEM_ESPACO_DE_MEMORIA;
+	if(tamanho > TAM - 1)
+    	retorno = SEM_ESPACO_DE_MEMORIA;
+	else
     // o tamanho nao pode ser menor que 1
-    retorno = TAMANHO_INVALIDO;
+	if(tamanho < 1)
+    	retorno = TAMANHO_INVALIDO;
     // deu tudo certo, crie
+	else
     retorno = SUCESSO;
 
     return retorno;
@@ -61,6 +67,11 @@ int inserirNumeroEstrutura(int posicao, int valor)
             if (temEspaco)
             {
                 //insere
+				int aux[valor];
+				vetorPrincipal[posicao] = aux;
+				
+				
+				
                 retorno = SUCESSO;
             }
             else
