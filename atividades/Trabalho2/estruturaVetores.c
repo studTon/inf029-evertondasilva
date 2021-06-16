@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "estruturaVetores.h"
 
-int vetorPrincipal[TAM];
+int* vetorPrincipal[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -67,6 +67,11 @@ int inserirNumeroEstrutura(int posicao, int valor)
             if (temEspaco)
             {
                 //insere
+				int aux[valor];
+				vetorPrincipal[posicao] = aux;
+				
+				
+				
                 retorno = SUCESSO;
             }
             else

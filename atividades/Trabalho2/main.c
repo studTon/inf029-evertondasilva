@@ -42,7 +42,13 @@ int main()
         case 1:
         { //inserir
             //TODO
-            //ret = inserirNumeroEmEstrutura(5, 25);
+			int posicao;
+			int tamanho;
+			printf("Digite a posicao que deseja criar estrutura auxiliar: ");
+			scanf("%d", &posicao);
+			printf("Digite o tamanho da estrutura que deseja criar: ");
+			scanf("%d", &tamanho);
+            ret = inserirNumeroEstrutura(posicao, tamanho);
             if (ret == SUCESSO)
             {
                 printf("Inserido com sucesso");

@@ -17,7 +17,7 @@ typedef struct reg {
 #define TAM 11
 
 int criarEstruturaAuxiliar(int posicao, int tamanho);
-int inserirNumeroEmEstrutura(int posicao, int valor);
+int inserirNumeroEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor);
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]);
