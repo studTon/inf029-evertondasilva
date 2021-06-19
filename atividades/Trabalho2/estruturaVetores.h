@@ -18,6 +18,7 @@ typedef struct reg {
 
 int criarEstruturaAuxiliar(int posicao, int tamanho);
 int inserirNumeroEstrutura(int posicao, int valor);
+void inserirElemento( int* vetor, int posicao, int tam);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor);
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]);

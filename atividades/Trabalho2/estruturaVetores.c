@@ -84,10 +84,25 @@ int inserirNumeroEstrutura(int posicao, int valor)
             retorno = SEM_ESTRUTURA_AUXILIAR;
         }
     }
+	
+	inserirElemento(*vetorPrincipal, posicao, valor);
+	
 
     return retorno;
 }
 
+void inserirElemento( int* vetor, int posicao, int tam)
+	{	
+		//Adicionar elementos na estrutura auxiliar
+		/*int elemento;
+		for(int posElemento = 0; posElemento < tam; posElemento++)
+		{	
+			printf("Digite um elemento para a posicao %d: ", posElemento);
+			scanf("%d", &elemento);
+			vetor[posicao][posElemento] = elemento;
+		} RESOLVER AQUI*/
+	}
+	
 /*
 Objetivo: excluir o numero 'valor' da estrutura auxiliar no final da estrutura.
 ex: suponha os valores [3, 8, 7, 9,  ,  ]. Após excluir, a estrutura deve ficar da seguinte forma [3, 8, 7,  ,  ,  ].
@@ -232,6 +247,15 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 {
 
     int retorno = 0;
+	int iCont;
+	int contador = 0;
+	for( iCont = 1; iCont <= TAM; iCont++ )
+	{
+		contador++;
+		vetorPrincipal[posicao][contador];
+	}
+	
+	retorno = contador;
 
     return retorno;
 }
@@ -287,4 +311,5 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
+	printf("***PROGRAMA ENCERRADO***\n\n");
 }

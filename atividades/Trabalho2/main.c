@@ -76,7 +76,7 @@ int main()
             printf("Qual a estrutura a ser listada (1..10)?");
             scanf("%d", &posicao);
 
-            int qtd = 0;//getQuantidadeElementosEstruturaAuxiliar(posicao);
+            int qtd = getQuantidadeElementosEstruturaAuxiliar(posicao);
 
             if (qtd == POSICAO_INVALIDA)
             {
@@ -86,13 +86,13 @@ int main()
             { // existe elemento
                 int vetorAux[qtd];
 
-                //retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
+                retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
 
                 if (retorno == SUCESSO)
                 {
                     //imprimir para os dados para o usuário
-                    int i = 0;
-                    for (; i < qtd; i++)
+                    int i;
+                    for (i = 0; i < qtd; i++)
                     {
                         printf("%d", vetorAux[i]);
                     }
