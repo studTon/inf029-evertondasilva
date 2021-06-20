@@ -51,15 +51,15 @@ int main()
             ret = inserirNumeroEstrutura(posicao, tamanho);
             if (ret == SUCESSO)
             {
-                printf("Inserido com sucesso");
+                printf("Inserido com sucesso\n");
             }
             else if (ret == SEM_ESPACO)
             {
-                printf("Sem Espaço");
+                printf("Sem Espaço\n");
             }
             else if (ret == SEM_ESTRUTURA_AUXILIAR)
             {
-                printf("Sem estrutura Auxiliar");
+                printf("Sem estrutura Auxiliar\n");
             }
             break;
         }
@@ -89,7 +89,7 @@ int main()
 				int pos;
 				printf("Digite a posição: ");
 				scanf("%d", &pos);
-				printf("Digite o número que está na estrutura\n");
+				printf("Digite o número que está na estrutura: ");
 				scanf("%d", &num);
 				excluirNumeroEspecificoDeEstrutura(pos, num);
 			}

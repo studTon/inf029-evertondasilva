@@ -99,6 +99,7 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
+	vetorPrincipal[posicao].auxiliar = 0;
     int retorno = SUCESSO;
     return retorno;
 }
@@ -118,6 +119,10 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
+	if(vetorPrincipal[posicao].auxiliar == valor)
+	{
+		vetorPrincipal[posicao].auxiliar = 0;
+	}
     int retorno = SUCESSO;
     return retorno;
 }
