@@ -11,8 +11,9 @@ enum { TODAS_ESTRUTURAS_AUXILIARES_VAZIAS = -11, NOVO_TAMANHO_INVALIDO, NUMERO_I
 
 typedef struct reg {
     int conteudo;
+	int auxiliar;
     struct reg *prox;
-} No;
+} estrutura;
 
 #define TAM 11
 
@@ -25,11 +26,11 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]);
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[]);
 int getDadosDeTodasEstruturasAuxiliares(int vetorAux[]);
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[]);
-int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho);
+int modificarTamanhoEstruturaAuxiliar(int posicao, int estruturavoTamanho);
 int getQuantidadeElementosEstruturaAuxiliar(int posicao);
-No *montarListaEncadeadaComCabecote();
-void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]);
-void destruirListaEncadeadaComCabecote(No **inicio);
+//estrutura *montarListaEncadeadaComCabecote();
+void getDadosListaEncadeadaComCabecote(estrutura *inicio, int vetorAux[]);
+void destruirListaEncadeadaComCabecote(estrutura **inicio);
 
 void inicializar();
 void finalizar();

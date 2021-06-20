@@ -66,7 +66,33 @@ int main()
 
         case 2:
         { //excluir
-            //TODO
+            int op;
+			printf("Digite o que deseja fazer: \n");
+			printf("0 - Voltar\n");
+			printf("1 - Excluir no final da estrutura\n");
+			printf("2 - Excluir numero especifico da estrutura\n");
+			scanf("%d", &op);
+			if( op == 0 )
+				break;
+			else
+			if (op == 1)
+			{
+				int pos;
+				printf("Digite a posição: ");
+				scanf("%d", &pos);
+				excluirNumeroDoFinaldaEstrutura(pos);
+			}
+			else
+			if (op == 2)
+			{
+				int num;
+				int pos;
+				printf("Digite a posição: ");
+				scanf("%d", &pos);
+				printf("Digite o número que está na estrutura\n");
+				scanf("%d", &num);
+				excluirNumeroEspecificoDeEstrutura(pos, num);
+			}
             break;
         }
 

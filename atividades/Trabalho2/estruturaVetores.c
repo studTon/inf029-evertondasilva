@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "estruturaVetores.h"
 
-int* vetorPrincipal[TAM];
+estrutura vetorPrincipal[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -68,9 +68,7 @@ int inserirNumeroEstrutura(int posicao, int valor)
             {
                 //insere
 				int aux[valor];
-				vetorPrincipal[posicao] = aux;
-				
-				
+				vetorPrincipal[posicao].auxiliar = aux[valor];
 				
                 retorno = SUCESSO;
             }
@@ -85,23 +83,8 @@ int inserirNumeroEstrutura(int posicao, int valor)
         }
     }
 	
-	inserirElemento(*vetorPrincipal, posicao, valor);
-	
-
     return retorno;
 }
-
-void inserirElemento( int* vetor, int posicao, int tam)
-	{	
-		//Adicionar elementos na estrutura auxiliar
-		/*int elemento;
-		for(int posElemento = 0; posElemento < tam; posElemento++)
-		{	
-			printf("Digite um elemento para a posicao %d: ", posElemento);
-			scanf("%d", &elemento);
-			vetor[posicao][posElemento] = elemento;
-		} RESOLVER AQUI*/
-	}
 	
 /*
 Objetivo: excluir o numero 'valor' da estrutura auxiliar no final da estrutura.
@@ -251,8 +234,10 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 	int contador = 0;
 	for( iCont = 1; iCont <= TAM; iCont++ )
 	{
-		contador++;
-		vetorPrincipal[posicao][contador];
+		if(vetorPrincipal[posicao].auxiliar >= 0)
+		{
+			contador++;
+		}
 	}
 	
 	retorno = contador;
@@ -263,21 +248,21 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 /*
 Objetivo: montar a lista encadeada com cabeçote com todos os números presentes em todas as estruturas.
 
-Retorno (No*)
+Retorno (estrutura*)
     NULL, caso não tenha nenhum número nas listas
-    No*, ponteiro para o início da lista com cabeçote
+    estrutura*, ponteiro para o início da lista com cabeçote
 */
-No *montarListaEncadeadaComCabecote()
+/*estrutura *montarListaEncadeadaComCabecote()
 {
 
     return NULL;
-}
+}*/
 
 /*
 Objetivo: retorna os números da lista enceada com cabeçote armazenando em vetorAux.
 Retorno void
 */
-void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[])
+void getDadosListaEncadeadaComCabecote(estrutura *inicio, int vetorAux[])
 {
 }
 
@@ -288,7 +273,7 @@ O ponteiro inicio deve ficar com NULL.
 Retorno 
     void.
 */
-void destruirListaEncadeadaComCabecote(No **inicio)
+void destruirListaEncadeadaComCabecote(estrutura **inicio)
 {
 }
 
