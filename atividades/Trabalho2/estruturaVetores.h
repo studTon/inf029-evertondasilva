@@ -13,13 +13,12 @@ typedef struct reg {
     int conteudo;
 	int auxiliar;
     struct reg *prox;
-} estrutura;
+} No;
 
 #define TAM 11
 
 int criarEstruturaAuxiliar(int posicao, int tamanho);
-int inserirNumeroEstrutura(int posicao, int valor);
-void inserirElemento( int* vetor, int posicao, int tam);
+int inserirNumeroEmEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor);
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[]);
@@ -28,12 +27,12 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[]);
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[]);
 int modificarTamanhoEstruturaAuxiliar(int posicao, int estruturavoTamanho);
 int getQuantidadeElementosEstruturaAuxiliar(int posicao);
-//estrutura *montarListaEncadeadaComCabecote();
-void getDadosListaEncadeadaComCabecote(estrutura *inicio, int vetorAux[]);
-void destruirListaEncadeadaComCabecote(estrutura **inicio);
+No *montarListaEncadeadaComCabecote();
+void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]);
+void destruirListaEncadeadaComCabecote(No **inicio);
 
 void inicializar();
 void finalizar();
-//void dobrar(int *x);
+void dobrar(int *x);
 
 #endif  // TRABALHO2_ESTRUTURAVETORES_H
