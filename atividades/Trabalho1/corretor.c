@@ -7,7 +7,7 @@
 
 //  ----- Orientações gerais -----
 //  Descrição: esse arquivo contém exemplos de testes das questões do trabalho.
-//  o aluno pode incrementar os testes
+//  o aluNo pode incrementar os testes
 
 //  Copyright © 2016 Renato Novais. All rights reserved.
 // Útima atualização: 19/08/2016 - 12/12/2018
@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
-//renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.c
+//reNomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.c
 #include "EvertonDaSilva20192160012.h"
 
 void testSomar();    //fun??o utilizada para testes
@@ -89,70 +89,70 @@ void testQ1()
 void testQ2()
 {
     char datainicial[11], datafinal[11];
-    int qtdDias, qtdMeses, qtdAnos;
-    int retorno;
+    int qtdDias, qtdMeses, qtdANos;
+    int retorNo;
 
     //teste 1
     qtdDias = -1;
     qtdMeses = -1;
-    qtdAnos = -1;
+    qtdANos = -1;
 
     strcpy(datainicial, "01/06/2015");
     strcpy(datafinal, "15/07/2015");
-    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
-    printf("%d\n", retorno == 1);
+    retorNo = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdANos);
+    printf("%d\n", retorNo == 1);
     printf("%d\n", qtdDias == 14);
     printf("%d\n", qtdMeses == 1);
-    printf("%d\n", qtdAnos == 0);
+    printf("%d\n", qtdANos == 0);
 
-    //teste 2 - retornos
+    //teste 2 - retorNos
     qtdDias = -1;
     qtdMeses = -1;
-    qtdAnos = -1;
+    qtdANos = -1;
 
     strcpy(datainicial, "01/30/2015");
     strcpy(datafinal, "01/06/2016");
-    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
-    printf("%d\n", retorno == 2);
+    retorNo = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdANos);
+    printf("%d\n", retorNo == 2);
 
     strcpy(datainicial, "01/3/2015");
     strcpy(datafinal, "40/06/2016");
-    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
-    printf("%d\n", retorno == 3);
+    retorNo = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdANos);
+    printf("%d\n", retorNo == 3);
 
     strcpy(datainicial, "01/06/2016");
     strcpy(datafinal, "01/06/2015");
-    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
-    printf("%d\n", retorno == 4);
+    retorNo = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdANos);
+    printf("%d\n", retorNo == 4);
 
     //teste 3
     
     qtdDias = -1;
     qtdMeses = -1;
-    qtdAnos = -1;
+    qtdANos = -1;
 
     strcpy(datainicial, "06/06/2017");
     strcpy(datafinal, "07/07/2017");
-    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
-    printf("%d\n", retorno == 1);
+    retorNo = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdANos);
+    printf("%d\n", retorNo == 1);
     printf("%d\n", qtdDias == 1);
     printf("%d\n", qtdMeses == 1);
-    printf("%d\n", qtdAnos == 0);
+    printf("%d\n", qtdANos == 0);
     
     //teste 4
     
     qtdDias = -1;
     qtdMeses = -1;
-    qtdAnos = -1;
+    qtdANos = -1;
     
     strcpy(datainicial, "01/06/2015");
     strcpy(datafinal, "04/06/2015");
     
-    retorno = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdAnos);
-    printf("%d\n", retorno == 1);
+    retorNo = q2(datainicial, datafinal, &qtdDias, &qtdMeses, &qtdANos);
+    printf("%d\n", retorNo == 1);
     printf("%d\n", qtdDias == 3);
     printf("%d\n", qtdMeses == 0);
-    printf("%d\n", qtdAnos == 0);
+    printf("%d\n", qtdANos == 0);
 }
 
 void testQ3()

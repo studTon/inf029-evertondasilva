@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include "disciplina.h"
-#include "aluno.h"
+#include "aluNo.h"
 #include "professor.h"
 #include "relatorios.h"
 #include "utilitarios.h"
 
-int cadastrosComSucessoAluno;
+int cadastrosComSucessoAluNo;
 int cadastrosComSucessoProf;
 int disciplinasCadastradas;
 
-cadastroAluno aluno[QTD_DE_ALUNOS];
+cadastroAluNo aluNo[QTD_DE_ALUNoS];
 cadastroDisc disciplina[QTD_DE_DISC];
-alunoIrregular alunosIrregulares[QTD_DE_ALUNOS];
+aluNoIrregular aluNosIrregulares[QTD_DE_ALUNoS];
 
 void menuRelatorios()
 {    
@@ -25,19 +25,19 @@ void menuRelatorios()
         /*menu Relatórios*/
         printf("\nEscolha uma opcao a seguir:\n");
         printf("0 - Voltar\n");
-        printf("1 - Alunos ordenados por sexo\n");
-        printf("2 - Alunos ordenados por nome\n");
-        printf("3 - Alunos ordenados por data de nascimento\n");
+        printf("1 - AluNos ordenados por sexo\n");
+        printf("2 - AluNos ordenados por Nome\n");
+        printf("3 - AluNos ordenados por data de nascimento\n");
         printf("4 - Professores ordenados por sexo\n");
-        printf("5 - Professores ordenados por nome\n");
+        printf("5 - Professores ordenados por Nome\n");
         printf("6 - Professores ordenados por data de nascimento\n");
         printf("7 - Aniversariantes do mes\n");
         printf("8 - Busca de pessoas\n");
-        printf("9 - Alunos matriculados em menos de 3 disciplinas\n");
-        printf("A - Disciplinas, por professor, com mais de 40 alunos\n::");
+        printf("9 - AluNos matriculados em meNos de 3 disciplinas\n");
+        printf("A - Disciplinas, por professor, com mais de 40 aluNos\n::");
         
         scanf("%1c", &opcao);
-        while(getchar() != '\n');/*Pular o char new line no input*/
+        while(getchar() != '\n');/*Pular o char new line No input*/
         if(opcao == 'a')
             opcao = 'A';
         switch(opcao)
@@ -48,15 +48,15 @@ void menuRelatorios()
             }break;
             case '1':
             {
-                listarAlunosPorSexo();      
+                listarAluNosPorSexo();      
             }break;
             case '2':
             {
-                listarAlunosPorNome();
+                listarAluNosPorNome();
             }break;
             case '3':
             {
-                listarAlunosPorData();
+                listarAluNosPorData();
             }break;
             case '4':
             {
@@ -80,7 +80,7 @@ void menuRelatorios()
             }break;
             case '9':
             {
-                alunosComPoucaDisciplina();     
+                aluNosComPoucaDisciplina();     
             }break;
             case 'A':
             {
@@ -96,54 +96,54 @@ void menuRelatorios()
     }
 }
 
-void listarAlunosPorSexo()
+void listarAluNosPorSexo()
 {
-    printf("***ALUNOS POR SEXO***\n");
+    printf("***ALUNoS POR SEXO***\n");
     int iContador = 0;
-    printf("FEMININO\n");
-    while(iContador < cadastrosComSucessoAluno)
+    printf("FEMININo\n");
+    while(iContador < cadastrosComSucessoAluNo)
     {
-        if(aluno[iContador].sexo == 'F')
-            printf("%s\n", aluno[iContador].nome);
+        if(aluNo[iContador].sexo == 'F')
+            printf("%s\n", aluNo[iContador].Nome);
         iContador++;
     }
     iContador = 0;
-    printf("MASCULINO\n");
-    while(iContador < cadastrosComSucessoAluno)
+    printf("MASCULINo\n");
+    while(iContador < cadastrosComSucessoAluNo)
     {
-        if(aluno[iContador].sexo == 'M')
-            printf("%s\n", aluno[iContador].nome);
+        if(aluNo[iContador].sexo == 'M')
+            printf("%s\n", aluNo[iContador].Nome);
         iContador++;
     }
     iContador = 0;
     printf("OUTRO\n");
-    while(iContador < cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluNo)
     {
-        if(aluno[iContador].sexo == 'O')
-            printf("%s\n", aluno[iContador].nome);
+        if(aluNo[iContador].sexo == 'O')
+            printf("%s\n", aluNo[iContador].Nome);
         iContador++;
     }
     printf("==============\nFim da lista...\n\n");
 }
 
-void listarAlunosPorNome()
+void listarAluNosPorNome()
 {
-    printf("***ALUNOS POR NOME***\n");
+    printf("***ALUNoS POR NoME***\n");
     //Ordenar das strings
     int iContador = 0;
     int jContador;
     int achou = 0;
-    //char listaTemporaria[QTD_DE_ALUNOS][TAM_NOME];
+    //char listaTemporaria[QTD_DE_ALUNoS][TAM_NoME];
     char letra = 'A';
 
     while(letra < 'Z' + 1)
     {
         iContador = 0;
         printf("[%c]\n", letra);
-        while(iContador < cadastrosComSucessoAluno)
+        while(iContador < cadastrosComSucessoAluNo)
         {
-            if(aluno[iContador].nome[0] == letra)
-                printf("- %s\n", aluno[iContador].nome);
+            if(aluNo[iContador].Nome[0] == letra)
+                printf("- %s\n", aluNo[iContador].Nome);
             iContador++;
         }
         letra++;
@@ -152,65 +152,65 @@ void listarAlunosPorNome()
     printf("==============\nFim da lista...\n\n");
 }
 
-void listarAlunosPorData()
+void listarAluNosPorData()
 {
-    printf("***ALUNOS POR DATA DE NASCIMENTO***\n");
+    printf("***ALUNoS POR DATA DE NASCIMENTO***\n");
     typedef struct
     {
-        char nome[TAM_NOME];
-        int listarData[3];//|dia|mês|ano|
+        char Nome[TAM_NoME];
+        int listarData[3];//|dia|mês|aNo|
     }fichaTemp;
     
-    fichaTemp alunoListado[QTD_DE_ALUNOS];
+    fichaTemp aluNoListado[QTD_DE_ALUNoS];
     int casaAlgarismo;
     int indiceCaracter;
-    int compararAno;
+    int compararANo;
     int compararMes;
     int compararDia;
     int iContador = 0;
-    while(iContador < cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluNo)
     {
-        //Copiar o nome
+        //Copiar o Nome
         indiceCaracter = 0;
-        while(aluno[iContador].nome[indiceCaracter] != '\0')
+        while(aluNo[iContador].Nome[indiceCaracter] != '\0')
         {
-            alunoListado[iContador].nome[indiceCaracter] = aluno[iContador].nome[indiceCaracter];
+            aluNoListado[iContador].Nome[indiceCaracter] = aluNo[iContador].Nome[indiceCaracter];
             indiceCaracter++;
         }
-        alunoListado[iContador].nome[indiceCaracter] = '\0';
+        aluNoListado[iContador].Nome[indiceCaracter] = '\0';
         //Decompor e listar data
         indiceCaracter = 6;
         casaAlgarismo = 1000;
-        compararAno = 0;
-        while(aluno[iContador].dataNasc[indiceCaracter] != '\0')
+        compararANo = 0;
+        while(aluNo[iContador].dataNasc[indiceCaracter] != '\0')
         {
-            compararAno += (aluno[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
+            compararANo += (aluNo[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
             casaAlgarismo /= 10;
             indiceCaracter++;
         }
-        alunoListado[iContador].listarData[2] = compararAno;
+        aluNoListado[iContador].listarData[2] = compararANo;
         //*****************
         indiceCaracter = 3;
         casaAlgarismo = 10;
         compararMes = 0;
-        while(aluno[iContador].dataNasc[indiceCaracter] != '/')
+        while(aluNo[iContador].dataNasc[indiceCaracter] != '/')
         {
-            compararMes += (aluno[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
+            compararMes += (aluNo[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
             casaAlgarismo /= 10;
             indiceCaracter++;
         }
-        alunoListado[iContador].listarData[1] = compararMes;
+        aluNoListado[iContador].listarData[1] = compararMes;
         //****************
         indiceCaracter = 0;
         casaAlgarismo = 10;
         compararDia = 0;
-        while(aluno[iContador].dataNasc[indiceCaracter] != '/')
+        while(aluNo[iContador].dataNasc[indiceCaracter] != '/')
         {
-            compararDia += (aluno[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
+            compararDia += (aluNo[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
             casaAlgarismo /= 10;
             indiceCaracter++;
         }
-        alunoListado[iContador].listarData[0] = compararDia;
+        aluNoListado[iContador].listarData[0] = compararDia;
         
         iContador++;
     }
@@ -219,46 +219,46 @@ void listarAlunosPorData()
     int auxiliar;
     iContador = 0;
     int jContador;
-    while(iContador < cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluNo)
     {
         jContador = iContador + 1;
-        while(jContador < cadastrosComSucessoAluno)
+        while(jContador < cadastrosComSucessoAluNo)
         {
-            if(alunoListado[iContador].listarData[0] < alunoListado[jContador].listarData[0])
+            if(aluNoListado[iContador].listarData[0] < aluNoListado[jContador].listarData[0])
             {
-                //Copiar o nome******************************************************
-                char copiaNomeTemp[TAM_NOME];
+                //Copiar o Nome******************************************************
+                char copiaNomeTemp[TAM_NoME];
                 indiceCaracter = 0;
-                while(alunoListado[jContador].nome[indiceCaracter] != '\0')
+                while(aluNoListado[jContador].Nome[indiceCaracter] != '\0')
                 {
-                    copiaNomeTemp[indiceCaracter] = alunoListado[jContador].nome[indiceCaracter];
+                    copiaNomeTemp[indiceCaracter] = aluNoListado[jContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
                 copiaNomeTemp[indiceCaracter] = '\0';
                 indiceCaracter = 0;
-                while(alunoListado[iContador].nome[indiceCaracter] != '\0')
+                while(aluNoListado[iContador].Nome[indiceCaracter] != '\0')
                 {
-                    alunoListado[jContador].nome[indiceCaracter] = alunoListado[iContador].nome[indiceCaracter];
+                    aluNoListado[jContador].Nome[indiceCaracter] = aluNoListado[iContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
-                alunoListado[jContador].nome[indiceCaracter] = '\0';
+                aluNoListado[jContador].Nome[indiceCaracter] = '\0';
                 indiceCaracter = 0;
                 while(copiaNomeTemp[indiceCaracter] != '\0')
                 {
-                    alunoListado[iContador].nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
+                    aluNoListado[iContador].Nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
                     indiceCaracter++;
                 }
-                alunoListado[iContador].nome[indiceCaracter] = '\0';
+                aluNoListado[iContador].Nome[indiceCaracter] = '\0';
                 /****************************************************************************/
-                auxiliar = alunoListado[iContador].listarData[0];
-                alunoListado[iContador].listarData[0] = alunoListado[jContador].listarData[0];
-                alunoListado[jContador].listarData[0] = auxiliar;
-                auxiliar = alunoListado[iContador].listarData[1];
-                alunoListado[iContador].listarData[1] = alunoListado[jContador].listarData[1];
-                alunoListado[jContador].listarData[1] = auxiliar;
-                auxiliar = alunoListado[iContador].listarData[2];
-                alunoListado[iContador].listarData[2] = alunoListado[jContador].listarData[2];
-                alunoListado[jContador].listarData[2] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[0];
+                aluNoListado[iContador].listarData[0] = aluNoListado[jContador].listarData[0];
+                aluNoListado[jContador].listarData[0] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[1];
+                aluNoListado[iContador].listarData[1] = aluNoListado[jContador].listarData[1];
+                aluNoListado[jContador].listarData[1] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[2];
+                aluNoListado[iContador].listarData[2] = aluNoListado[jContador].listarData[2];
+                aluNoListado[jContador].listarData[2] = auxiliar;
             }
             jContador++;
         }
@@ -266,102 +266,102 @@ void listarAlunosPorData()
     }
     //Por mês
     iContador = 0;
-    while(iContador < cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluNo)
     {
         jContador = iContador + 1;
-        while(jContador < cadastrosComSucessoAluno)
+        while(jContador < cadastrosComSucessoAluNo)
         {
-            if(alunoListado[iContador].listarData[1] < alunoListado[jContador].listarData[1])
+            if(aluNoListado[iContador].listarData[1] < aluNoListado[jContador].listarData[1])
             {
-                //Copiar o nome******************************************************
-                char copiaNomeTemp[TAM_NOME];
+                //Copiar o Nome******************************************************
+                char copiaNomeTemp[TAM_NoME];
                 indiceCaracter = 0;
-                while(alunoListado[jContador].nome[indiceCaracter] != '\0')
+                while(aluNoListado[jContador].Nome[indiceCaracter] != '\0')
                 {
-                    copiaNomeTemp[indiceCaracter] = alunoListado[jContador].nome[indiceCaracter];
+                    copiaNomeTemp[indiceCaracter] = aluNoListado[jContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
                 copiaNomeTemp[indiceCaracter] = '\0';
                 indiceCaracter = 0;
-                while(alunoListado[iContador].nome[indiceCaracter] != '\0')
+                while(aluNoListado[iContador].Nome[indiceCaracter] != '\0')
                 {
-                    alunoListado[jContador].nome[indiceCaracter] = alunoListado[iContador].nome[indiceCaracter];
+                    aluNoListado[jContador].Nome[indiceCaracter] = aluNoListado[iContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
-                alunoListado[jContador].nome[indiceCaracter] = '\0';
+                aluNoListado[jContador].Nome[indiceCaracter] = '\0';
                 indiceCaracter = 0;
                 while(copiaNomeTemp[indiceCaracter] != '\0')
                 {
-                    alunoListado[iContador].nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
+                    aluNoListado[iContador].Nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
                     indiceCaracter++;
                 }
-                alunoListado[iContador].nome[indiceCaracter] = '\0';
+                aluNoListado[iContador].Nome[indiceCaracter] = '\0';
                 /****************************************************************************/
-                auxiliar = alunoListado[iContador].listarData[0];
-                alunoListado[iContador].listarData[0] = alunoListado[jContador].listarData[0];
-                alunoListado[jContador].listarData[0] = auxiliar;
-                auxiliar = alunoListado[iContador].listarData[1];
-                alunoListado[iContador].listarData[1] = alunoListado[jContador].listarData[1];
-                alunoListado[jContador].listarData[1] = auxiliar;
-                auxiliar = alunoListado[iContador].listarData[2];
-                alunoListado[iContador].listarData[2] = alunoListado[jContador].listarData[2];
-                alunoListado[jContador].listarData[2] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[0];
+                aluNoListado[iContador].listarData[0] = aluNoListado[jContador].listarData[0];
+                aluNoListado[jContador].listarData[0] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[1];
+                aluNoListado[iContador].listarData[1] = aluNoListado[jContador].listarData[1];
+                aluNoListado[jContador].listarData[1] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[2];
+                aluNoListado[iContador].listarData[2] = aluNoListado[jContador].listarData[2];
+                aluNoListado[jContador].listarData[2] = auxiliar;
             }
             jContador++;
         }
         iContador++;
     }
-    //Por ano
+    //Por aNo
     iContador = 0;
-    while(iContador < cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluNo)
     {
         jContador = iContador + 1;
-        while(jContador < cadastrosComSucessoAluno)
+        while(jContador < cadastrosComSucessoAluNo)
         {
-            if(alunoListado[iContador].listarData[2] < alunoListado[jContador].listarData[2])
+            if(aluNoListado[iContador].listarData[2] < aluNoListado[jContador].listarData[2])
             {
-                //Copiar o nome******************************************************
-                char copiaNomeTemp[TAM_NOME];
+                //Copiar o Nome******************************************************
+                char copiaNomeTemp[TAM_NoME];
                 indiceCaracter = 0;
-                while(alunoListado[jContador].nome[indiceCaracter] != '\0')
+                while(aluNoListado[jContador].Nome[indiceCaracter] != '\0')
                 {
-                    copiaNomeTemp[indiceCaracter] = alunoListado[jContador].nome[indiceCaracter];
+                    copiaNomeTemp[indiceCaracter] = aluNoListado[jContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
                 copiaNomeTemp[indiceCaracter] = '\0';
                 indiceCaracter = 0;
-                while(alunoListado[iContador].nome[indiceCaracter] != '\0')
+                while(aluNoListado[iContador].Nome[indiceCaracter] != '\0')
                 {
-                    alunoListado[jContador].nome[indiceCaracter] = alunoListado[iContador].nome[indiceCaracter];
+                    aluNoListado[jContador].Nome[indiceCaracter] = aluNoListado[iContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
-                alunoListado[jContador].nome[indiceCaracter] = '\0';
+                aluNoListado[jContador].Nome[indiceCaracter] = '\0';
                 indiceCaracter = 0;
                 while(copiaNomeTemp[indiceCaracter] != '\0')
                 {
-                    alunoListado[iContador].nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
+                    aluNoListado[iContador].Nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
                     indiceCaracter++;
                 }
-                alunoListado[iContador].nome[indiceCaracter] = '\0';
+                aluNoListado[iContador].Nome[indiceCaracter] = '\0';
                 /****************************************************************************/
-                auxiliar = alunoListado[iContador].listarData[0];
-                alunoListado[iContador].listarData[0] = alunoListado[jContador].listarData[0];
-                alunoListado[jContador].listarData[0] = auxiliar;
-                auxiliar = alunoListado[iContador].listarData[1];
-                alunoListado[iContador].listarData[1] = alunoListado[jContador].listarData[1];
-                alunoListado[jContador].listarData[1] = auxiliar;
-                auxiliar = alunoListado[iContador].listarData[2];
-                alunoListado[iContador].listarData[2] = alunoListado[jContador].listarData[2];
-                alunoListado[jContador].listarData[2] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[0];
+                aluNoListado[iContador].listarData[0] = aluNoListado[jContador].listarData[0];
+                aluNoListado[jContador].listarData[0] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[1];
+                aluNoListado[iContador].listarData[1] = aluNoListado[jContador].listarData[1];
+                aluNoListado[jContador].listarData[1] = auxiliar;
+                auxiliar = aluNoListado[iContador].listarData[2];
+                aluNoListado[iContador].listarData[2] = aluNoListado[jContador].listarData[2];
+                aluNoListado[jContador].listarData[2] = auxiliar;
             }
             jContador++;
         }
         iContador++;
     }
     
-    for(iContador = 0; iContador < cadastrosComSucessoAluno; iContador++)
+    for(iContador = 0; iContador < cadastrosComSucessoAluNo; iContador++)
     {
-        printf("- %s : %d/%d/%d\n", alunoListado[iContador].nome, alunoListado[iContador].listarData[0], alunoListado[iContador].listarData[1], alunoListado[iContador].listarData[2]);
+        printf("- %s : %d/%d/%d\n", aluNoListado[iContador].Nome, aluNoListado[iContador].listarData[0], aluNoListado[iContador].listarData[1], aluNoListado[iContador].listarData[2]);
     }
     printf("==============\nFim da lista...\n\n");
 }
@@ -369,19 +369,19 @@ void listarProfessorPorSexo()
 {
    printf("***PROFESSORES POR SEXO***\n");
     int iContador = 0;
-    printf("FEMININO\n");
+    printf("FEMININo\n");
     while(iContador < cadastrosComSucessoProf)
     {
         if(professor[iContador].sexo == 'F')
-            printf("%s\n", professor[iContador].nome);
+            printf("%s\n", professor[iContador].Nome);
         iContador++;
     }
     iContador = 0;
-    printf("MASCULINO\n");
+    printf("MASCULINo\n");
     while(iContador < cadastrosComSucessoProf)
     {
         if(professor[iContador].sexo == 'M')
-            printf("%s\n", professor[iContador].nome);
+            printf("%s\n", professor[iContador].Nome);
         iContador++;
     }
     iContador = 0;
@@ -389,19 +389,19 @@ void listarProfessorPorSexo()
     while(iContador < cadastrosComSucessoProf)
     {
         if(professor[iContador].sexo == 'O')
-            printf("%s\n", professor[iContador].nome);
+            printf("%s\n", professor[iContador].Nome);
         iContador++;
     }
     printf("==============\nFim da lista...\n\n"); 
 }
 void listarProfessorPorNome()
 {
-    printf("***PROFESSORES POR NOME***\n");
+    printf("***PROFESSORES POR NoME***\n");
     //Ordenar das strings
     int iContador = 0;
     int jContador;
     int achou = 0;
-    //char listaTemporaria[QTD_DE_PROFS][TAM_NOME];
+    //char listaTemporaria[QTD_DE_PROFS][TAM_NoME];
     char letra = 'A';
 
     while(letra < 'Z' + 1)
@@ -410,8 +410,8 @@ void listarProfessorPorNome()
         printf("[%c]\n", letra);
         while(iContador < cadastrosComSucessoProf)
         {
-            if(professor[iContador].nome[0] == letra)
-                printf("- %s\n", professor[iContador].nome);
+            if(professor[iContador].Nome[0] == letra)
+                printf("- %s\n", professor[iContador].Nome);
             iContador++;
         }
         letra++;
@@ -424,39 +424,39 @@ void listarProfessorPorData()
     printf("***PROFESSORES POR DATA DE NASCIMENTO***\n");
     int casaAlgarismo;
     int indiceCaracter;
-    int compararAno;
+    int compararANo;
     int compararMes;
     int compararDia;
     
     int iContador = 0;
     typedef struct
     {
-        char nome[TAM_NOME];
-        int listarData[3];//|dia|mês|ano|
+        char Nome[TAM_NoME];
+        int listarData[3];//|dia|mês|aNo|
     }fichaTemp;
     
     fichaTemp professorListado[QTD_DE_PROFS];
     while(iContador < cadastrosComSucessoProf)
     {
-        //Copiar o nome
+        //Copiar o Nome
         indiceCaracter = 0;
-        while(professor[iContador].nome[indiceCaracter] != '\0')
+        while(professor[iContador].Nome[indiceCaracter] != '\0')
         {
-            professorListado[iContador].nome[indiceCaracter] = professor[iContador].nome[indiceCaracter];
+            professorListado[iContador].Nome[indiceCaracter] = professor[iContador].Nome[indiceCaracter];
             indiceCaracter++;
         }
-        professorListado[iContador].nome[indiceCaracter] = '\0';
+        professorListado[iContador].Nome[indiceCaracter] = '\0';
         //Decompor e listar data
         indiceCaracter = 6;
         casaAlgarismo = 1000;
-        compararAno = 0;
+        compararANo = 0;
         while(professor[iContador].dataNasc[indiceCaracter] != '\0')
         {
-            compararAno += (professor[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
+            compararANo += (professor[iContador].dataNasc[indiceCaracter] - '0') * casaAlgarismo;
             casaAlgarismo /= 10;
             indiceCaracter++;
         }
-        professorListado[iContador].listarData[2] = compararAno;
+        professorListado[iContador].listarData[2] = compararANo;
         //*****************
         indiceCaracter = 3;
         casaAlgarismo = 10;
@@ -494,31 +494,31 @@ void listarProfessorPorData()
         {
             if(professorListado[iContador].listarData[0] < professorListado[jContador].listarData[0])
             {
-                //Copiar o nome******************************************************
-                char copiaNomeTemp[TAM_NOME];
+                //Copiar o Nome******************************************************
+                char copiaNomeTemp[TAM_NoME];
                 indiceCaracter = 0;
-                while(professorListado[jContador].nome[indiceCaracter] != '\0')
+                while(professorListado[jContador].Nome[indiceCaracter] != '\0')
                 {
-                    copiaNomeTemp[indiceCaracter] = professorListado[jContador].nome[indiceCaracter];
+                    copiaNomeTemp[indiceCaracter] = professorListado[jContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
                 copiaNomeTemp[indiceCaracter] = '\0';
                 indiceCaracter = 0;
-                while(professorListado[iContador].nome[indiceCaracter] != '\0')
+                while(professorListado[iContador].Nome[indiceCaracter] != '\0')
                 {
-                    professorListado[jContador].nome[indiceCaracter] = professorListado[iContador].nome[indiceCaracter];
+                    professorListado[jContador].Nome[indiceCaracter] = professorListado[iContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
-                professorListado[jContador].nome[indiceCaracter] = '\0';
+                professorListado[jContador].Nome[indiceCaracter] = '\0';
                 indiceCaracter = 0;
                 while(copiaNomeTemp[indiceCaracter] != '\0')
                 {
-                    professorListado[iContador].nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
+                    professorListado[iContador].Nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
                     indiceCaracter++;
                 }
-                professorListado[iContador].nome[indiceCaracter] = '\0';
+                professorListado[iContador].Nome[indiceCaracter] = '\0';
                 /****************************************************************************/
-                professorListado[iContador].nome[indiceCaracter] = '\0';
+                professorListado[iContador].Nome[indiceCaracter] = '\0';
                 auxiliar = professorListado[iContador].listarData[0];
                 professorListado[iContador].listarData[0] = professorListado[jContador].listarData[0];
                 professorListado[jContador].listarData[0] = auxiliar;
@@ -542,31 +542,31 @@ void listarProfessorPorData()
         {
             if(professorListado[iContador].listarData[1] < professorListado[jContador].listarData[1])
             {
-                //Copiar o nome******************************************************
-                char copiaNomeTemp[TAM_NOME];
+                //Copiar o Nome******************************************************
+                char copiaNomeTemp[TAM_NoME];
                 indiceCaracter = 0;
-                while(professorListado[jContador].nome[indiceCaracter] != '\0')
+                while(professorListado[jContador].Nome[indiceCaracter] != '\0')
                 {
-                    copiaNomeTemp[indiceCaracter] = professorListado[jContador].nome[indiceCaracter];
+                    copiaNomeTemp[indiceCaracter] = professorListado[jContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
                 copiaNomeTemp[indiceCaracter] = '\0';
                 indiceCaracter = 0;
-                while(professorListado[iContador].nome[indiceCaracter] != '\0')
+                while(professorListado[iContador].Nome[indiceCaracter] != '\0')
                 {
-                    professorListado[jContador].nome[indiceCaracter] = professorListado[iContador].nome[indiceCaracter];
+                    professorListado[jContador].Nome[indiceCaracter] = professorListado[iContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
-                professorListado[jContador].nome[indiceCaracter] = '\0';
+                professorListado[jContador].Nome[indiceCaracter] = '\0';
                 indiceCaracter = 0;
                 while(copiaNomeTemp[indiceCaracter] != '\0')
                 {
-                    professorListado[iContador].nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
+                    professorListado[iContador].Nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
                     indiceCaracter++;
                 }
-                professorListado[iContador].nome[indiceCaracter] = '\0';
+                professorListado[iContador].Nome[indiceCaracter] = '\0';
                 /****************************************************************************/
-                professorListado[iContador].nome[indiceCaracter] = '\0';
+                professorListado[iContador].Nome[indiceCaracter] = '\0';
                 auxiliar = professorListado[iContador].listarData[0];
                 professorListado[iContador].listarData[0] = professorListado[jContador].listarData[0];
                 professorListado[jContador].listarData[0] = auxiliar;
@@ -581,7 +581,7 @@ void listarProfessorPorData()
         }
         iContador++;
     }
-    //Por ano
+    //Por aNo
     iContador = 0;
     while(iContador < cadastrosComSucessoProf)
     {
@@ -590,31 +590,31 @@ void listarProfessorPorData()
         {
             if(professorListado[iContador].listarData[2] < professorListado[jContador].listarData[2])
             {
-                //Copiar o nome******************************************************
-                char copiaNomeTemp[TAM_NOME];
+                //Copiar o Nome******************************************************
+                char copiaNomeTemp[TAM_NoME];
                 indiceCaracter = 0;
-                while(professorListado[jContador].nome[indiceCaracter] != '\0')
+                while(professorListado[jContador].Nome[indiceCaracter] != '\0')
                 {
-                    copiaNomeTemp[indiceCaracter] = professorListado[jContador].nome[indiceCaracter];
+                    copiaNomeTemp[indiceCaracter] = professorListado[jContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
                 copiaNomeTemp[indiceCaracter] = '\0';
                 indiceCaracter = 0;
-                while(professorListado[iContador].nome[indiceCaracter] != '\0')
+                while(professorListado[iContador].Nome[indiceCaracter] != '\0')
                 {
-                    professorListado[jContador].nome[indiceCaracter] = professorListado[iContador].nome[indiceCaracter];
+                    professorListado[jContador].Nome[indiceCaracter] = professorListado[iContador].Nome[indiceCaracter];
                     indiceCaracter++;
                 }
-                professorListado[jContador].nome[indiceCaracter] = '\0';
+                professorListado[jContador].Nome[indiceCaracter] = '\0';
                 indiceCaracter = 0;
                 while(copiaNomeTemp[indiceCaracter] != '\0')
                 {
-                    professorListado[iContador].nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
+                    professorListado[iContador].Nome[indiceCaracter] = copiaNomeTemp[indiceCaracter];
                     indiceCaracter++;
                 }
-                professorListado[iContador].nome[indiceCaracter] = '\0';
+                professorListado[iContador].Nome[indiceCaracter] = '\0';
                 /****************************************************************************/
-                professorListado[iContador].nome[indiceCaracter] = '\0';
+                professorListado[iContador].Nome[indiceCaracter] = '\0';
                 auxiliar = professorListado[iContador].listarData[0];
                 professorListado[iContador].listarData[0] = professorListado[jContador].listarData[0];
                 professorListado[jContador].listarData[0] = auxiliar;
@@ -632,7 +632,7 @@ void listarProfessorPorData()
     
     for(iContador = 0; iContador < cadastrosComSucessoProf; iContador++)
     {
-        printf("- %s : %d / %d / %d\n", professorListado[iContador].nome, professorListado[iContador].listarData[0], professorListado[iContador].listarData[1], professorListado[iContador].listarData[2]);
+        printf("- %s : %d / %d / %d\n", professorListado[iContador].Nome, professorListado[iContador].listarData[0], professorListado[iContador].listarData[1], professorListado[iContador].listarData[2]);
     }
     printf("==============\nFim da lista...\n\n");
 }
@@ -640,12 +640,12 @@ void aniversariantesMes()
 {
     typedef struct
     {
-        char nome[TAM_NOME];
+        char Nome[TAM_NoME];
         int data[2];
         int tipoMatricula;
     }fichaTemporaria;
     
-    fichaTemporaria pessoa[QTD_DE_ALUNOS + QTD_DE_PROFS];
+    fichaTemporaria pessoa[QTD_DE_ALUNoS + QTD_DE_PROFS];
     /*Input*/
     printf("***ANIVERSARIANTES DO MES***\n");
     int mesProcurado = 0;
@@ -654,36 +654,36 @@ void aniversariantesMes()
     printf("::\n");
     if(mesProcurado >= 1 && mesProcurado <= 12)
     {
-        //decompor cadastro de data dos alunos
+        //decompor cadastro de data dos aluNos
         int iContador = 0;
         int kContador = 0;
-        while(iContador < cadastrosComSucessoAluno)
+        while(iContador < cadastrosComSucessoAluNo)
         {
             int mesComparar = 0;
-            mesComparar += (aluno[iContador].dataNasc[3] - '0') * 10;
-            mesComparar += aluno[iContador].dataNasc[4] - '0';
+            mesComparar += (aluNo[iContador].dataNasc[3] - '0') * 10;
+            mesComparar += aluNo[iContador].dataNasc[4] - '0';
             if(mesComparar == mesProcurado)
             {
                 //Tipo
                 pessoa[kContador].tipoMatricula = 0;
-                //O nome
+                //O Nome
                 int letra = 0;
-                while(aluno[iContador].nome[letra] != '\0')
+                while(aluNo[iContador].Nome[letra] != '\0')
                 {
-                    pessoa[kContador].nome[letra] = aluno[iContador].nome[letra];
+                    pessoa[kContador].Nome[letra] = aluNo[iContador].Nome[letra];
                     letra++;
                 }
-                pessoa[kContador].nome[letra] = '\0';
+                pessoa[kContador].Nome[letra] = '\0';
                 //A data
                 pessoa[kContador].data[1] = mesComparar;
-                pessoa[kContador].data[0] = (aluno[iContador].dataNasc[0] - '0') * 10;
-                pessoa[kContador].data[0] += aluno[iContador].dataNasc[1] - '0';
+                pessoa[kContador].data[0] = (aluNo[iContador].dataNasc[0] - '0') * 10;
+                pessoa[kContador].data[0] += aluNo[iContador].dataNasc[1] - '0';
                 
                 kContador++;
             }
             iContador++;
         }
-        //decompor cadastro de data dos alunos
+        //decompor cadastro de data dos aluNos
         iContador = 0;
         while(iContador < cadastrosComSucessoProf)
         {
@@ -694,14 +694,14 @@ void aniversariantesMes()
             {
                 //Tipo
                 pessoa[kContador].tipoMatricula = 1;
-                //O nome
+                //O Nome
                 int letra = 0;
-                while(professor[iContador].nome[letra] != '\0')
+                while(professor[iContador].Nome[letra] != '\0')
                 {
-                    pessoa[kContador].nome[letra] = professor[iContador].nome[letra];
+                    pessoa[kContador].Nome[letra] = professor[iContador].Nome[letra];
                     letra++;
                 }
-                pessoa[kContador].nome[letra] = '\0';
+                pessoa[kContador].Nome[letra] = '\0';
                 //A data
                 pessoa[kContador].data[1] = mesComparar;
                 pessoa[kContador].data[0] = (professor[iContador].dataNasc[0] - '0') * 10;
@@ -724,28 +724,28 @@ void aniversariantesMes()
                     pessoa[kContador].tipoMatricula = pessoa[iContador].tipoMatricula;
                     pessoa[iContador].tipoMatricula = auxiliar;
                     //Nome
-                    char nomeTemp[TAM_NOME];
+                    char NomeTemp[TAM_NoME];
                     int letra = 0;
-                    while(pessoa[kContador].nome[letra] != '\0')
+                    while(pessoa[kContador].Nome[letra] != '\0')
                     {
-                        nomeTemp[letra] = pessoa[kContador].nome[letra];
+                        NomeTemp[letra] = pessoa[kContador].Nome[letra];
                         letra++;
                     }
-                    nomeTemp[letra] = '\0';
+                    NomeTemp[letra] = '\0';
                     letra = 0;
-                    while(pessoa[iContador].nome[letra] != '\0')
+                    while(pessoa[iContador].Nome[letra] != '\0')
                     {
-                        pessoa[kContador].nome[letra] = pessoa[iContador].nome[letra];
+                        pessoa[kContador].Nome[letra] = pessoa[iContador].Nome[letra];
                         letra++;
                     }
-                    pessoa[kContador].nome[letra] = '\0';
+                    pessoa[kContador].Nome[letra] = '\0';
                     letra = 0;
-                    while(nomeTemp[letra] != '\0')
+                    while(NomeTemp[letra] != '\0')
                     {
-                        pessoa[iContador].nome[letra] = nomeTemp[letra];
+                        pessoa[iContador].Nome[letra] = NomeTemp[letra];
                         letra++;
                     }
-                    pessoa[iContador].nome[letra] = '\0';
+                    pessoa[iContador].Nome[letra] = '\0';
                     //Data
                     auxiliar = pessoa[kContador].data[0];
                     pessoa[kContador].data[0] = pessoa[iContador].data[0];
@@ -769,28 +769,28 @@ void aniversariantesMes()
                     pessoa[kContador].tipoMatricula = pessoa[iContador].tipoMatricula;
                     pessoa[iContador].tipoMatricula = auxiliar;
                     //Nome
-                    char nomeTemp[TAM_NOME];
+                    char NomeTemp[TAM_NoME];
                     int letra = 0;
-                    while(pessoa[kContador].nome[letra] != '\0')
+                    while(pessoa[kContador].Nome[letra] != '\0')
                     {
-                        nomeTemp[letra] = pessoa[kContador].nome[letra];
+                        NomeTemp[letra] = pessoa[kContador].Nome[letra];
                         letra++;
                     }
-                    nomeTemp[letra] = '\0';
+                    NomeTemp[letra] = '\0';
                     letra = 0;
-                    while(pessoa[iContador].nome[letra] != '\0')
+                    while(pessoa[iContador].Nome[letra] != '\0')
                     {
-                        pessoa[kContador].nome[letra] = pessoa[iContador].nome[letra];
+                        pessoa[kContador].Nome[letra] = pessoa[iContador].Nome[letra];
                         letra++;
                     }
-                    pessoa[kContador].nome[letra] = '\0';
+                    pessoa[kContador].Nome[letra] = '\0';
                     letra = 0;
-                    while(nomeTemp[letra] != '\0')
+                    while(NomeTemp[letra] != '\0')
                     {
-                        pessoa[iContador].nome[letra] = nomeTemp[letra];
+                        pessoa[iContador].Nome[letra] = NomeTemp[letra];
                         letra++;
                     }
-                    pessoa[iContador].nome[letra] = '\0';
+                    pessoa[iContador].Nome[letra] = '\0';
                     //Data
                     auxiliar = pessoa[kContador].data[0];
                     pessoa[kContador].data[0] = pessoa[iContador].data[0];
@@ -806,11 +806,11 @@ void aniversariantesMes()
         {
             if(pessoa[kContador].tipoMatricula == 0)
             {
-                printf("- %s - ALUNO - DATA: %d / %d \n", pessoa[kContador].nome, pessoa[kContador].data[0], pessoa[kContador].data[1]);
+                printf("- %s - ALUNo - DATA: %d / %d \n", pessoa[kContador].Nome, pessoa[kContador].data[0], pessoa[kContador].data[1]);
             }
             else
             {
-                printf("- %s - PROFESSOR - DATA: %d / %d \n", pessoa[kContador].nome, pessoa[kContador].data[0], pessoa[kContador].data[1]);
+                printf("- %s - PROFESSOR - DATA: %d / %d \n", pessoa[kContador].Nome, pessoa[kContador].data[0], pessoa[kContador].data[1]);
             }
         }
     }
@@ -820,23 +820,23 @@ void aniversariantesMes()
 void buscarPessoas()
 {
     printf("***BUSCAR PESSOAS***\n");
-    char inputNome[TAM_NOME];
-    printf("Digite o nome da pessoa procurada\n::");
+    char inputNome[TAM_NoME];
+    printf("Digite o Nome da pessoa procurada\n::");
     scanf("%50[^\n]%*c", inputNome);
     int iContador = 0;
     int jContador;
     int achouSemelhante;
     int tamNome;
-    while(iContador < cadastrosComSucessoAluno)
+    while(iContador < cadastrosComSucessoAluNo)
     {
         achouSemelhante = 0;
         for(tamNome = 0; inputNome[tamNome] != '\0'; tamNome++);
         jContador = 0;
         while(jContador <= tamNome - 2)
         {
-            if(inputNome[0] == aluno[iContador].nome[jContador] &&
-               inputNome[1] == aluno[iContador].nome[jContador + 1] &&
-               inputNome[2] == aluno[iContador].nome[jContador + 2])
+            if(inputNome[0] == aluNo[iContador].Nome[jContador] &&
+               inputNome[1] == aluNo[iContador].Nome[jContador + 1] &&
+               inputNome[2] == aluNo[iContador].Nome[jContador + 2])
             {
                 achouSemelhante = 1;
                 break;
@@ -845,81 +845,81 @@ void buscarPessoas()
         }
         if(achouSemelhante == 1)
         {
-            printf("- %s\n", aluno[iContador].nome);
+            printf("- %s\n", aluNo[iContador].Nome);
         }
         iContador++;
     }
 }
-void alunosComPoucaDisciplina()
+void aluNosComPoucaDisciplina()
 {
-    printf("***LISTA DE ALUNOS COM POUCAS DISCIPLINAS***\n");
+    printf("***LISTA DE ALUNoS COM POUCAS DISCIPLINAS***\n");
     int somaDisciplinas;
-    int nomeConfere;
-    int contaAlunosIrregulares = 0;
+    int NomeConfere;
+    int contaAluNosIrregulares = 0;
     int completou = 0;
-    for(int iContador = 0; iContador < cadastrosComSucessoAluno; iContador++)
+    for(int iContador = 0; iContador < cadastrosComSucessoAluNo; iContador++)
     {
         somaDisciplinas = 0;
         int jContador = 0;
         for(; jContador < disciplinasCadastradas; jContador++)
         {
-            nomeConfere = 0;
-            for(int kContador = 0; disciplina[jContador].alunosEmDisciplina[kContador][0] != 0 && nomeConfere != 1; kContador++)
+            NomeConfere = 0;
+            for(int kContador = 0; disciplina[jContador].aluNosEmDisciplina[kContador][0] != 0 && NomeConfere != 1; kContador++)
             {
                 int letrasIguais = 0;
                 int tamNome;
-                for(tamNome = 0; disciplina[jContador].alunosEmDisciplina[kContador][tamNome] != '\0'; tamNome++)
+                for(tamNome = 0; disciplina[jContador].aluNosEmDisciplina[kContador][tamNome] != '\0'; tamNome++)
                 {
-                    if(disciplina[jContador].alunosEmDisciplina[kContador][tamNome] == aluno[iContador].nome[tamNome])
+                    if(disciplina[jContador].aluNosEmDisciplina[kContador][tamNome] == aluNo[iContador].Nome[tamNome])
                     {
                         letrasIguais++;
                     }
                 }
                 if(letrasIguais == tamNome)
                 {
-                    nomeConfere = 1;  
+                    NomeConfere = 1;  
                 }
             }
-            if(nomeConfere == 1)
+            if(NomeConfere == 1)
                 somaDisciplinas++;
         }
         if(jContador == disciplinasCadastradas)
             completou = 1;
         if(somaDisciplinas < 3 && completou == 1)
         {
-            alunosIrregulares[contaAlunosIrregulares] = passarDadosAluno(aluno[iContador].nome, somaDisciplinas);
-            contaAlunosIrregulares++;
+            aluNosIrregulares[contaAluNosIrregulares] = passarDadosAluNo(aluNo[iContador].Nome, somaDisciplinas);
+            contaAluNosIrregulares++;
         }
     }
     
-    listarAlunosIrregulares(contaAlunosIrregulares);
+    listarAluNosIrregulares(contaAluNosIrregulares);
 }
-alunoIrregular passarDadosAluno(char nome[], int somaDisciplinas)
+aluNoIrregular passarDadosAluNo(char Nome[], int somaDisciplinas)
 {
-    alunoIrregular dadosAluno;
-    for(int iContador = 0; nome[iContador] != '\0'; iContador++)
+    aluNoIrregular dadosAluNo;
+    for(int iContador = 0; Nome[iContador] != '\0'; iContador++)
     {
-        dadosAluno.nome[iContador] = nome[iContador];
+        dadosAluNo.Nome[iContador] = Nome[iContador];
     }
-    dadosAluno.quantDisciplinas = somaDisciplinas;
+    dadosAluNo.quantDisciplinas = somaDisciplinas;
     
-    return dadosAluno;
+    return dadosAluNo;
 }
-void listarAlunosIrregulares(int qtdAlunos)
+void listarAluNosIrregulares(int qtdAluNos)
 {
-    for(int iContador = 0; iContador < qtdAlunos; iContador++)
+    for(int iContador = 0; iContador < qtdAluNos; iContador++)
     {
-        printf("- %s == %d disciplinas\n", alunosIrregulares[iContador].nome, alunosIrregulares[iContador].quantDisciplinas);
+        printf("- %s == %d disciplinas\n", aluNosIrregulares[iContador].Nome, aluNosIrregulares[iContador].quantDisciplinas);
     }
 }
 void turmasGrandes()
 {
-    printf("***TURMAS COM MAIS DE 40 ALUNOS***\n");
+    printf("***TURMAS COM MAIS DE 40 ALUNoS***\n");
     for(int iContador = 0; iContador < disciplinasCadastradas; iContador++)
     {
         if(verificarDisciplina(iContador) == 1)
         {
-            printf("- %s\n", disciplina[iContador].nomeDisciplina);
+            printf("- %s\n", disciplina[iContador].NomeDisciplina);
         }
     }
 }
@@ -927,7 +927,7 @@ void turmasGrandes()
 int verificarDisciplina(int indice)
 {
     int jContador;
-    for(jContador = 0; disciplina[indice].alunosEmDisciplina[jContador][0] != 0; jContador++);
+    for(jContador = 0; disciplina[indice].aluNosEmDisciplina[jContador][0] != 0; jContador++);
     
     if(jContador > LIMITE_DE_VAGAS)
     {

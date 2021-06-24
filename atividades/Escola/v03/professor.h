@@ -5,7 +5,7 @@
 typedef struct
 {
     char matricula[TAM_MATRICULA_PROF];
-    char nome[TAM_NOME];
+    char Nome[TAM_NoME];
     char sexo;
     char dataNasc[TAM_DATA_NASC];
     char cpf[TAM_CPF];
@@ -14,7 +14,7 @@ typedef struct
 /*Registro*/
 extern cadastroProfessor professor[QTD_DE_PROFS];
 
-/*Variáveis para auxiliar a contagem dos alunos*/
+/*Variáveis para auxiliar a contagem dos aluNos*/
 extern int chaveDeValidarProf;
 extern int cadastrosComSucessoProf;
 extern int cadastrosProfExcluidos;

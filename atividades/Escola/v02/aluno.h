@@ -1,36 +1,36 @@
-#ifndef ALUNO_H
-#define ALUNO_H
+#ifndef ALUNo_H
+#define ALUNo_H
 #include "utilitarios.h"
 /*Registro*/
 typedef struct
 {
-    char matricula[TAM_MATRICULA_ALUNO];
-    char nome[TAM_NOME];
+    char matricula[TAM_MATRICULA_ALUNo];
+    char Nome[TAM_NoME];
     char sexo;
     char dataNasc[TAM_DATA_NASC];
     char cpf[TAM_CPF];
-}cadastroAluno;
+}cadastroAluNo;
 
 /*Registro*/
-cadastroAluno aluno[QTD_DE_ALUNOS];
+cadastroAluNo aluNo[QTD_DE_ALUNoS];
 
 /*Funções principais*/
-void menuAluno(void);
-void inserirAluno(void);
-void excluirAluno(void);
-int excluirAlunoNaLista(int indiceAluno);
-void listarAlunos(void);
-/*Funções para inserir os dados do aluno*/
-void inserirNomeAluno(void);
-void inserirSexoAluno(void);
-void inserirDataAluno(void);
-void inserirCpfAluno(void);
+void menuAluNo(void);
+void inserirAluNo(void);
+void excluirAluNo(void);
+int excluirAluNoNaLista(int indiceAluNo);
+void listarAluNos(void);
+/*Funções para inserir os dados do aluNo*/
+void inserirNomeAluNo(void);
+void inserirSexoAluNo(void);
+void inserirDataAluNo(void);
+void inserirCpfAluNo(void);
 /*######################################*/
 /*Funções de Validação*/
-void gerarMatriculaAluno(int inputIndiceAluno);
-void validarNomeAluno(char inputNome[]);
-void validarCPFAluno(char cpf[]);
-void validarSexoAluno(char sexo);
-void validarNascAluno(char data[]);
+void gerarMatriculaAluNo(int inputIndiceAluNo);
+void validarNomeAluNo(char inputNome[]);
+void validarCPFAluNo(char cpf[]);
+void validarSexoAluNo(char sexo);
+void validarNascAluNo(char data[]);
 /**********************/
 #endif

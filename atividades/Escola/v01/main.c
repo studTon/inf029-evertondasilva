@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 /*Bibliotecas dos módulos*/
-#include "aluno.h"
+#include "aluNo.h"
 /*************************/
 
 int main(int argc, char *argv[])
@@ -13,9 +13,9 @@ int main(int argc, char *argv[])
         printf("******************************\n");
         printf("*            ESCOLA          *\n");
         printf("******************************\n");
-        printf("\nEscolha uma opcao a seguir:\n0 - Sair\n1 - Gerenciar alunos\n::");
+        printf("\nEscolha uma opcao a seguir:\n0 - Sair\n1 - Gerenciar aluNos\n::");
         scanf("%1c%*c", &escolhaMenu);
-        while(getchar() != '\n');/*Pular o char new line no input*/
+        while(getchar() != '\n');/*Pular o char new line No input*/
         switch(escolhaMenu)
         {
             case '0':
@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
             }break;
             case '1':
             {
-                //Informações sobre aluno
-                menuAluno();
+                //Informações sobre aluNo
+                menuAluNo();
             }break;
             default:
             {

@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "disciplina.h"
-#include "aluno.h"
+#include "aluNo.h"
 #include "professor.h"
 
 int chaveValidarDisciplina;
-int cadastrosComSucessoAluno;
+int cadastrosComSucessoAluNo;
 int cadastrosComSucessoProf;
 int disciplinasCadastradas;
 int disciplinasExcluidas;
@@ -25,11 +25,11 @@ void menuDisc()
         printf("1 - Inserir disciplina\n");
         printf("2 - Excluir disciplina\n");
         printf("3 - Listar disciplinas\n");
-        printf("4 - Matricular aluno em disciplina\n");
-        printf("5 - Listar alunos em disciplina\n::");
+        printf("4 - Matricular aluNo em disciplina\n");
+        printf("5 - Listar aluNos em disciplina\n::");
 
         scanf("%1c", &escolha);
-        while(getchar() != '\n');/*Pular o char new line no input*/
+        while(getchar() != '\n');/*Pular o char new line No input*/
         switch(escolha)
         {
             case '0':
@@ -50,7 +50,7 @@ void menuDisc()
             }break;
             case '4':
             {
-                matricularAlunoEmDisc();           
+                matricularAluNoEmDisc();           
             }break;
             case '5':
             {
@@ -74,18 +74,18 @@ void inserirDisc()
     if(!naoPossivelDisc)
     {
         //Nome da disciplina
-        nomeDaDisciplina();
+        NomeDaDisciplina();
         //Semestre da disciplina
         semestreDaDisciplina();
         //Nome do professor na disciplinar
         professorDaDisciplina();
-        //Anular campo de alunos em disciplina
-        for(int iContador = 0; iContador < QTD_DE_ALUNOS; iContador++)
+        //Anular campo de aluNos em disciplina
+        for(int iContador = 0; iContador < QTD_DE_ALUNoS; iContador++)
         {
-            disciplina[disciplinasCadastradas].alunosEmDisciplina[iContador][0] = 0;    
+            disciplina[disciplinasCadastradas].aluNosEmDisciplina[iContador][0] = 0;    
         }
         /*Validações dos campos inseridos*/
-        validarNomeDisc(disciplina[disciplinasCadastradas].nomeDisciplina);
+        validarNomeDisc(disciplina[disciplinasCadastradas].NomeDisciplina);
         validarSemestre(disciplina[disciplinasCadastradas].semestre);
         validarProfNaDisc(disciplina[disciplinasCadastradas].professorDisciplina);
         /*Contar os cadastros com sucesso*/
@@ -97,13 +97,13 @@ void inserirDisc()
     }     
 }
 /*######Funções para inserir os campos do cadastro da disciplina######*/
-void nomeDaDisciplina()
+void NomeDaDisciplina()
 {
-    printf("Digite o nome da disciplina: ");
-    fgets(disciplina[disciplinasCadastradas].nomeDisciplina, TAM_NOME_DISC, stdin);
+    printf("Digite o Nome da disciplina: ");
+    fgets(disciplina[disciplinasCadastradas].NomeDisciplina, TAM_NoME_DISC, stdin);
     int iContador = 0;
-    while(disciplina[disciplinasCadastradas].nomeDisciplina[iContador] != '\n')iContador++;
-    disciplina[disciplinasCadastradas].nomeDisciplina[iContador] = '\0';
+    while(disciplina[disciplinasCadastradas].NomeDisciplina[iContador] != '\n')iContador++;
+    disciplina[disciplinasCadastradas].NomeDisciplina[iContador] = '\0';
 }
 
 void semestreDaDisciplina()
@@ -115,7 +115,7 @@ void semestreDaDisciplina()
 
 void professorDaDisciplina()
 {
-    printf("Digite o nome do professor que ensina a disciplina: ");
+    printf("Digite o Nome do professor que ensina a disciplina: ");
     scanf("%51[^\n]%*c", disciplina[disciplinasCadastradas].professorDisciplina);
 }
 /*###################################################################*/
@@ -180,7 +180,7 @@ void validarNomeDisc(char inputDisciplina[])
     }
     else
     {
-        printf("NOME INVALIDO PARA A DISCIPLINA\n");
+        printf("NoME INVALIDO PARA A DISCIPLINA\n");
     }
 }
 void validarSemestre(char inputSemestre)
@@ -194,7 +194,7 @@ void validarSemestre(char inputSemestre)
         printf("SEMESTRE INVALIDO\n");
     }
 }
-void validarProfNaDisc(char nomeProfessor[])
+void validarProfNaDisc(char NomeProfessor[])
 {   
     int professorEscolhido;
     int indiceProfessor = 0;
@@ -203,9 +203,9 @@ void validarProfNaDisc(char nomeProfessor[])
     {
         int iContador = 0;
         int caracteresIguais = 0;
-        while(nomeProfessor[iContador] != '\0')
+        while(NomeProfessor[iContador] != '\0')
         {
-            if(nomeProfessor[iContador] == professor[indiceProfessor].nome[iContador])
+            if(NomeProfessor[iContador] == professor[indiceProfessor].Nome[iContador])
             {
                 caracteresIguais++;
             }
@@ -225,16 +225,16 @@ void validarProfNaDisc(char nomeProfessor[])
     }
     else
     {
-        printf("NOME DE PROFESSOR INVALIDO\n");
+        printf("NoME DE PROFESSOR INVALIDO\n");
     }
 }
 //#######################################
 void excluirDisc()
 {
     printf("****************************\n");
-    char nomeDisciplinaExcluir[TAM_NOME_DISC];
-    printf("Digite o nome da disciplina que deseja excluir: ");
-    fgets(nomeDisciplinaExcluir, TAM_NOME_DISC, stdin);
+    char NomeDisciplinaExcluir[TAM_NoME_DISC];
+    printf("Digite o Nome da disciplina que deseja excluir: ");
+    fgets(NomeDisciplinaExcluir, TAM_NoME_DISC, stdin);
     int jContador;
     int indiceDaDisciplina = 0;
     int caracteresIguais;
@@ -243,7 +243,7 @@ void excluirDisc()
     {
         caracteresIguais = 0;
         jContador = 0;
-        while(nomeDisciplinaExcluir[jContador] == disciplina[indiceDaDisciplina].nomeDisciplina[jContador])
+        while(NomeDisciplinaExcluir[jContador] == disciplina[indiceDaDisciplina].NomeDisciplina[jContador])
         {
             jContador++;
             caracteresIguais++;
@@ -270,9 +270,9 @@ int excluirDiscNaLista(int indiceDisc)
     {
         //Nome disciplina
         int iContador = 0;
-        while(disciplina[indiceDisc].nomeDisciplina[iContador] != '\0')
+        while(disciplina[indiceDisc].NomeDisciplina[iContador] != '\0')
         {
-            disciplina[indiceDisc].nomeDisciplina[iContador] = 0;
+            disciplina[indiceDisc].NomeDisciplina[iContador] = 0;
             iContador++;
         }
         //Código da disciplina
@@ -302,7 +302,7 @@ void listarDisciplinas()
     while(indiceDisciplina < disciplinasCadastradas)
     {
         printf("CODIGO: %s\n", disciplina[indiceDisciplina].codigo);
-        printf("NOME DA DISCIPLINA: %s\n", disciplina[indiceDisciplina].nomeDisciplina);
+        printf("NoME DA DISCIPLINA: %s\n", disciplina[indiceDisciplina].NomeDisciplina);
         printf("SEMESTRE: %c\n", disciplina[indiceDisciplina].semestre);
         printf("PROFESSOR DA DISCIPLINA: %s\n", disciplina[indiceDisciplina].professorDisciplina);
         printf("*******************************\n");
@@ -311,29 +311,29 @@ void listarDisciplinas()
     printf("Listagem completa...\n\n");
 }
 
-void matricularAlunoEmDisc()
+void matricularAluNoEmDisc()
 {
-    printf("****************************\n***Matricular aluno em disciplina***\n");
-    char alunoProcurado[TAM_NOME];
-    char discProcurada[TAM_NOME_DISC];
-    int encontrouALuno = 0;//0 - Não encontrou|1 - Encontrou
+    printf("****************************\n***Matricular aluNo em disciplina***\n");
+    char aluNoProcurado[TAM_NoME];
+    char discProcurada[TAM_NoME_DISC];
+    int encontrouALuNo = 0;//0 - Não encontrou|1 - Encontrou
     int encontrouDisciplina = 0;//0 - Não encontrou|1 - Encontrou
-    int indiceAlunoEncontrado;
+    int indiceAluNoEncontrado;
     int indiceDiscEncontrada;
-    int alunoAdicionado = 0;
+    int aluNoAdicionado = 0;
     char escolha = '1';
     while(escolha != '0')
     {
-        printf("Digite o nome do aluno procurado: ");
-        scanf("%[^\n]%*c", alunoProcurado);
-        int indiceAluno = 0;
-        while(indiceAluno <= cadastrosComSucessoAluno)
+        printf("Digite o Nome do aluNo procurado: ");
+        scanf("%[^\n]%*c", aluNoProcurado);
+        int indiceAluNo = 0;
+        while(indiceAluNo <= cadastrosComSucessoAluNo)
         {
             int contadorLetra = 0;
             int contaIguais = 0;
-            while(alunoProcurado[contadorLetra] == aluno[indiceAluno].nome[contadorLetra] || contaIguais != contadorLetra)
+            while(aluNoProcurado[contadorLetra] == aluNo[indiceAluNo].Nome[contadorLetra] || contaIguais != contadorLetra)
             {
-                if(aluno[indiceAluno].nome[contadorLetra] == alunoProcurado[contadorLetra])
+                if(aluNo[indiceAluNo].Nome[contadorLetra] == aluNoProcurado[contadorLetra])
                 {
                     contaIguais++;
                 }
@@ -342,22 +342,22 @@ void matricularAlunoEmDisc()
             }
             if(contaIguais == contadorLetra)
             {
-                encontrouALuno = 1;//Achou o aluno
-                indiceAlunoEncontrado = indiceAluno;
+                encontrouALuNo = 1;//Achou o aluNo
+                indiceAluNoEncontrado = indiceAluNo;
                 break;
             }
-            indiceAluno++;
+            indiceAluNo++;
         }
-        printf("Digite o nome da disciplina: ");
+        printf("Digite o Nome da disciplina: ");
         scanf("%[^\n]%*c", discProcurada);
         int indiceDisc = 0;
         while(indiceDisc <= disciplinasCadastradas)
         {
             int contadorLetra = 0;
             int contaIguais = 0;
-            while(discProcurada[contadorLetra] == disciplina[indiceDisc].nomeDisciplina[contadorLetra] || contaIguais != contadorLetra)
+            while(discProcurada[contadorLetra] == disciplina[indiceDisc].NomeDisciplina[contadorLetra] || contaIguais != contadorLetra)
             {
-                if(discProcurada[contadorLetra] == disciplina[indiceDisc].nomeDisciplina[contadorLetra])
+                if(discProcurada[contadorLetra] == disciplina[indiceDisc].NomeDisciplina[contadorLetra])
                 {
                     contaIguais++;
                 }
@@ -371,33 +371,33 @@ void matricularAlunoEmDisc()
             }
             indiceDisc++;
         }
-        if(encontrouDisciplina == 1 && encontrouALuno == 1)
+        if(encontrouDisciplina == 1 && encontrouALuNo == 1)
         {
-            alunoAdicionado++;
+            aluNoAdicionado++;
             int iContador = 0;
-            int posicaoAdicionar = alunoAdicionado - 1;
-            while(aluno[indiceAlunoEncontrado].nome[iContador] != '\0')
+            int posicaoAdicionar = aluNoAdicionado - 1;
+            while(aluNo[indiceAluNoEncontrado].Nome[iContador] != '\0')
             {
-                disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar][iContador] = aluno[indiceAlunoEncontrado].nome[iContador];
+                disciplina[indiceDiscEncontrada].aluNosEmDisciplina[posicaoAdicionar][iContador] = aluNo[indiceAluNoEncontrado].Nome[iContador];
                 iContador++;
             }
-            disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar][iContador] = '\0';
+            disciplina[indiceDiscEncontrada].aluNosEmDisciplina[posicaoAdicionar][iContador] = '\0';
             iContador = 0;
-            while(iContador < TAM_NOME)
+            while(iContador < TAM_NoME)
             {
-                disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar + 1][iContador] = 0;
+                disciplina[indiceDiscEncontrada].aluNosEmDisciplina[posicaoAdicionar + 1][iContador] = 0;
                 iContador++;
             }
-            disciplina[indiceDiscEncontrada].alunosEmDisciplina[posicaoAdicionar + 1][iContador] = '\0';
-            printf("***ALUNO CADASTRADO COM SUCESSO***\n");
+            disciplina[indiceDiscEncontrada].aluNosEmDisciplina[posicaoAdicionar + 1][iContador] = '\0';
+            printf("***ALUNo CADASTRADO COM SUCESSO***\n");
         }
         else
         {
-            printf("NAO FOI POSSIVEL CADASTRAR: Verifique os dados e tente novamente\n");
+            printf("NAO FOI POSSIVEL CADASTRAR: Verifique os dados e tente Novamente\n");
         }
-        printf("Deseja continuar adicionando aluno em disciplina?\n0 - Voltar\nQualquer tecla - continuar\n::");
+        printf("Deseja continuar adicionando aluNo em disciplina?\n0 - Voltar\nQualquer tecla - continuar\n::");
         scanf("%c", &escolha);
-        while(getchar() != '\n');/*Pular o char new line no input*/
+        while(getchar() != '\n');/*Pular o char new line No input*/
         switch(escolha)
         {
             case '0':
@@ -415,8 +415,8 @@ void matricularAlunoEmDisc()
 
 void listarUmaDisciplina()
 {
-    char inputDisciplina[TAM_NOME_DISC];
-    printf("Digite o nome da disciplina que deseja listar os dados: ");
+    char inputDisciplina[TAM_NoME_DISC];
+    printf("Digite o Nome da disciplina que deseja listar os dados: ");
     scanf("%[^\n]%*c", inputDisciplina);
     int indiceDisciplina = 0;
     int indiceDiscDesejada;
@@ -427,7 +427,7 @@ void listarUmaDisciplina()
         int iContador = 0;
         while(inputDisciplina[iContador] != '\0')
         {
-            if(inputDisciplina[iContador] == disciplina[indiceDisciplina].nomeDisciplina[iContador])
+            if(inputDisciplina[iContador] == disciplina[indiceDisciplina].NomeDisciplina[iContador])
             {
                 contaIguais++;
             }
@@ -444,16 +444,16 @@ void listarUmaDisciplina()
     if(achou == 1)
     {
         printf("==========================\n");
-        printf("NOME DA DISCIPLINA: %s\n", disciplina[indiceDiscDesejada].nomeDisciplina);
+        printf("NoME DA DISCIPLINA: %s\n", disciplina[indiceDiscDesejada].NomeDisciplina);
         printf("CODIGO: %s\n", disciplina[indiceDiscDesejada].codigo);
         printf("SEMESTRE: %c\n", disciplina[indiceDiscDesejada].semestre);
         printf("PROFESSOR: %s\n", disciplina[indiceDiscDesejada].professorDisciplina);
-        printf("===ALUNOS NA DISCIPLINA===\n");
-        int indiceAluno = 0;
-        while(disciplina[indiceDiscDesejada].alunosEmDisciplina[indiceAluno][0] != 0)
+        printf("===ALUNoS NA DISCIPLINA===\n");
+        int indiceAluNo = 0;
+        while(disciplina[indiceDiscDesejada].aluNosEmDisciplina[indiceAluNo][0] != 0)
         {
-            printf("%d -> %s\n", indiceAluno + 1, disciplina[indiceDiscDesejada].alunosEmDisciplina[indiceAluno]);
-            indiceAluno++;
+            printf("%d -> %s\n", indiceAluNo + 1, disciplina[indiceDiscDesejada].aluNosEmDisciplina[indiceAluNo]);
+            indiceAluNo++;
         }
         printf("==========================\nFim da lista\n\n");  
     }

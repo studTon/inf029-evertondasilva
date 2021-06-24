@@ -1,23 +1,23 @@
 #include <stdio.h>
-#include "aluno.h"
-/*Variáveis para auxiliar a contagem dos alunos*/
+#include "aluNo.h"
+/*Variáveis para auxiliar a contagem dos aluNos*/
 int chaveDeValidar;
 int cadastrosComSucesso = 0;
 /*Registro*/
-cadastroAluno aluno[QTD_DE_ALUNOS];
+cadastroAluNo aluNo[QTD_DE_ALUNoS];
 
-/*menu Aluno*/
-void menuAluno()
+/*menu AluNo*/
+void menuAluNo()
 {
     char escolha = '1';
     while(escolha != '0')
     {
         printf("******************************\n");
-        printf("*         INFO ALUNO         *\n");
+        printf("*         INFO ALUNo         *\n");
         printf("******************************\n");
-        printf("\nEscolha uma opcao a seguir:\n0 - Voltar\n1 - Inserir aluno\n2 - Listar alunos\n::");
+        printf("\nEscolha uma opcao a seguir:\n0 - Voltar\n1 - Inserir aluNo\n2 - Listar aluNos\n::");
         scanf("%1c%*c", &escolha);
-        while(getchar() != '\n');/*Pular o char new line no input*/
+        while(getchar() != '\n');/*Pular o char new line No input*/
         switch(escolha)
         {
             case '0':
@@ -26,11 +26,11 @@ void menuAluno()
             }break;
             case '1':
             {
-                inserirAluno();
+                inserirAluNo();
             }break;
             case '2':
             {
-                listarAlunos();
+                listarAluNos();
             }break;
             default:
             {
@@ -42,21 +42,21 @@ void menuAluno()
     
 }
 /*Geração de matrícula*/
-void gerarMatricula(int inputIndiceAluno)
+void gerarMatricula(int inputIndiceAluNo)
 {    
-    if(inputIndiceAluno < QTD_DE_ALUNOS)
+    if(inputIndiceAluNo < QTD_DE_ALUNoS)
     {
         /*É necessário somar o char '0' a todos os valores inteiros na 
          *conversão de inteiro para char, pois o valor inteiro do char
          *'0' somado ao número inteiro equivale ao seu char correspon-
          *dente.
          */
-        //Decomposição do índice do aluno
-        char centenaAluno = (inputIndiceAluno / 100) + '0';
-        char dezenaAluno = ((inputIndiceAluno % 100) / 10) + '0';
-        char unidadeAluno = (inputIndiceAluno % 10) + '0';
-        //Ano e semestre
-        char ano[CARACTER_ANO] = "2021\0";
+        //Decomposição do índice do aluNo
+        char centenaAluNo = (inputIndiceAluNo / 100) + '0';
+        char dezenaAluNo = ((inputIndiceAluNo % 100) / 10) + '0';
+        char unidadeAluNo = (inputIndiceAluNo % 10) + '0';
+        //ANo e semestre
+        char aNo[CARACTER_ANo] = "2021\0";
         char semestre = '1';
         //Criação da string que representa a matrícula
         int contador = 0;
@@ -64,39 +64,39 @@ void gerarMatricula(int inputIndiceAluno)
         {
             if(contador >= 0 && contador <= 3)
             {
-                aluno[inputIndiceAluno].matricula[contador] = ano[contador];
+                aluNo[inputIndiceAluNo].matricula[contador] = aNo[contador];
             }
             if(contador == 4||contador == 6)
             {
-                aluno[inputIndiceAluno].matricula[contador] = '.';
+                aluNo[inputIndiceAluNo].matricula[contador] = '.';
             }
             if(contador == 5)
             {
-                aluno[inputIndiceAluno].matricula[contador] = semestre;
+                aluNo[inputIndiceAluNo].matricula[contador] = semestre;
             }
             if(contador == 7)
             {
-                aluno[inputIndiceAluno].matricula[contador] = centenaAluno;
+                aluNo[inputIndiceAluNo].matricula[contador] = centenaAluNo;
             }
             if(contador == 8)
             {
-                aluno[inputIndiceAluno].matricula[contador] = dezenaAluno;
+                aluNo[inputIndiceAluNo].matricula[contador] = dezenaAluNo;
             }
             if(contador == 9)
             {
-                aluno[inputIndiceAluno].matricula[contador] = unidadeAluno;
+                aluNo[inputIndiceAluNo].matricula[contador] = unidadeAluNo;
             }
             
         	contador++;
         }
         if(contador == 10)
-            aluno[inputIndiceAluno].matricula[contador] = '\0';
+            aluNo[inputIndiceAluNo].matricula[contador] = '\0';
 
-        printf("MATRICULA GERADA: %s\n", aluno[inputIndiceAluno].matricula);
+        printf("MATRICULA GERADA: %s\n", aluNo[inputIndiceAluNo].matricula);
     }
     else
     {
-        printf("SEM VAGAS PARA CADASTRO DE MAIS ALUNOS\n");
+        printf("SEM VAGAS PARA CADASTRO DE MAIS ALUNoS\n");
     }
         
 }
@@ -119,7 +119,7 @@ void validarNome(char inputNome[])
     }
     if(tamanhoInputNome == tamanhoNomeReal)
     {
-        printf("NOME VALIDO\n");
+        printf("NoME VALIDO\n");
         chaveDeValidar++;
     }
     else
@@ -183,7 +183,7 @@ void validarNasc(char data[])
     int contaCaracterBarra = 0;
     int contaDiaNumero = 0;
     int contaMesNumero = 0;
-    int contaAnoNumero = 0;
+    int contaANoNumero = 0;
     while(data[tamDoInput] != '\0')
     {
         if(tamDoInput != 2 && tamDoInput != 5)
@@ -201,7 +201,7 @@ void validarNasc(char data[])
             if(tamDoInput > 5 && tamDoInput < 10)
             {
                 if(data[tamDoInput] >= '0' && data[tamDoInput] <= '9')
-                    contaAnoNumero++;
+                    contaANoNumero++;
             }
         }
         if ((tamDoInput == 2 || tamDoInput == 5 )&& data[tamDoInput] == '/')
@@ -211,14 +211,14 @@ void validarNasc(char data[])
         tamDoInput++;
     }
 
-    if(contaDiaNumero != 2||contaMesNumero != 2||contaAnoNumero != 4||contaCaracterBarra != 2)
+    if(contaDiaNumero != 2||contaMesNumero != 2||contaANoNumero != 4||contaCaracterBarra != 2)
         errosData++;
     else
     {
         /*Aquisição das partes da data*/
             char diaChar[CARACTER_DIA];
             char mesChar[CARACTER_MES];
-            char anoChar[CARACTER_ANO];
+            char aNoChar[CARACTER_ANo];
 
             //dia
             int iContador = 0;
@@ -240,16 +240,16 @@ void validarNasc(char data[])
                 jContador++;
             }
             mesChar[jContador] = '\0';
-            //ano
+            //aNo
             jContador = 0;
             iContador++;
-            while (jContador < CARACTER_ANO - 1)
+            while (jContador < CARACTER_ANo - 1)
             {
-                anoChar[jContador] = data[iContador];
+                aNoChar[jContador] = data[iContador];
                 iContador++;
                 jContador++;
             }
-            anoChar[jContador] = '\0';
+            aNoChar[jContador] = '\0';
 
         /*Conversão para inteiros*/
         //Conversão da string dia
@@ -286,35 +286,35 @@ void validarNasc(char data[])
             indiceDoAlgarismo++;
         }
         
-        //Conversão da string ano
-        int anoData = 0;
+        //Conversão da string aNo
+        int aNoData = 0;
         indiceDoAlgarismo = 0;
-        while(indiceDoAlgarismo < CARACTER_ANO - 1)
+        while(indiceDoAlgarismo < CARACTER_ANo - 1)
         {
             switch(indiceDoAlgarismo)
             {
                 case 0:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1000;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 1000;
                 }break;
                 case 1:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 100;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 100;
                 }break;
                 case 2:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 10;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 10;
                 }break;
                 case 3:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 1;
                 }break;
             }
             indiceDoAlgarismo++;
         }
 
-        /*Verificação de ano bissexto*/
+        /*Verificação de aNo bissexto*/
         int bissexto = 0; //0 - Comum | 1 - Bissexto
-        if(anoData % 400 == 0)
+        if(aNoData % 400 == 0)
             bissexto = 1;
         else
-            if(anoData % 4 == 0 && (anoData % 100 != 0))
+            if(aNoData % 4 == 0 && (aNoData % 100 != 0))
             {
                 bissexto = 1;
             }
@@ -367,49 +367,49 @@ void validarNasc(char data[])
     }
 }
 /*********************************************************/
-//Inserir aluno
-void inserirAluno()
+//Inserir aluNo
+void inserirAluNo()
 {
     chaveDeValidar = 0;
-    printf("***Cadastrar aluno***\n");
+    printf("***Cadastrar aluNo***\n");
     //Matrícula
     /*Gerar matrícula*/        
     gerarMatricula(cadastrosComSucesso + 1);
     //Nome
-    printf("Digite o nome do(a) estudante: ");
-    scanf("%51[^\n]%*c", aluno[cadastrosComSucesso + 1].nome);
+    printf("Digite o Nome do(a) estudante: ");
+    scanf("%51[^\n]%*c", aluNo[cadastrosComSucesso + 1].Nome);
     //Sexo
-    printf("Digite o sexo do(a) estudante(F - Feminino|M - Masculino|O - Outro): ");
-    scanf("%1c%*c", &aluno[cadastrosComSucesso + 1].sexo);
-    if(aluno[cadastrosComSucesso + 1].sexo >= 'a' && aluno[cadastrosComSucesso + 1].sexo <= 'z')
-        aluno[cadastrosComSucesso + 1].sexo -= 32; //Tornar o input com letras maiúsculas
+    printf("Digite o sexo do(a) estudante(F - FeminiNo|M - MasculiNo|O - Outro): ");
+    scanf("%1c%*c", &aluNo[cadastrosComSucesso + 1].sexo);
+    if(aluNo[cadastrosComSucesso + 1].sexo >= 'a' && aluNo[cadastrosComSucesso + 1].sexo <= 'z')
+        aluNo[cadastrosComSucesso + 1].sexo -= 32; //Tornar o input com letras maiúsculas
     //Data de nascimento
     printf("Digite a data de nascimento(dd/mm/aaaa): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucesso + 1].dataNasc);
+    scanf("%[^\n]%*c", &aluNo[cadastrosComSucesso + 1].dataNasc);
     //CPF
     printf("Digite o CPF do(a) estudante(XXX.XXX.XXX-XX): ");
-    scanf("%[^\n]%*c", &aluno[cadastrosComSucesso + 1].cpf);
+    scanf("%[^\n]%*c", &aluNo[cadastrosComSucesso + 1].cpf);
     /*Validações*/
-    validarNome(aluno[cadastrosComSucesso + 1].nome);
-    validarSexo(aluno[cadastrosComSucesso + 1].sexo);
-    validarNasc(aluno[cadastrosComSucesso + 1].dataNasc);
-    validarCPF(aluno[cadastrosComSucesso + 1].cpf);
+    validarNome(aluNo[cadastrosComSucesso + 1].Nome);
+    validarSexo(aluNo[cadastrosComSucesso + 1].sexo);
+    validarNasc(aluNo[cadastrosComSucesso + 1].dataNasc);
+    validarCPF(aluNo[cadastrosComSucesso + 1].cpf);
     if(chaveDeValidar == 4)
         cadastrosComSucesso++;
 }
 
-//Listar aluno
-void listarAlunos()
+//Listar aluNo
+void listarAluNos()
 {
-    printf("\nLista de alunos cadastrados\n*******************************\n\n");
+    printf("\nLista de aluNos cadastrados\n*******************************\n\n");
     int iContador = 0;
     while(iContador <= cadastrosComSucesso)
     {
-        printf("MATRICULA: %s\n", aluno[iContador].matricula);
-        printf("NOME: %s\n", aluno[iContador].nome);
-        printf("SEXO: %c\n", aluno[iContador].sexo);
-        printf("DATA DE NASC.: %s\n", aluno[iContador].dataNasc);
-        printf("CPF: %s\n", aluno[iContador].cpf);
+        printf("MATRICULA: %s\n", aluNo[iContador].matricula);
+        printf("NoME: %s\n", aluNo[iContador].Nome);
+        printf("SEXO: %c\n", aluNo[iContador].sexo);
+        printf("DATA DE NASC.: %s\n", aluNo[iContador].dataNasc);
+        printf("CPF: %s\n", aluNo[iContador].cpf);
         printf("*******************************\n");
         iContador++;
     }

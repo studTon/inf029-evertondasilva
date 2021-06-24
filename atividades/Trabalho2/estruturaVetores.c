@@ -36,7 +36,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     // deu tudo certo, crie
 	else
 	{
-		int auxiliar[tamanho];
+		No *auxiliar[tamanho];
 		vetorPrincipal[posicao] = auxiliar;
 		retorno = SUCESSO;	
 	}
@@ -107,7 +107,7 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 	int retorno;
 	if(vetorPrincipal[posicao] == NULL)
 	{
-		vetorPrincipal[posicao].auxiliar = NULL;
+		vetorPrincipal[posicao] = NULL;
 		retorno = ESTRUTURA_AUXILIAR_VAZIA;
 	}
 	else
@@ -122,7 +122,7 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 	}
 	else
 	{
-		vetorPrincipal[posicao].auxiliar = 0;
+		vetorPrincipal[posicao] = 0;
 		retorno = SUCESSO;
 	}
     
@@ -144,9 +144,9 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
-	if(vetorPrincipal[posicao].auxiliar == valor)
+	if(vetorPrincipal[posicao] == valor)
 	{
-		vetorPrincipal[posicao].auxiliar = NULL;
+		vetorPrincipal[posicao] = NULL;
 	}
     int retorno = SUCESSO;
     return retorno;
@@ -176,18 +176,18 @@ Retorno (int)
 */
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-	if(vetorPrincipal[posicao].auxiliar != NULL)
+	if(vetorPrincipal[posicao] != NULL)
 	{
 		iCont = 1;
 		while(iCont < TAM)
 		{
-			printf("%d\n", vetorPrincipal[iCont].auxiliar);
+			printf("%d\n", vetorAux[iCont]);
 			iCont++;
 		}
 		int retorno = SUCESSO;	
 	}
 	else
-	if(vetorPrincipal[posicao].auxiliar == NULL)
+	if(vetorPrincipal[posicao] == NULL)
 	{
 		retorno = SEM_ESTRUTURA_AUXILIAR;
 	}
@@ -209,7 +209,23 @@ Rertono (int)
 */
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-
+	if(vetorPrincipal[posicao] != NULL)
+	{
+		iCont = 0;
+		int aux;
+		int jCont = iCont + 1;
+		while(iCont < sizeof(vetorAux) - 1)
+		{
+			if(vetorAux[iCont] > vetorAux[jCont])
+			{
+				aux = vetorAux[iCont];
+				vetorAux[iCont] = vetorAux[jCont];
+				vetorAux[jCont] = aux;	
+			}
+			iCont++; jCont++;
+		}
+			
+	}
     int retorno = 0;
 
     return retorno;
@@ -226,7 +242,17 @@ Rertono (int)
 int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
 
-    int retorno = 0;
+	int iCont = 0;
+	int jCont = 0;
+	while(iCont < TAM)
+	{
+		if(vetorPrincipal[iCont] != NULL);
+		{
+			printf("-- %d\n", vetorAux[jCont]);
+		}
+		iCont++;
+	}
+    int retorno = SUCESSO;
     return retorno;
 }
 
@@ -241,7 +267,27 @@ Rertono (int)
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
 
-    int retorno = 0;
+    int iCont = 0;
+	int jCont = 0;
+	int kCont = jCont + 1;
+	while(iCont < TAM)
+	{
+		if(vetorPrincipal[iCont] != NULL);
+		{
+			while(jCont < sizeof(vetorAux) - 1)
+			{
+				if(vetorAux[iCont] > vetorAux[kCont])
+				{
+					aux = vetorAux[jCont];
+					vetorAux[jCont] = vetorAux[kCont];
+					vetorAux[kCont] = aux;	
+				}
+			}
+			printf("-- %d\n", vetorAux[jCont]);
+		}
+		iCont++;
+	}
+    int retorno = SUCESSO;
     return retorno;
 }
 
@@ -258,8 +304,9 @@ Rertono (int)
 */
 int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho)
 {
-
-    int retorno = 0;
+	vetorPrincipal[posicao] = (No*)malloc(novoTamanho);
+	
+    int retorno = SUCESSO;
     return retorno;
 }
 
@@ -280,7 +327,7 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 	int contador = 0;
 	for( iCont = 1; iCont <= TAM; iCont++ )
 	{
-		if(vetorPrincipal[posicao].auxiliar >= 0)
+		if(vetorPrincipal[posicao] != NULL)
 		{
 			contador++;
 		}
@@ -310,6 +357,7 @@ Retorno void
 */
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[])
 {
+	//OBS: Não consegui assimilar esse assunto. Faltou mais dedicação da minha parte.
 }
 
 /*
@@ -321,6 +369,7 @@ Retorno
 */
 void destruirListaEncadeadaComCabecote(No **inicio)
 {
+	//OBS: Não consegui assimilar esse assunto. Faltou mais dedicação da minha parte.
 }
 
 /*
