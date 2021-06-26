@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "NoVetores.h"
+#include "estruturaVetores.h"
 
 int menu();
 
@@ -44,11 +44,11 @@ int main()
             //TODO
 			int posicao;
 			int tamanho;
-			printf("Digite a posicao que deseja criar No auxiliar: ");
+			printf("Digite a posicao que deseja criar Estrutura auxiliar: ");
 			scanf("%d", &posicao);
-			printf("Digite o tamanho da No que deseja criar: ");
+			printf("Digite o tamanho da Estrutura que deseja criar: ");
 			scanf("%d", &tamanho);
-            ret = inserirNumeroNo(posicao, tamanho);
+            ret = inserirNumeroEstrutura(posicao, tamanho);
             if (ret == SUCESSO)
             {
                 printf("Inserido com sucesso\n");
@@ -57,9 +57,9 @@ int main()
             {
                 printf("Sem Espaço\n");
             }
-            else if (ret == SEM_No_AUXILIAR)
+            else if (ret == SEM_ESTRUTURA_AUXILIAR)
             {
-                printf("Sem No Auxiliar\n");
+                printf("Sem Estrutura Auxiliar\n");
             }
             break;
         }
@@ -69,8 +69,8 @@ int main()
             int op;
 			printf("Digite o que deseja fazer: \n");
 			printf("0 - Voltar\n");
-			printf("1 - Excluir no final da No\n");
-			printf("2 - Excluir numero especifico da No\n");
+			printf("1 - Excluir no final da Estrutura\n");
+			printf("2 - Excluir numero especifico da Estrutura\n");
 			scanf("%d", &op);
 			if( op == 0 )
 				break;
@@ -80,7 +80,7 @@ int main()
 				int pos;
 				printf("Digite a posição: ");
 				scanf("%d", &pos);
-				excluirNumeroDoFinaldaNo(pos);
+				excluirNumeroDoFinaldaEstrutura(pos);
 			}
 			else
 			if (op == 2)
@@ -89,9 +89,9 @@ int main()
 				int pos;
 				printf("Digite a posição: ");
 				scanf("%d", &pos);
-				printf("Digite o número que está na No: ");
+				printf("Digite o número que está na Estrutura: ");
 				scanf("%d", &num);
-				excluirNumeroEspecificoDeNo(pos, num);
+				excluirNumeroEspecificoDeEstrutura(pos, num);
 			}
             break;
         }
@@ -99,10 +99,10 @@ int main()
         case 3:
         { //recuperar dados No auxiliar
             int posicao, retorno;
-            printf("Qual a No a ser listada (1..10)?");
+            printf("Qual a Estrutura a ser listada (1..10)?");
             scanf("%d", &posicao);
 
-            int qtd = getQuantidadeElementosNoAuxiliar(posicao);
+            int qtd = getQuantidadeElementosEstruturaAuxiliar(posicao);
 
             if (qtd == POSICAO_INVALIDA)
             {
@@ -112,7 +112,7 @@ int main()
             { // existe elemento
                 int vetorAux[qtd];
 
-                retorno = getDadosNoAuxiliar(posicao, vetorAux);
+                retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
 
                 if (retorno == SUCESSO)
                 {

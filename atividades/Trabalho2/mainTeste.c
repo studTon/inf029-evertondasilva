@@ -5,26 +5,26 @@
 void show_log(char *str);
 
 void testeInserirSemNada();
-void testeCriarNo();
-void testeInserirComNo();
+void testeCriarEstrutura();
+void testeInserirComEstrutura();
 void testeExcluir();
 void testeExcluirNumeroEspecifico();
 void testeListar();
 void testeRetornarTodosNumeros();
-void testeMudarTamanhoNo();
+void testeMudarTamanhoEstrutura();
 void testeListaEncadeada();
 
 int main()
 {
     inicializar();
     testeInserirSemNada();
-    testeCriarNo();
-    testeInserirComNo();
+    testeCriarEstrutura();
+    testeInserirComEstrutura();
     testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
-    testeMudarTamanhoNo();
+    testeMudarTamanhoEstrutura();
     testeListaEncadeada();
     finalizar();
 }
@@ -44,9 +44,9 @@ void testeInserirSemNada()
     printf("%d\n", inserirNumeroEmEstrutura(11, 2) == POSICAO_INVALIDA);
 }
 
-void testeCriarNo()
+void testeCriarEsturutra()
 {
-    show_log("testeCriarNo()");
+    show_log("testeCriarEstrutura()");
     printf("%d\n", criarEstruturaAuxiliar(-2, 5) == POSICAO_INVALIDA);
     printf("%d\n", criarEstruturaAuxiliar(0, 5) == POSICAO_INVALIDA);
     printf("%d\n", criarEstruturaAuxiliar(11, 5) == POSICAO_INVALIDA);
@@ -59,9 +59,9 @@ void testeCriarNo()
 2 [ , , ]
 */
 
-void testeInserirComNo()
+void testeInserirComEstrutura()
 {
-    show_log("testeInserirComNo()");
+    show_log("testeInserirComEstrutura()");
     //###  int inserirNumeroEmNo(int valor, int posicao); ###
     printf("%d\n", inserirNumeroEmEstrutura(2, 4) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, -2) == SUCESSO);
@@ -222,7 +222,7 @@ Rertono (int)
     NOVO_TAMANHO_INVALIDO - novo tamanho não pode ser negativo
     SEM_ESPACO_DE_MEMORIA - erro na alocação do novo valor
 */
-void testeMudarTamanhoNo()
+void testeMudarTamanhoEstrutura()
 {
     show_log("testeMudarTamanhoNo()");
     int vet[1];

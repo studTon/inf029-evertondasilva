@@ -3,7 +3,7 @@
 #include "estruturaVetores.h"
 
 No vetorPrincipal[TAM];
-
+int *nulo = NULL;
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
 com tamanho 'tamanho'
@@ -36,8 +36,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     // deu tudo certo, crie
 	else
 	{
-		No *auxiliar[tamanho];
-		vetorPrincipal[posicao] = auxiliar;
+		vetorPrincipal[posicao].auxiliar = tamanho;
 		retorno = SUCESSO;	
 	}
     
@@ -72,8 +71,8 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             if (temEspaco)
             {
                 //insere
-				No aux[valor] = (No*) malloc(No);
-				vetorPrincipal[posicao] = aux[valor];
+				No *aux = malloc(valor);
+				vetorPrincipal[posicao] = *aux;
 				
                 retorno = SUCESSO;
             }
@@ -105,13 +104,13 @@ Rertono (int)
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
 	int retorno;
-	if(vetorPrincipal[posicao] == NULL)
+	if(vetorPrincipal[posicao].auxiliar == NULL)
 	{
-		vetorPrincipal[posicao] = NULL;
+		vetorPrincipal[posicao].auxiliar = NULL;
 		retorno = ESTRUTURA_AUXILIAR_VAZIA;
 	}
 	else
-	if(posicao == NULL)
+	if(posicao == 0)
 	{
 		retorno = SEM_ESTRUTURA_AUXILIAR;
 	}
@@ -122,7 +121,7 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 	}
 	else
 	{
-		vetorPrincipal[posicao] = 0;
+		vetorPrincipal[posicao].auxiliar = NULL;
 		retorno = SUCESSO;
 	}
     
@@ -144,11 +143,16 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
-	if(vetorPrincipal[posicao] == valor)
+	int retorno = 0;
+	for(int iCont = 0; iCont < valor; iCont++)
 	{
-		vetorPrincipal[posicao] = NULL;
+		if(vetorPrincipal[posicao].conteudo == 0)
+		{
+			vetorPrincipal[posicao].auxiliar = NULL;
+		}
+		retorno = SUCESSO;	
 	}
-    int retorno = SUCESSO;
+	
     return retorno;
 }
 
@@ -176,18 +180,19 @@ Retorno (int)
 */
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-	if(vetorPrincipal[posicao] != NULL)
+	int retorno  = 0;
+	if(vetorPrincipal[posicao].auxiliar != NULL)
 	{
-		iCont = 1;
+		int iCont = 1;
 		while(iCont < TAM)
 		{
 			printf("%d\n", vetorAux[iCont]);
 			iCont++;
 		}
-		int retorno = SUCESSO;	
+		retorno = SUCESSO;	
 	}
 	else
-	if(vetorPrincipal[posicao] == NULL)
+	if(vetorPrincipal[posicao].conteudo == 0)
 	{
 		retorno = SEM_ESTRUTURA_AUXILIAR;
 	}
@@ -209,9 +214,9 @@ Rertono (int)
 */
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-	if(vetorPrincipal[posicao] != NULL)
+	if(vetorPrincipal[posicao].auxiliar != NULL)
 	{
-		iCont = 0;
+		int iCont = 0;
 		int aux;
 		int jCont = iCont + 1;
 		while(iCont < sizeof(vetorAux) - 1)
@@ -246,7 +251,7 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 	int jCont = 0;
 	while(iCont < TAM)
 	{
-		if(vetorPrincipal[iCont] != NULL);
+		if(vetorPrincipal[iCont].auxiliar != NULL);
 		{
 			printf("-- %d\n", vetorAux[jCont]);
 		}
@@ -270,9 +275,10 @@ int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
     int iCont = 0;
 	int jCont = 0;
 	int kCont = jCont + 1;
+	int aux;
 	while(iCont < TAM)
 	{
-		if(vetorPrincipal[iCont] != NULL);
+		if(vetorPrincipal[iCont].conteudo != 0);
 		{
 			while(jCont < sizeof(vetorAux) - 1)
 			{
@@ -304,7 +310,7 @@ Rertono (int)
 */
 int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho)
 {
-	vetorPrincipal[posicao] = (No*)malloc(novoTamanho);
+	vetorPrincipal[posicao].conteudo = malloc(novoTamanho);
 	
     int retorno = SUCESSO;
     return retorno;
@@ -327,7 +333,7 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 	int contador = 0;
 	for( iCont = 1; iCont <= TAM; iCont++ )
 	{
-		if(vetorPrincipal[posicao] != NULL)
+		if(vetorPrincipal[posicao].conteudo != 0)
 		{
 			contador++;
 		}
@@ -392,4 +398,5 @@ para poder liberar todos os espaços de memória das Nos auxiliares.
 void finalizar()
 {
 	printf("***PROGRAMA ENCERRADO***\n\n");
+	free(vetorPrincipal);
 }
