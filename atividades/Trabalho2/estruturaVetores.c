@@ -351,11 +351,11 @@ Retorno (No*)
     NULL, caso não tenha nenhum número nas listas
     No*, ponteiro para o início da lista com cabeçote
 */
-/*No *montarListaEncadeadaComCabecote()
+No *montarListaEncadeadaComCabecote()
 {
 
     return NULL;
-}*/
+}
 
 /*
 Objetivo: retorna os números da lista enceada com cabeçote armazenando em vetorAux.
