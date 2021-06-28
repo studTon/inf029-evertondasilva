@@ -6,7 +6,7 @@ typedef struct
 {
     float numero[QTD_NUMEROS];
 }registro;
-registro Estrutura;
+registro No;
 /********************/
 
 int main(void)
@@ -15,7 +15,7 @@ int main(void)
 
     for (int jContador = 0; jContador < QTD_NUMEROS; jContador++)
     {
-        printf("%.2f", Estrutura.numero[jContador]);
+        printf("%.2f", No.numero[jContador]);
         if(jContador < QTD_NUMEROS - 1)
             printf(" | ");
     }
@@ -29,7 +29,7 @@ void Ler4numeros()
     while (iContador < QTD_NUMEROS)
     {
         printf("Digite o numero(indice %d): ", iContador);
-        scanf("%f", &Estrutura.numero[iContador]);
+        scanf("%f", &No.numero[iContador]);
         iContador++;
     }
 }

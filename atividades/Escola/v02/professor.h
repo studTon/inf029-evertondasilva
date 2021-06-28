@@ -5,7 +5,7 @@
 typedef struct
 {
     char matricula[TAM_MATRICULA_PROF];
-    char nome[TAM_NOME];
+    char Nome[TAM_NoME];
     char sexo;
     char dataNasc[TAM_DATA_NASC];
     char cpf[TAM_CPF];

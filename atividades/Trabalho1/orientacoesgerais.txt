@@ -1,10 +1,10 @@
 - baixar o código
-- renomear os arquivos 
+- reNomear os arquivos 
 	PrimeiroUltimoNomeMatricula.c e 
 	PrimeiroUltimoNomeMatricula.h para
 	seus dados
 - compilar 
 	- gcc PrimeiroUltimoNomeMATRICULA.c corretor.c -o T1
-	- lembrar de substituir o comando acima pelo novo nome
+	- lembrar de substituir o comando acima pelo Novo Nome
 - rodar
 	- ./T1

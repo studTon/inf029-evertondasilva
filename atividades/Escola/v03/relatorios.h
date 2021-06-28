@@ -3,27 +3,27 @@
 /*Registro*/
 typedef struct
 {
-    char nome[TAM_NOME];
+    char Nome[TAM_NoME];
     int quantDisciplinas;
-}alunoIrregular;
+}aluNoIrregular;
 
-alunoIrregular alunosIrregulares[QTD_DE_ALUNOS];
+aluNoIrregular aluNosIrregulares[QTD_DE_ALUNoS];
 /*Principais funções*/
 void menuRelatorios(void);
-void listarAlunosPorSexo(void);
-void listarAlunosPorNome(void);
-void listarAlunosPorData(void);
+void listarAluNosPorSexo(void);
+void listarAluNosPorNome(void);
+void listarAluNosPorData(void);
 void listarProfessorPorSexo(void);
 void listarProfessorPorNome(void);
 void listarProfessorPorData(void);
 void aniversariantesMes(void);
 void buscarPessoas(void);
-void alunosComPoucaDisciplina(void);//Alunos matriculados em menos de 3 disciplinas
+void aluNosComPoucaDisciplina(void);//AluNos matriculados em meNos de 3 disciplinas
 void turmasGrandes(void);//Disciplina ultrapassa 40 vagas
 
 /*Funções auxiliares*/
-alunoIrregular passarDadosAluno(char nome[], int somaDisciplinas);
-void listarAlunosIrregulares(int qtdAlunos);
+aluNoIrregular passarDadosAluNo(char Nome[], int somaDisciplinas);
+void listarAluNosIrregulares(int qtdAluNos);
 int verificarDisciplina(int indice);
 
 #endif

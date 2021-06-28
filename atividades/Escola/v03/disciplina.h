@@ -3,11 +3,11 @@
 #include "utilitarios.h"
 /*Registro*/
 typedef struct{
-    char nomeDisciplina[TAM_NOME_DISC];
+    char NomeDisciplina[TAM_NoME_DISC];
     char codigo[TAM_CODIGO_DISC];
     char semestre;
-    char professorDisciplina[TAM_NOME_PROF_DISC];
-    char alunosEmDisciplina[QTD_DE_ALUNOS][TAM_NOME];
+    char professorDisciplina[TAM_NoME_PROF_DISC];
+    char aluNosEmDisciplina[QTD_DE_ALUNoS][TAM_NoME];
 }cadastroDisc;
 /*Registro das disciplinas*/
 cadastroDisc disciplina[QTD_DE_DISC];
@@ -24,16 +24,16 @@ void inserirDisc(void);
 void excluirDisc(void);
 int excluirDiscNaLista(int indiceDisc);
 void listarDisciplinas(void);
-void matricularAlunoEmDisc(void);
+void matricularAluNoEmDisc(void);
 void listarUmaDisciplina(void);
 /*Funções de preenchimento dos dados da disciplina*/
-void nomeDaDisciplina(void);
+void NomeDaDisciplina(void);
 void semestreDaDisciplina(void);
 void professorDaDisciplina(void);
 /*Funções de validação*/
 void gerarCodigoDaDisc(int inputIndiceDisc);
 void validarNomeDisc(char inputDisciplina[]);
 void validarSemestre(char inputSemestre);
-void validarProfNaDisc(char nomeProfessor[]);
+void validarProfNaDisc(char NomeProfessor[]);
 /***********************/
 #endif

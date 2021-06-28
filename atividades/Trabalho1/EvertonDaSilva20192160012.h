@@ -6,11 +6,11 @@
 //  Professor: Renato Novais - renato@ifba.edu.br
 
 //  ----- Orientações gerais -----
-//  Descrição: esse arquivo deve conter as questõeses do trabalho do aluno.
-//  Cada aluno deve renomear esse arquivo para Aluno<MATRICULA>.c
-//  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
+//  Descrição: esse arquivo deve conter as questõeses do trabalho do aluNo.
+//  Cada aluNo deve reNomear esse arquivo para AluNo<MATRICULA>.c
+//  O aluNo deve preencher seus dados abaixo, e implementar as questões do trabalho
 
-//  ----- Dados do Aluno -----
+//  ----- Dados do AluNo -----
 //  Nome: Everton Souza da Silva
 //  email: 20192160012@ifba.edu.br
 //  Matrícula: 20192160012
@@ -24,7 +24,7 @@ typedef struct
 {
     int dia;
     int mes;
-    int ano;
+    int aNo;
 }tipoData;
 
 tipoData dataProcessada;
@@ -32,7 +32,7 @@ tipoData dataProcessada;
 int somar(int x, int y); //função utilizada para testes
 int fatorial(int x); //função utilizada para testes
 int q1(char *data);
-int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdAnos);
+int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdANos);
 int q3(char *texto, char c, int isCaseSensitive);
 int q4(char *strTexto, char *strBusca, int posicoes[30]);
 int q5(int num);
@@ -43,8 +43,8 @@ int q6(int numerobase, int numerobusca);
 int verificarData(int arranjoData[]);
 int decomporDataDia(char data[]);
 int decomporDataMes(char data[]);
-int decomporDataAno(char data[]);
-int anoBissexto(int ano);
+int decomporDataANo(char data[]);
+int aNoBissexto(int aNo);
 //Q2
 int calcularDias(char *datainicial, char *datafinal);
 int calcularMaiorData(char *datainicial, char *datafinal);

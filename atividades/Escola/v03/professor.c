@@ -22,7 +22,7 @@ void menuProf()
         printf("3 - Listar professor\n::");
 
         scanf("%1c", &escolha);
-        while(getchar() != '\n');/*Pular o char new line no input*/
+        while(getchar() != '\n');/*Pular o char new line No input*/
         switch(escolha)
         {
             case '0':
@@ -55,7 +55,7 @@ void gerarMatriculaProf(int inputIndiceProf)
 {   
     
     inputIndiceProf++;//+1 para inicializar a numeração do cadastro
-    if(inputIndiceProf <= QTD_DE_ALUNOS)
+    if(inputIndiceProf <= QTD_DE_ALUNoS)
     {
         if(cadastrosProfExcluidos > 0)
         inputIndiceProf += cadastrosProfExcluidos;
@@ -69,15 +69,15 @@ void gerarMatriculaProf(int inputIndiceProf)
         char dezenaProf = ((inputIndiceProf % 100) / 10) + '0';
         char unidadeProf = (inputIndiceProf % 10) + '0';
         inputIndiceProf--;//-1 para armazenar na variável correta
-        //Ano
-        char ano[TAM_CARACTER_ANO] = "2021\0";
+        //ANo
+        char aNo[TAM_CARACTER_ANo] = "2021\0";
         //Criação da string que representa a matrícula
         int contador = 0;
         while(contador < TAM_MATRICULA_PROF - 1)
         {
             if(contador >= 0 && contador <= 3)
             {
-                professor[inputIndiceProf].matricula[contador] = ano[contador];
+                professor[inputIndiceProf].matricula[contador] = aNo[contador];
             }
             if(contador == 4)
             {
@@ -105,7 +105,7 @@ void gerarMatriculaProf(int inputIndiceProf)
             
 
         printf("MATRICULA GERADA: %s\n", professor[inputIndiceProf].matricula);
-        /*Matrícula do tipo: XXXX.XXX -> Ano.Número Do Professor*/
+        /*Matrícula do tipo: XXXX.XXX -> ANo.Número Do Professor*/
     }
     else
     {
@@ -192,7 +192,7 @@ void validarNascProf(char data[])
     int contaCaracterBarra = 0;
     int contaDiaNumero = 0;
     int contaMesNumero = 0;
-    int contaAnoNumero = 0;
+    int contaANoNumero = 0;
     while(data[tamDoInput] != '\0')
     {
         if(tamDoInput != 2 && tamDoInput != 5)
@@ -210,7 +210,7 @@ void validarNascProf(char data[])
             if(tamDoInput > 5 && tamDoInput < 10)
             {
                 if(data[tamDoInput] >= '0' && data[tamDoInput] <= '9')
-                    contaAnoNumero++;
+                    contaANoNumero++;
             }
         }
         if ((tamDoInput == 2 || tamDoInput == 5 )&& data[tamDoInput] == '/')
@@ -220,14 +220,14 @@ void validarNascProf(char data[])
         tamDoInput++;
     }
 
-    if(contaDiaNumero != 2||contaMesNumero != 2||contaAnoNumero != 4||contaCaracterBarra != 2)
+    if(contaDiaNumero != 2||contaMesNumero != 2||contaANoNumero != 4||contaCaracterBarra != 2)
         errosData++;
     else
     {
         /*Aquisição das partes da data*/
             char diaChar[TAM_CARACTER_DIA];
             char mesChar[TAM_CARACTER_MES];
-            char anoChar[TAM_CARACTER_ANO];
+            char aNoChar[TAM_CARACTER_ANo];
 
             //dia
             int iContador = 0;
@@ -249,16 +249,16 @@ void validarNascProf(char data[])
                 jContador++;
             }
             mesChar[jContador] = '\0';
-            //ano
+            //aNo
             jContador = 0;
             iContador++;
-            while (jContador < TAM_CARACTER_ANO - 1)
+            while (jContador < TAM_CARACTER_ANo - 1)
             {
-                anoChar[jContador] = data[iContador];
+                aNoChar[jContador] = data[iContador];
                 iContador++;
                 jContador++;
             }
-            anoChar[jContador] = '\0';
+            aNoChar[jContador] = '\0';
 
         /*Conversão para inteiros*/
         //Conversão da string dia
@@ -295,35 +295,35 @@ void validarNascProf(char data[])
             indiceDoAlgarismo++;
         }
         
-        //Conversão da string ano
-        int anoData = 0;
+        //Conversão da string aNo
+        int aNoData = 0;
         indiceDoAlgarismo = 0;
-        while(indiceDoAlgarismo < TAM_CARACTER_ANO - 1)
+        while(indiceDoAlgarismo < TAM_CARACTER_ANo - 1)
         {
             switch(indiceDoAlgarismo)
             {
                 case 0:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1000;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 1000;
                 }break;
                 case 1:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 100;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 100;
                 }break;
                 case 2:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 10;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 10;
                 }break;
                 case 3:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 1;
                 }break;
             }
             indiceDoAlgarismo++;
         }
 
-        /*Verificação de ano bissexto*/
+        /*Verificação de aNo bissexto*/
         int bissexto = 0; //0 - Comum | 1 - Bissexto
-        if(anoData % 400 == 0)
+        if(aNoData % 400 == 0)
             bissexto = 1;
         else
-            if(anoData % 4 == 0 && (anoData % 100 != 0))
+            if(aNoData % 4 == 0 && (aNoData % 100 != 0))
             {
                 bissexto = 1;
             }
@@ -391,7 +391,7 @@ void inserirProf()
     //CPF
     inserirCpfProf();
     /*Validações*/
-    validarNomeProf(professor[cadastrosComSucessoProf].nome);
+    validarNomeProf(professor[cadastrosComSucessoProf].Nome);
     validarSexoProf(professor[cadastrosComSucessoProf].sexo);
     validarNascProf(professor[cadastrosComSucessoProf].dataNasc);
     validarCPFProf(professor[cadastrosComSucessoProf].cpf);
@@ -405,18 +405,18 @@ void inserirProf()
 /*######Funções de preenchimento dos campos######*/
 void inserirNomeProf()
 {
-    printf("Digite o nome do(a) professor(a): ");
-    /*scanf("%50[^\n]%*c", professor[cadastrosComSucessoProf].nome);
+    printf("Digite o Nome do(a) professor(a): ");
+    /*scanf("%50[^\n]%*c", professor[cadastrosComSucessoProf].Nome);
     setbuf(stdin, NULL);*/
-    fgets(professor[cadastrosComSucessoProf].nome, sizeof(professor[cadastrosComSucessoProf].nome), stdin);
+    fgets(professor[cadastrosComSucessoProf].Nome, sizeof(professor[cadastrosComSucessoProf].Nome), stdin);
     int contaCaracter = 0;
-    while(professor[cadastrosComSucessoProf].nome[contaCaracter] != '\n')contaCaracter++;
-    professor[cadastrosComSucessoProf].nome[contaCaracter] = '\0';
+    while(professor[cadastrosComSucessoProf].Nome[contaCaracter] != '\n')contaCaracter++;
+    professor[cadastrosComSucessoProf].Nome[contaCaracter] = '\0';
     setbuf(stdin, NULL);
 }
 void inserirSexoProf()
 {
-    printf("Digite o sexo do(a) professor(a)(F - Feminino|M - Masculino|O - Outro): ");
+    printf("Digite o sexo do(a) professor(a)(F - FeminiNo|M - MasculiNo|O - Outro): ");
     scanf("%c", &professor[cadastrosComSucessoProf].sexo);
     /* Pula o restante da linha */
     while(getchar() != '\n');
@@ -485,10 +485,10 @@ int excluirProfNaLista(int indiceProf)
             professor[indiceProf].matricula[iContador] = 0;
         }
 
-        for(int iContador = 0; professor[indiceProf].nome[iContador] != '\0' && professor[indiceProf + 1].nome[iContador] != '\0'; iContador++)
+        for(int iContador = 0; professor[indiceProf].Nome[iContador] != '\0' && professor[indiceProf + 1].Nome[iContador] != '\0'; iContador++)
         {
-            //Apagar o nome cadastrado
-            professor[indiceProf].nome[iContador] = 0;
+            //Apagar o Nome cadastrado
+            professor[indiceProf].Nome[iContador] = 0;
         }
 
         professor[indiceProf].sexo = 0; //Apagar o sexo cadastrado
@@ -507,7 +507,7 @@ int excluirProfNaLista(int indiceProf)
 //Listar professores
 void listarProf()
 {   
-    /*BUG: Quando lista professores, com pelo menos um excluído*
+    /*BUG: Quando lista professores, com pelo meNos um excluído*
     *, o programa exibe um cadastro com dados vazios.          *
     */
     printf("\nLista de professores cadastrados(as)\n*******************************\n\n");
@@ -515,7 +515,7 @@ void listarProf()
     while(iContador < cadastrosComSucessoProf)
     {
         printf("MATRICULA: %s\n", professor[iContador].matricula);
-        printf("NOME: %s\n", professor[iContador].nome);
+        printf("NoME: %s\n", professor[iContador].Nome);
         printf("SEXO: %c\n", professor[iContador].sexo);
         printf("DATA DE NASC.: %s\n", professor[iContador].dataNasc);
         printf("CPF: %s\n", professor[iContador].cpf);

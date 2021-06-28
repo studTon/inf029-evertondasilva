@@ -4,7 +4,7 @@ void estocagem(void);
 typedef struct
 {
     int codigo;
-    char *nome;
+    char *Nome;
     int qtde;//Quantidade do produto
     float preco;
 }Produto;

@@ -5,7 +5,7 @@
 
 int menu();
 
-//void dobrar(int *x);
+void dobrar(int *x);
 
 int menu()
 {
@@ -14,7 +14,7 @@ int menu()
     printf("0 - Sair\n");
     printf("1 - Inserir\n");
     printf("2 - Excluir\n");
-    printf("3 - Listar uma estrutura\n");
+    printf("3 - Listar uma No\n");
     printf("4 - Dobrar Numero\n");
     printf("5 - \n::");
     scanf("%d", &op);
@@ -23,7 +23,7 @@ int menu()
 
 int main()
 {
-	setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "");
     inicializar();
     int op;
     int sair = 0;
@@ -44,9 +44,9 @@ int main()
             //TODO
 			int posicao;
 			int tamanho;
-			printf("Digite a posicao que deseja criar estrutura auxiliar: ");
+			printf("Digite a posicao que deseja criar Estrutura auxiliar: ");
 			scanf("%d", &posicao);
-			printf("Digite o tamanho da estrutura que deseja criar: ");
+			printf("Digite o tamanho da Estrutura que deseja criar: ");
 			scanf("%d", &tamanho);
             ret = inserirNumeroEstrutura(posicao, tamanho);
             if (ret == SUCESSO)
@@ -59,7 +59,7 @@ int main()
             }
             else if (ret == SEM_ESTRUTURA_AUXILIAR)
             {
-                printf("Sem estrutura Auxiliar\n");
+                printf("Sem Estrutura Auxiliar\n");
             }
             break;
         }
@@ -69,8 +69,8 @@ int main()
             int op;
 			printf("Digite o que deseja fazer: \n");
 			printf("0 - Voltar\n");
-			printf("1 - Excluir no final da estrutura\n");
-			printf("2 - Excluir numero especifico da estrutura\n");
+			printf("1 - Excluir no final da Estrutura\n");
+			printf("2 - Excluir numero especifico da Estrutura\n");
 			scanf("%d", &op);
 			if( op == 0 )
 				break;
@@ -89,7 +89,7 @@ int main()
 				int pos;
 				printf("Digite a posição: ");
 				scanf("%d", &pos);
-				printf("Digite o número que está na estrutura: ");
+				printf("Digite o número que está na Estrutura: ");
 				scanf("%d", &num);
 				excluirNumeroEspecificoDeEstrutura(pos, num);
 			}
@@ -97,9 +97,9 @@ int main()
         }
 
         case 3:
-        { //recuperar dados estrutura auxiliar
+        { //recuperar dados No auxiliar
             int posicao, retorno;
-            printf("Qual a estrutura a ser listada (1..10)?");
+            printf("Qual a Estrutura a ser listada (1..10)?");
             scanf("%d", &posicao);
 
             int qtd = getQuantidadeElementosEstruturaAuxiliar(posicao);
@@ -135,7 +135,7 @@ int main()
 
             //dobrar(&valor);
 
-            //passar para um funcao (void dobrar(...)) que recebe o numero e dobra (EstruturaVetores.c)
+            //passar para um funcao (void dobrar(...)) que recebe o numero e dobra (NoVetores.c)
 
             printf("%i", valor);
 
@@ -144,7 +144,7 @@ int main()
 
         default:
         {
-            printf("opcao invÃ¡lida\n");
+            printf("opcao inválida\n");
         }
         }
     }

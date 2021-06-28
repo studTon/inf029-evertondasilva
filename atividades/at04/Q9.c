@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM_NOME 21
+#define TAM_NoME 21
 #define TAM_DATA 11 //Corresponde a : "01/01/0001\0"
 #define TAM_CPF 15 //Corresponde a : "123.456.789-00\0"
 #define CARACTER_DIA 3
 #define CARACTER_MES 3
-#define CARACTER_ANO 5
+#define CARACTER_ANo 5
 #define NUM_BARRAS 30
 /*Protótipo das funções utilizadas*/
 void cadastrarCliente(void);
@@ -16,7 +16,7 @@ void validarNasc(char data[]);
 /*Struct dos dados do cliente*/
 typedef struct
 {
-    char nome[TAM_NOME];
+    char Nome[TAM_NoME];
     char cpf[TAM_CPF];
     char sexo;
     char dataNasc[TAM_DATA];
@@ -33,15 +33,15 @@ int main(int argc, char *argv[])
     cadastrarCliente();
     /*Validação dos dados*/
     printf("\n\n===Validacao dos dados===\n\n");
-    validarNome(perfilCliente.nome);
+    validarNome(perfilCliente.Nome);
     validarCPF(perfilCliente.cpf);
     validarSexo(perfilCliente.sexo);
     validarNasc(perfilCliente.dataNasc);
-    /*Retorno dos dados cadastrados*/
+    /*RetorNo dos dados cadastrados*/
     if(contaErros == 0)
     {
         printf("\n\n===Dados cadastrados===\n\n");
-        printf("Nome: %s\n", perfilCliente.nome);
+        printf("Nome: %s\n", perfilCliente.Nome);
         printf("CPF: %s\n", perfilCliente.cpf);
         printf("Sexo: %c\n", perfilCliente.sexo);
         printf("Data de nasc.: %s\n", perfilCliente.dataNasc);    
@@ -58,24 +58,24 @@ void cadastrarCliente(void)
 {
     printf("===Cadastro de cliente===\n\n");
     //Nome
-    printf("Primeiro nome: ");
-    scanf("%[^\n]%*c", perfilCliente.nome);
+    printf("Primeiro Nome: ");
+    scanf("%[^\n]%*c", perfilCliente.Nome);
     //CPF
     printf("CPF(Formato: XXX.XXX.XXX-XX): ");
     scanf("%[^\n]%*c", perfilCliente.cpf);
     //Sexo
-    printf("Sexo(M - Masculino|F - Feminino|O - Outro): ");
+    printf("Sexo(M - MasculiNo|F - FeminiNo|O - Outro): ");
     scanf("%c", &perfilCliente.sexo);
     /*Capitalização do caractere que define sexo*/
     if(perfilCliente.sexo >= 'a' && perfilCliente.sexo <= 'z')
         perfilCliente.sexo -= 32; 
     //Data de nascimento
-    while(getchar() != '\n' );/*Pular uma linha para não considerar '\n' no input*/
-    printf("Data de nascimento(Formato: dia/mes/ano): ");
+    while(getchar() != '\n' );/*Pular uma linha para não considerar '\n' No input*/
+    printf("Data de nascimento(Formato: dia/mes/aNo): ");
     scanf("%[^\n]%*c", perfilCliente.dataNasc);
 }
 
-/*Validar nome*/
+/*Validar Nome*/
 void validarNome(char inputNome[])
 {
     int tamDoInput = 0;
@@ -93,7 +93,7 @@ void validarNome(char inputNome[])
         tamDoInput++;
     }
     /*Conclusão*/
-    if(tamDoInput > TAM_NOME || caracteresValidos < tamDoInput)
+    if(tamDoInput > TAM_NoME || caracteresValidos < tamDoInput)
     {
         printf("ERRO: Nome invalido\n");
         contaErros++;
@@ -166,7 +166,7 @@ void validarNasc(char data[])
     int contaCaracterBarra = 0;
     int contaDiaNumero = 0;
     int contaMesNumero = 0;
-    int contaAnoNumero = 0;
+    int contaANoNumero = 0;
     while(data[tamDoInput] != '\0')
     {
         if(tamDoInput != 2 && tamDoInput != 5)
@@ -184,7 +184,7 @@ void validarNasc(char data[])
             if(tamDoInput > 5 && tamDoInput < 10)
             {
                 if(data[tamDoInput] >= '0' && data[tamDoInput] <= '9')
-                    contaAnoNumero++;
+                    contaANoNumero++;
             }
         }
         if (tamDoInput == 2 || tamDoInput == 5 && data[tamDoInput] == '/')
@@ -194,14 +194,14 @@ void validarNasc(char data[])
         tamDoInput++;
     }
 
-    if(contaDiaNumero != 2||contaMesNumero != 2||contaAnoNumero != 4||contaCaracterBarra != 2)
+    if(contaDiaNumero != 2||contaMesNumero != 2||contaANoNumero != 4||contaCaracterBarra != 2)
         errosData++;
     else
     {
         /*Aquisição das partes da data*/
             char diaChar[CARACTER_DIA];
             char mesChar[CARACTER_MES];
-            char anoChar[CARACTER_ANO];
+            char aNoChar[CARACTER_ANo];
 
             //dia
             int iContador = 0;
@@ -223,16 +223,16 @@ void validarNasc(char data[])
                 jContador++;
             }
             mesChar[jContador] = '\0';
-            //ano
+            //aNo
             jContador = 0;
             iContador++;
-            while (jContador < CARACTER_ANO - 1)
+            while (jContador < CARACTER_ANo - 1)
             {
-                anoChar[jContador] = data[iContador];
+                aNoChar[jContador] = data[iContador];
                 iContador++;
                 jContador++;
             }
-            anoChar[jContador] = '\0';
+            aNoChar[jContador] = '\0';
 
         /*Conversão para inteiros*/
         //Conversão da string dia
@@ -269,35 +269,35 @@ void validarNasc(char data[])
             indiceDoAlgarismo++;
         }
         
-        //Conversão da string ano
-        int anoData = 0;
+        //Conversão da string aNo
+        int aNoData = 0;
         indiceDoAlgarismo = 0;
-        while(indiceDoAlgarismo < CARACTER_ANO - 1)
+        while(indiceDoAlgarismo < CARACTER_ANo - 1)
         {
             switch(indiceDoAlgarismo)
             {
                 case 0:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1000;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 1000;
                 }break;
                 case 1:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 100;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 100;
                 }break;
                 case 2:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 10;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 10;
                 }break;
                 case 3:{
-                    anoData += (anoChar[indiceDoAlgarismo] - '0') * 1;
+                    aNoData += (aNoChar[indiceDoAlgarismo] - '0') * 1;
                 }break;
             }
             indiceDoAlgarismo++;
         }
 
-        /*Verificação de ano bissexto*/
+        /*Verificação de aNo bissexto*/
         int bissexto = 0; //0 - Comum | 1 - Bissexto
-        if(anoData % 400 == 0)
+        if(aNoData % 400 == 0)
             bissexto = 1;
         else
-            if(anoData % 4 == 0 && (anoData % 100 != 0))
+            if(aNoData % 4 == 0 && (aNoData % 100 != 0))
             {
                 bissexto = 1;
             }

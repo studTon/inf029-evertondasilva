@@ -6,7 +6,7 @@ typedef struct
 {
     char palavra[NUM_STRINGS][TAM_STRING];
 }registro;
-registro Estrutura;
+registro No;
 
 /*Principal*/
 int main(void)
@@ -17,7 +17,7 @@ int main(void)
     int iContador = 0;
     while (iContador < NUM_STRINGS)
     {
-        printf("%s\n", Estrutura.palavra[iContador]);
+        printf("%s\n", No.palavra[iContador]);
         iContador++;
     }
     printf("\n");
@@ -30,7 +30,7 @@ void ler3palavras()
     while (jContador < NUM_STRINGS)
     {
         printf("Digite a palavra(indice %d): ", jContador);
-        scanf("%[^\n]%*c", Estrutura.palavra[jContador]);
+        scanf("%[^\n]%*c", No.palavra[jContador]);
 
         jContador++;
     }

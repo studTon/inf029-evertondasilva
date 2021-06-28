@@ -6,11 +6,11 @@
 //  Professor: Renato Novais - renato@ifba.edu.br
 
 //  ----- Orientações gerais -----
-//  Descrição: esse arquivo deve conter as questões do trabalho do aluno.
-//  Cada aluno deve renomear esse arquivo para Aluno<MATRICULA>.c
-//  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
+//  Descrição: esse arquivo deve conter as questões do trabalho do aluNo.
+//  Cada aluNo deve reNomear esse arquivo para AluNo<MATRICULA>.c
+//  O aluNo deve preencher seus dados abaixo, e implementar as questões do trabalho
 
-//  ----- Dados do Aluno -----
+//  ----- Dados do AluNo -----
 //  Nome: Everton Souza da Silva
 //  email: 20192160012@ifba.edu.br
 //  Matrícula: 20192160012
@@ -76,7 +76,7 @@ int fatorial(int x)
 @objetivo
     Validar uma data
 @entrada
-    uma string data. Formatos que devem ser aceitos: dd/mm/aaaa, onde dd = dia, mm = mês, e aaaa, igual ao ano. dd em mm podem ter apenas um digito, e aaaa podem ter apenas dois digitos.
+    uma string data. Formatos que devem ser aceitos: dd/mm/aaaa, onde dd = dia, mm = mês, e aaaa, igual ao aNo. dd em mm podem ter apenas um digito, e aaaa podem ter apenas dois digitos.
 @saida
     0 -> se data inválida
     1 -> se data válida
@@ -158,7 +158,7 @@ int q1(char *data)
         
         dataInt[0] = decomporDataDia(data);
         dataInt[1] = decomporDataMes(data);
-        dataInt[2] = decomporDataAno(data);
+        dataInt[2] = decomporDataANo(data);
         
         datavalida = verificarData(dataInt);
     }    
@@ -222,9 +222,9 @@ int decomporDataMes(char *data)
     return dataInt;
 }
 
-int decomporDataAno(char *data)
+int decomporDataANo(char *data)
 {
-    char dataAno[5];
+    char dataANo[5];
     int dataInt;
     int iContador = 0;
     int contaBarras = 0;
@@ -235,35 +235,35 @@ int decomporDataAno(char *data)
         iContador++;
     }
     int jContador = 0;
-    while( jContador < 4 || dataAno[jContador] != '\0')
+    while( jContador < 4 || dataANo[jContador] != '\0')
     {
-        dataAno[jContador] = data[iContador];
+        dataANo[jContador] = data[iContador];
         iContador++;
         jContador++;
     }
-    dataAno[jContador] = '\0';
+    dataANo[jContador] = '\0';
 
     if( jContador == 4 )
     {
-        dataInt = atoi(dataAno);
+        dataInt = atoi(dataANo);
     }
     else   
     {
-        dataInt = atoi(dataAno) + 2000;
+        dataInt = atoi(dataANo) + 2000;
     }
    
     return dataInt;
 }
 
-int anoBissexto(int ano)
+int aNoBissexto(int aNo)
 {
-    return ((ano % 400 == 0) || ((ano % 4 == 0) && (ano % 100 != 0)));
+    return ((aNo % 400 == 0) || ((aNo % 4 == 0) && (aNo % 100 != 0)));
 }
 
-int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == ano*/
+int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == aNo*/
 {
     
-    int bissexto = anoBissexto(arranjoData[2]);
+    int bissexto = aNoBissexto(arranjoData[2]);
     
     
     if
@@ -313,16 +313,16 @@ int verificarData(int arranjoData[]) /*Formato [0] == dia| [1] == mês| [2] == an
 /*
  Q2 = diferença entre duas datas
  @objetivo
-    Calcular a diferença em anos, meses e dias entre duas datas
+    Calcular a diferença em aNos, meses e dias entre duas datas
  @entrada
-    uma string datainicial, uma string datafinal. Além disso, a função tem três parâmetros qtdDias, qtdMeses e qtdAnos. Esses três parâmetros devem ser utilizados para guardar os resultados dos cálculos. Na chamada da função deve passar o valor -1 para os três
+    uma string datainicial, uma string datafinal. Além disso, a função tem três parâmetros qtdDias, qtdMeses e qtdANos. Esses três parâmetros devem ser utilizados para guardar os resultados dos cálculos. Na chamada da função deve passar o valor -1 para os três
  @saida
     1 -> cálculo de diferença realizado com sucesso
     2 -> datainicial inválida
     3 -> datafinal inválida
     4 -> datainicial > datafinal
  */
-int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdAnos)
+int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtdANos)
 {
     int validadeDistancia = 1;
     if ( q1(datainicial) == 0 )
@@ -344,22 +344,22 @@ int q2(char *datainicial, char *datafinal, int *qtdDias, int *qtdMeses, int *qtd
             }
     
     //calcule os dados e armazene nas três variáveis a seguir
-    int nDias, nMeses, nAnos;
+    int nDias, nMeses, nANos;
     
     dataProcessada = calcularDataSeparada(calcularDias(datainicial, datafinal));
     nDias = dataProcessada.dia;
     nMeses = dataProcessada.mes;
-    nAnos = dataProcessada.ano;
+    nANos = dataProcessada.aNo;
     
     
     /*mantenha o código abaixo, para salvar os dados em 
-    nos parâmetros da funcao
+    Nos parâmetros da funcao
     */
     *qtdDias = nDias;
-    *qtdAnos = nAnos;
+    *qtdANos = nANos;
     *qtdMeses = nMeses;
 
-    //coloque o retorno correto
+    //coloque o retorNo correto
     return validadeDistancia;
 }
 
@@ -367,17 +367,17 @@ int calcularMaiorData(char *datainicial, char *datafinal)
 {
     int inicialDia = decomporDataDia(datainicial);
     int inicialMes = decomporDataMes(datainicial);
-    int inicialAno = decomporDataAno(datainicial);
+    int inicialANo = decomporDataANo(datainicial);
     int finalDia = decomporDataDia(datafinal);
     int finalMes = decomporDataMes(datafinal);
-    int finalAno = decomporDataAno(datafinal);
+    int finalANo = decomporDataANo(datafinal);
     
     int dataFinalMaior = 0;
-    if(finalAno < inicialAno)
+    if(finalANo < inicialANo)
         return dataFinalMaior;
     else
     {
-        if(finalAno == inicialAno)
+        if(finalANo == inicialANo)
         {
             if(finalMes < inicialMes)
                 return dataFinalMaior;
@@ -416,27 +416,27 @@ int calcularDias(char *datainicial, char *datafinal)
 {
     int inicialDia = decomporDataDia(datainicial);
     int inicialMes = decomporDataMes(datainicial);
-    int inicialAno = decomporDataAno(datainicial);
+    int inicialANo = decomporDataANo(datainicial);
     int finalDia = decomporDataDia(datafinal);
     int finalMes = decomporDataMes(datafinal);
-    int finalAno = decomporDataAno(datafinal);
-    //printf("Final ano %d\n", finalAno);
+    int finalANo = decomporDataANo(datafinal);
+    //printf("Final aNo %d\n", finalANo);
                                   /*J   F   M   A   M   J   J   A   S   O   N   D*/
     int diasDosMeses[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
                                {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
     
-    int anoAnalizado = inicialAno;
+    int aNoAnalizado = inicialANo;
     /*
     Esse indice será inicializado com o indice do próximo mês ao inicial, pois em C o vetor é contador a partir de 0        */
     int indice = inicialMes;
     int dias = 0;
     int bissexto;
-    while(anoAnalizado <= finalAno)
+    while(aNoAnalizado <= finalANo)
     {
-        bissexto = anoBissexto(anoAnalizado);
+        bissexto = aNoBissexto(aNoAnalizado);
         if(bissexto == 1)
         {
-            if(inicialAno == finalAno)
+            if(inicialANo == finalANo)
             {
                 if(inicialMes == finalMes)
                 {
@@ -457,7 +457,7 @@ int calcularDias(char *datainicial, char *datafinal)
                     dias += finalDia;
                 }
             }
-            if(anoAnalizado == inicialAno && anoAnalizado != finalAno)
+            if(aNoAnalizado == inicialANo && aNoAnalizado != finalANo)
             {
                 dias += diasDosMeses[bissexto][inicialMes] - inicialDia;
                 
@@ -466,14 +466,14 @@ int calcularDias(char *datainicial, char *datafinal)
                     dias += diasDosMeses[bissexto][indice];
                 }
             }
-            if(anoAnalizado != inicialAno && anoAnalizado != finalAno)
+            if(aNoAnalizado != inicialANo && aNoAnalizado != finalANo)
             {
                 for(int indice = 1; indice <= 12; indice++)
                 {
                     dias += diasDosMeses[bissexto][indice];
                 }
             }
-            if(anoAnalizado == finalAno && anoAnalizado != inicialAno)
+            if(aNoAnalizado == finalANo && aNoAnalizado != inicialANo)
             {
                 if(finalMes != 1)
                 {
@@ -489,7 +489,7 @@ int calcularDias(char *datainicial, char *datafinal)
         }
         else
         {
-            if(inicialAno == finalAno)
+            if(inicialANo == finalANo)
             {
                 if(inicialMes == finalMes)
                 {
@@ -510,7 +510,7 @@ int calcularDias(char *datainicial, char *datafinal)
                     dias += finalDia;
                 }
             }
-            if(anoAnalizado == inicialAno && anoAnalizado != finalAno)
+            if(aNoAnalizado == inicialANo && aNoAnalizado != finalANo)
             {
                 dias += diasDosMeses[bissexto][inicialMes] - inicialDia;
                 
@@ -519,14 +519,14 @@ int calcularDias(char *datainicial, char *datafinal)
                     dias += diasDosMeses[bissexto][indice];
                 }
             }
-            if(anoAnalizado != inicialAno && anoAnalizado != finalAno)
+            if(aNoAnalizado != inicialANo && aNoAnalizado != finalANo)
             {
                 for(int indice = 1; indice <= 12; indice++)
                 {
                     dias += diasDosMeses[bissexto][indice];
                 }
             }
-            if(anoAnalizado == finalAno && anoAnalizado != inicialAno)
+            if(aNoAnalizado == finalANo && aNoAnalizado != inicialANo)
             {
                 if(finalMes != 1)
                 {
@@ -540,7 +540,7 @@ int calcularDias(char *datainicial, char *datafinal)
                     dias += finalDia;
             }
         }
-        anoAnalizado++;  
+        aNoAnalizado++;  
     }
      
     return dias;
@@ -550,7 +550,7 @@ tipoData calcularDataSeparada(int dias)
 {
     tipoData dataCalculada;
     
-    dataCalculada.ano = dias / 365;
+    dataCalculada.aNo = dias / 365;
     dataCalculada.mes = dias / 30;
     dataCalculada.dia = dias % 30;
     
@@ -724,14 +724,14 @@ int q3(char *texto, char c, int isCaseSensitive)
  @objetivo
     Pesquisar todas as ocorrências de uma palavra em um texto
  @entrada
-    uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irá guardar as posições de início e fim de cada ocorrência da palavra (strBusca) no texto base (texto).
+    uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irá guardar as posições de início e fim de cada ocorrência da palavra (strBusca) No texto base (texto).
  @saida
     Um número n >= 0 correspondente a quantidade de ocorrências encontradas.
-    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
+    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como há uma ocorrência da palavra de busca No texto, deve-se armazenar No vetor, da seguinte forma:
         posicoes[0] = 13;
         posicoes[1] = 16;
-        Observe que o índice da posição no texto deve começar ser contado a partir de 1.
-        O retorno da função, n, nesse caso seria 1;
+        Observe que o índice da posição No texto deve começar ser contado a partir de 1.
+        O retorNo da função, n, nesse caso seria 1;
 
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])

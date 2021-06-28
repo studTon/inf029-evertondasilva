@@ -1,7 +1,7 @@
 #### Funcionalidades da Versão v01 ####
 
-   * Estrutura básica para representar aluno
-   * Estrutura inicial de menu e switch
-   * Lista de alunos
-   * Inserir aluno
-   * Listar alunos
+   * No básica para representar aluNo
+   * No inicial de menu e switch
+   * Lista de aluNos
+   * Inserir aluNo
+   * Listar aluNos
