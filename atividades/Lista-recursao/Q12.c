@@ -11,9 +11,17 @@ int main(void)
 	return 0;
 }
 
+static int aux = 0;
+/*Algum erro de lógica não está me permitindo imprimir mais valores na tela*/
 void ordemCrescente(int n)
 {
-	n - n;
-	printf("- %d\n", n);
-	return ordemCrescente(n + 1);
+	if(aux < n)
+	{
+		printf("-- %d\n", aux);
+		aux++;
+	}	
+	else
+		return;
+	
+	ordemCrescente(aux);
 }

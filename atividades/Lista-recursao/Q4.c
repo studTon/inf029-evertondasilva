@@ -5,7 +5,7 @@ int somarVetor(int V[], int N);
 int main(void)
 {
     int V[] = { 1, 2, 3, 4, 5 };
-    int N = sizeof(V) / sizeof(V[0]);
+    int N = TAM_VETOR;
     printf("%d\n", somarVetor(V, N));
     return 0;
 }
