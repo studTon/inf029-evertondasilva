@@ -27,12 +27,12 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[]);
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[]);
 int modificarTamanhoEstruturaAuxiliar(int posicao, int estruturavoTamanho);
 int getQuantidadeElementosEstruturaAuxiliar(int posicao);
-No *montarListaEncadeadaComCabecote();
+No *montarListaEncadeadaComCabecote(void);
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]);
 void destruirListaEncadeadaComCabecote(No **inicio);
 
-void inicializar();
-void finalizar();
+void inicializar(void);
+void finalizar(void);
 void dobrar(int *x);
 
 #endif  // TRABALHO2_ESTRUTURAVETORES_H
