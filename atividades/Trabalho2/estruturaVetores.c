@@ -19,15 +19,15 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
     int retorno = 0;
     // a posicao pode já existir estrutura auxiliar
-	if(posicao < 1 || posicao > 10)
+	if(posicao >= 1 || posicao <= 10)
     	retorno = JA_TEM_ESTRUTURA_AUXILIAR;
 	else
     // se posição é um valor válido {entre 1 e 10}
-	if(tamanho <= TAM - 1 && tamanho >= 1)
+	if(tamanho < TAM - 1 && tamanho > 10)
     	retorno = POSICAO_INVALIDA;
 	else
     // o tamanho ser muito grande
-	if(tamanho > TAM - 1)
+	if(tamanho == NULL)
     	retorno = SEM_ESPACO_DE_MEMORIA;
 	else
     // o tamanho nao pode ser menor que 1
@@ -288,6 +288,7 @@ int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
 					vetorAux[jCont] = vetorAux[kCont];
 					vetorAux[kCont] = aux;	
 				}
+				jCont++;
 			}
 			printf("-- %d\n", vetorAux[jCont]);
 		}
@@ -351,10 +352,9 @@ Retorno (No*)
     NULL, caso não tenha nenhum número nas listas
     No*, ponteiro para o início da lista com cabeçote
 */
-No *montarListaEncadeadaComCabecote()
+No *montarListaEncadeadaComCabecote(void)
 {
-
-    return NULL;
+	return NULL;
 }
 
 /*
@@ -364,6 +364,16 @@ Retorno void
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[])
 {
 	//OBS: N�o consegui assimilar esse assunto. Faltou mais dedica��o da minha parte.
+	int iCont;
+	for(iCont = 0; iCont < inicio->auxiliar; iCont++)
+	{
+		int jCont;
+		for(jCont = 0; jCont < sizeof(vetorAux); jCont++)
+		{
+			printf("%d\n", vetorAux[jCont]);
+		}
+	}
+		
 }
 
 /*
@@ -398,5 +408,4 @@ para poder liberar todos os espaços de memória das Nos auxiliares.
 void finalizar()
 {
 	printf("***PROGRAMA ENCERRADO***\n\n");
-	free(vetorPrincipal);
 }
